@@ -9,7 +9,7 @@
   </style>
 
   <style name="MyActionbar" parent="@android:style/Widget.Holo.Light.ActionBar">
-    <item name="android:background">@color/colorPrimaryDark</item>
+    <item name="android:background">@color/colorPrimary</item>
     <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
   </style>
   <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
