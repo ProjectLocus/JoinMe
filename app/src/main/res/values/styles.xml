@@ -1,11 +1,25 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
+  <style name="MyActionbar" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <item name="android:background">@color/colorPrimaryDark</item>
+    <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+  </style>
+  <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+    <item name="android:textColor">@color/colorAccent</item>
+  </style>
+
+  <style name="MainMenuFragmentText" parent="AppTheme">
+    <item name="android:textStyle">bold</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/colorAccent</item>
   </style>
 
 </resources>
