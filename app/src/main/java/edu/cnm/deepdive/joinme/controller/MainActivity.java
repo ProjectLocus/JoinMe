@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
     toolbar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        //todo: implement fragment swap to home fragment
+        goToFragInviteCreate();
       }
     });
   }
