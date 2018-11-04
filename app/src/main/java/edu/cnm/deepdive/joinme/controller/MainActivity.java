@@ -1,20 +1,32 @@
-package edu.cnm.deepdive.joinme;
+package edu.cnm.deepdive.joinme.controller;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.view.FragInviteCreate;
+import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
+import edu.cnm.deepdive.joinme.view.FragInviteIn;
+import edu.cnm.deepdive.joinme.view.FragInviteIn.FragInviteInListener;
+import edu.cnm.deepdive.joinme.view.FragInviteOut;
+import edu.cnm.deepdive.joinme.view.FragInviteOut.FragInviteOutListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragInviteOutListener,
+    FragInviteInListener, FragInviteCreateListener {
 
   private static final String TAG = "MainActivity";
 
   private Toolbar toolbar;
   private FrameLayout container;
+  private FragmentManager fragmentManager;
 
 
   @Override
@@ -28,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initDataIntoViews() {
+    fragmentManager = getSupportFragmentManager();
     setSupportActionBar(toolbar);
+    goToFragInviteOut();
   }
 
   private void initViews() {
@@ -43,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initDB() {
+  }
+
+  protected void swapFrags(Fragment fragIn){
+    if(fragIn==null){
+      Log.d(TAG, "swapFrags: null fragment");
+      return;
+    }
+    fragmentManager.beginTransaction()
+        .replace(container.getId(), fragIn)
+        .commit();
   }
 
   @Override
@@ -62,5 +86,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     return true;
+  }
+
+  @Override
+  public void goToFragInviteIn() {
+    swapFrags(new FragInviteIn());
+  }
+
+  @Override
+  public void goToFragInviteCreate() {
+    swapFrags(new FragInviteCreate());
+  }
+
+  @Override
+  public void goToFragInviteOut() {
+    swapFrags(new FragInviteOut());
   }
 }
