@@ -18,6 +18,10 @@ public class FragUserProf extends Fragment {
   private TextView userDisplayName, userDescription;
   private FloatingActionButton userFA;
 
+  public interface FragUserProfListener {
+
+  }
+
 
   @Nullable
   @Override

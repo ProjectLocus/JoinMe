@@ -23,9 +23,10 @@ import edu.cnm.deepdive.joinme.view.FragInviteOut.FragInviteOutListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
+import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
-    FragMainMenuListener {
+    FragMainMenuListener, FragUserProfListener {
 
   private static final String TAG = "MainActivity";
 
