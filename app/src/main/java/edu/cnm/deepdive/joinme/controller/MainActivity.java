@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
+import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
 import edu.cnm.deepdive.joinme.view.FragInviteIn;
@@ -20,9 +21,10 @@ import edu.cnm.deepdive.joinme.view.FragInviteIn.FragInviteInListener;
 import edu.cnm.deepdive.joinme.view.FragInviteOut;
 import edu.cnm.deepdive.joinme.view.FragInviteOut.FragInviteOutListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
+import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
 
-public class MainActivity extends AppCompatActivity implements FragInviteOutListener,
-    FragInviteInListener, FragInviteCreateListener {
+public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
+    FragMainMenuListener {
 
   private static final String TAG = "MainActivity";
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
   private FragmentManager fragmentManager;
   private FragMainMenu fragMainMenu;
   private FragInvitationRV fragInvitationRV;
+  private int calledInviteListType;
 
 
   @Override
@@ -92,21 +95,6 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
     return true;
   }
 
-  @Override
-  public void goToFragInviteIn() {
-    swapFrags(new FragInviteIn());
-  }
-
-  @Override
-  public void goToFragInviteCreate() {
-    swapFrags(new FragInviteCreate());
-  }
-
-  @Override
-  public void goToFragInviteOut() {
-    swapFrags(new FragInviteOut());
-  }
-
   public void goToFragMainMenu(){
     if(fragMainMenu==null){
       fragMainMenu = new FragMainMenu();
@@ -114,10 +102,16 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
     swapFrags(fragMainMenu);
   }
 
-  public void goToFragInvitationRv(){
+  public void goToFragInvitationRv(int inviteListType){
     if(fragInvitationRV==null){
       fragInvitationRV = new FragInvitationRV();
     }
+    calledInviteListType = inviteListType;
     swapFrags(fragInvitationRV);
+  }
+
+  @Override
+  public int getCalledInviteListType() {
+    return calledInviteListType;
   }
 }
