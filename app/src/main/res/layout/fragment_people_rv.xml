@@ -32,5 +32,6 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_frag_people_rv_title"/>
+    app:layout_constraintTop_toBottomOf="@+id/tv_frag_people_rv_title"
+    tools:listitem="@layout/rv_item_person_list"/>
 </android.support.constraint.ConstraintLayout>
