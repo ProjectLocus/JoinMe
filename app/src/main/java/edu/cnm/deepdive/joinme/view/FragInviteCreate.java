@@ -36,7 +36,7 @@ public class FragInviteCreate extends Fragment {
   }
 
   private void initViews(View view) {
-    tempText = view.findViewById(R.id.temp_title2);
+    tempText = view.findViewById(R.id.temp_title0);
     tempText.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
