@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
     toolbar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        goToFragInviteCreate();
+        goToFragMainMenu();
       }
     });
   }
