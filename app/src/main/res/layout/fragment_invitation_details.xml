@@ -4,9 +4,81 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
+  <TextView
+    android:textSize="25dp"
+    android:id="@+id/invite_create"
+    android:text="Invitation Details"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 
 
+  <EditText
+    android:id="@+id/title_create"
+    android:layout_width="212dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="54dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:ems="10"
+    android:text="Title"/>
 
+  <EditText
+    android:id="@+id/location_create"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="121dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:ems="10"
+    android:text="Location"/>
+
+  <EditText
+    android:id="@+id/date_create"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="192dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:ems="10"
+    android:text="Date"/>
+
+  <EditText
+    android:id="@+id/time_create"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="248dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:ems="10"
+    android:text="Time"/>
+
+  <EditText
+    android:id="@+id/detail_create"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="147dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:ems="10"
+    android:text="Details"/>
+
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="100dp"
+    android:layout_marginStart="60dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:text="Accept"/>
+
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="100dp"
+    android:layout_marginEnd="60dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    android:text="Decline"/>
 
 
 
