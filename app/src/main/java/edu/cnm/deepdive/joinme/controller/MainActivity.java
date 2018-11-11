@@ -18,6 +18,7 @@ import edu.cnm.deepdive.joinme.view.FragInviteIn;
 import edu.cnm.deepdive.joinme.view.FragInviteIn.FragInviteInListener;
 import edu.cnm.deepdive.joinme.view.FragInviteOut;
 import edu.cnm.deepdive.joinme.view.FragInviteOut.FragInviteOutListener;
+import edu.cnm.deepdive.joinme.view.FragMainMenu;
 
 public class MainActivity extends AppCompatActivity implements FragInviteOutListener,
     FragInviteInListener, FragInviteCreateListener {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
   private Toolbar toolbar;
   private FrameLayout container;
   private FragmentManager fragmentManager;
+  private FragMainMenu fragMainMenu;
 
 
   @Override
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
   private void initDataIntoViews() {
     fragmentManager = getSupportFragmentManager();
     setSupportActionBar(toolbar);
-    goToFragInviteOut();
+    goToFragMainMenu();
   }
 
   private void initViews() {
@@ -101,5 +103,12 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
   @Override
   public void goToFragInviteOut() {
     swapFrags(new FragInviteOut());
+  }
+
+  public void goToFragMainMenu(){
+    if(fragMainMenu==null){
+      fragMainMenu = new FragMainMenu();
+    }
+    swapFrags(fragMainMenu);
   }
 }
