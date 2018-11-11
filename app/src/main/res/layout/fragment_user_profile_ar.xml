@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+  <ImageView
+    android:id="@+id/imageView2"
+    android:layout_width="376dp"
+    android:layout_height="296dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    app:srcCompat="@drawable/ic_image_black_24dp"/>
+
+  <TextView
+    android:id="@+id/display_name_user_profile"
+    android:layout_width="376dp"
+    android:layout_height="48dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_alignBottom="@+id/imageView2"
+    android:background="#80000000"
+    android:text="Display Name"
+    android:textSize="32dp"
+    android:textColor="#FFFFFFFF"/>
+
+  <TextView
+    android:id="@+id/description_user_profile"
+    android:layout_width="376dp"
+    android:layout_height="248dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_alignParentBottom="true"
+    android:text="Description"
+    android:textSize="24dp"
+    android:textColor="#FFFFFFFF"/>
+
+  <android.support.design.widget.FloatingActionButton
+    android:id="@+id/floatingActionButton"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:layout_alignBottom="@+id/description_user_profile"
+    android:layout_alignEnd="@+id/imageView2"
+    android:backgroundTint="#FF748C"
+    android:clickable="true"/>
+
+</RelativeLayout>
