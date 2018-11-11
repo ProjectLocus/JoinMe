@@ -15,8 +15,8 @@
   <EditText
     android:id="@+id/title_create"
     android:layout_width="212dp"
-    android:layout_height="51dp"
-    android:layout_marginTop="194dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="82dp"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
     android:ems="10"
@@ -25,8 +25,10 @@
   <EditText
     android:id="@+id/location_create"
     android:layout_width="wrap_content"
-    android:layout_height="51dp"
-    android:layout_centerInParent="true"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="157dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
     android:ems="10"
     android:text="Location"/>
 
@@ -34,21 +36,31 @@
     android:id="@+id/date_create"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="205dp"
-    android:layout_alignParentBottom="true"
+    android:layout_marginTop="235dp"
+    android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
     android:ems="10"
     android:text="Date"/>
 
   <EditText
     android:id="@+id/time_create"
-    android:layout_width="214dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="137dp"
+    android:layout_marginBottom="214dp"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:ems="10"
     android:text="Time"/>
+
+  <EditText
+    android:id="@+id/detail_create"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="147dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:ems="10"
+    android:text="Details"/>
 
 
 
