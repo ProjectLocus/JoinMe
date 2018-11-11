@@ -6,48 +6,56 @@
 
 
   <TextView
-    android:textSize="25dp"
     android:id="@+id/invite_create"
-    android:text="Create an Invitation"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignStart="@+id/title_create"
+    android:text="Create an Invitation"
+    android:textAlignment="center"
+    android:textSize="24dp"/>
 
   <EditText
     android:id="@+id/title_create"
-    android:layout_width="212dp"
-    android:layout_height="51dp"
-    android:layout_marginTop="194dp"
-    android:layout_alignParentTop="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="192dp"
+    android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
-    android:ems="10"
+    android:ems="16"
     android:text="Title"/>
 
   <EditText
     android:id="@+id/location_create"
     android:layout_width="wrap_content"
-    android:layout_height="51dp"
-    android:layout_centerInParent="true"
-    android:ems="10"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_below="@+id/title_create"
+    android:layout_centerHorizontal="true"
+    android:ems="16"
     android:text="Location"/>
 
   <EditText
     android:id="@+id/date_create"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="205dp"
-    android:layout_alignParentBottom="true"
+    android:layout_below="@+id/location_create"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
-    android:ems="10"
+    android:ems="16"
     android:text="Date"/>
 
   <EditText
     android:id="@+id/time_create"
-    android:layout_width="214dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="137dp"
-    android:layout_alignParentBottom="true"
+    android:layout_below="@+id/date_create"
+    android:layout_marginTop="8dp"
     android:layout_centerHorizontal="true"
-    android:ems="10"
+    android:ems="16"
     android:text="Time"/>
 
 
