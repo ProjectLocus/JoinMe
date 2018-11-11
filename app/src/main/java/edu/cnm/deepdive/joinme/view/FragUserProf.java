@@ -34,10 +34,10 @@ public class FragUserProf extends Fragment {
   }
 
   private void initView(View view) {
-    userProfPic = view.findViewById(R.id.user_prof_pic);
-    userDisplayName = view.findViewById(R.id.user_display_name);
-    userDescription = view.findViewById(R.id.user_description);
-    userFA = view.findViewById(R.id.user_fa);
+    userProfPic = view.findViewById(R.id.iv_user_profile_prof_image);
+    userDisplayName = view.findViewById(R.id.tv_user_profile_display_name);
+    userDescription = view.findViewById(R.id.tv_user_profile_description);
+    userFA = view.findViewById(R.id.fab_user_profile_next);
     userFA.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {

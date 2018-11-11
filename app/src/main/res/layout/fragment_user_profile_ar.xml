@@ -2,12 +2,11 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
   <ImageView
-    android:id="@+id/user_prof_pic"
+    android:id="@+id/iv_user_profile_prof_image"
     android:layout_width="376dp"
     android:layout_height="296dp"
     android:layout_marginTop="8dp"
@@ -17,19 +16,19 @@
     app:srcCompat="@drawable/ic_image"/>
 
   <TextView
-    android:id="@+id/user_display_name"
+    android:id="@+id/tv_user_profile_display_name"
     android:layout_width="376dp"
     android:layout_height="48dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:layout_alignBottom="@+id/user_prof_pic"
+    android:layout_alignBottom="@+id/iv_user_profile_prof_image"
     android:background="#80000000"
     android:text="Display Name"
     android:textSize="32dp"
     android:textColor="#FFFFFFFF"/>
 
   <TextView
-    android:id="@+id/user_description"
+    android:id="@+id/tv_user_profile_description"
     android:layout_width="376dp"
     android:layout_height="248dp"
     android:layout_marginBottom="8dp"
@@ -41,11 +40,11 @@
     android:textColor="#000000"/>
 
   <android.support.design.widget.FloatingActionButton
-    android:id="@+id/user_fa"
+    android:id="@+id/fab_user_profile_next"
     android:layout_width="64dp"
     android:layout_height="64dp"
-    android:layout_alignBottom="@+id/user_description"
-    android:layout_alignEnd="@+id/user_prof_pic"
+    android:layout_alignBottom="@+id/tv_user_profile_description"
+    android:layout_alignEnd="@+id/tv_user_profile_display_name"
     android:backgroundTint="#FF748C"
     android:clickable="true"/>
 
