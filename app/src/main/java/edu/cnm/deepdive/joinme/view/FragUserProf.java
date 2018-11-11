@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,12 @@ public class FragUserProf extends Fragment {
     userDisplayName = view.findViewById(R.id.user_display_name);
     userDescription = view.findViewById(R.id.user_description);
     userFA = view.findViewById(R.id.user_fa);
+    userFA.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+
+      }
+    });
 
   }
 }
