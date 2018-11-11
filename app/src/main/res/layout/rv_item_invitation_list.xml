@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="8dp"
+  android:layout_marginBottom="16dp"
+  android:background="@color/lightGray"
+  android:elevation="4dp">
+
+  <de.hdodenhof.circleimageview.CircleImageView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/civ_rv_item_invitationlist_profile_image"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:src="@drawable/ic_person_white"
+    app:civ_border_color="@color/parkingBlue"
+    app:civ_border_width="2dp"
+    />
+  <TextView
+    android:id="@+id/tv_rv_item_invitationlist_title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:gravity="start"
+    android:textColor="@color/parkingBlue"
+    android:textSize="18sp"
+    app:layout_constraintBottom_toTopOf="@+id/tv_rv_item_invitationlist_comments"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/civ_rv_item_invitationlist_profile_image"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="Invitation Title"/>
+  <TextView
+    android:id="@+id/tv_rv_item_invitationlist_comments"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginStart="16dp"
+    android:textColor="@color/healthGreen"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="@+id/tv_rv_item_invitationlist_title"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="@+id/tv_rv_item_invitationlist_title"
+    app:layout_constraintTop_toBottomOf="@+id/tv_rv_item_invitationlist_title"
+    tools:text="Comments"/>
+
+</android.support.constraint.ConstraintLayout>
