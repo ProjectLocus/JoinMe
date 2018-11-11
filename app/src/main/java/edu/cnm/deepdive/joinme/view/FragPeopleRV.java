@@ -5,51 +5,52 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
 
-public class FragInviteIn extends Fragment {
+public class FragPeopleRV extends Fragment {
 
-  private static final String TAG = "FragInviteIn";
+  private static final String TAG = "FragPeopleRV";
 
-  private TextView tempText;
-  private FragInviteInListener fragInviteInListener;
+  private FragPeopleRVListener fragPeopleRVListener;
+  private TextView listTitle;
+  private RecyclerView recyclerView;
 
-  public interface FragInviteInListener{
-    public void goToFragInviteCreate();
+  public interface FragPeopleRVListener{
+    int getCalledPeopleListType();
   }
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View theView = inflater.inflate(R.layout.fragment_invite_in, container, false);
-    //do stuff
+    View theView = inflater.inflate(R.layout.rv_item_person_list, container, false);
     initViews(theView);
-
-    return theView;
+    initData();
+    return super.onCreateView(inflater, container, savedInstanceState);
   }
 
-  private void initViews(View view) {
-    tempText = view.findViewById(R.id.temp_title1);
-    tempText.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        fragInviteInListener.goToFragInviteCreate();
-      }
-    });
+  private void initData() {
   }
+
+  private void initViews(View theView) {
+    listTitle = theView.findViewById(R.id.tv_frag_people_rv_title);
+    recyclerView = theView.findViewById(R.id.rv_frag_people_rv_peoplelist);
+  }
+
+
+
 
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
     try {
-      fragInviteInListener = (FragInviteInListener) getActivity();
+      fragPeopleRVListener = (FragPeopleRVListener) getActivity();
     } catch (ClassCastException e) {
       Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
     }

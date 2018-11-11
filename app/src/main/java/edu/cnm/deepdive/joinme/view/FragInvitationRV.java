@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +21,7 @@ public class FragInvitationRV extends Fragment {
   private FragInvitationRVListener fragInvitationRVListener;
   private TextView fragmentTitle;
   private RecyclerView recyclerView;
+  private FloatingActionButton floatingActionButton;
 
   public interface FragInvitationRVListener{
     int getCalledInviteListType();
@@ -32,7 +34,7 @@ public class FragInvitationRV extends Fragment {
     View theView = inflater.inflate(R.layout.fragment_invitation_rv, container, false);
     initViews(theView);
     initData();
-    return super.onCreateView(inflater, container, savedInstanceState);
+    return theView;
   }
 
   private void initData() {
@@ -41,6 +43,7 @@ public class FragInvitationRV extends Fragment {
   private void initViews(View theView) {
     fragmentTitle = theView.findViewById(R.id.tv_frag_invitation_rv_title);
     recyclerView = theView.findViewById(R.id.rv_frag_invitation_rv_invitations);
+    floatingActionButton = theView.findViewById(R.id.fab_frag_invitation_rv_add);
   }
 
   @Override

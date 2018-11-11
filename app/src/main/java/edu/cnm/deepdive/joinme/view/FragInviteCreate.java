@@ -21,7 +21,7 @@ public class FragInviteCreate extends Fragment {
   private FragInviteCreateListener fragInviteCreateListener;
 
   public interface FragInviteCreateListener{
-    public void goToFragInviteOut();
+
   }
 
   @Nullable
@@ -36,13 +36,7 @@ public class FragInviteCreate extends Fragment {
   }
 
   private void initViews(View view) {
-    tempText = view.findViewById(R.id.temp_title0);
-    tempText.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        fragInviteCreateListener.goToFragInviteOut();
-      }
-    });
+
   }
 
   @Override

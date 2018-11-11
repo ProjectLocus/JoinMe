@@ -14,19 +14,15 @@ import android.widget.FrameLayout;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
-import edu.cnm.deepdive.joinme.view.FragInviteCreate;
-import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
-import edu.cnm.deepdive.joinme.view.FragInviteIn;
-import edu.cnm.deepdive.joinme.view.FragInviteIn.FragInviteInListener;
-import edu.cnm.deepdive.joinme.view.FragInviteOut;
-import edu.cnm.deepdive.joinme.view.FragInviteOut.FragInviteOutListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
+import edu.cnm.deepdive.joinme.view.FragPeopleRV;
+import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
-    FragMainMenuListener, FragUserProfListener {
+    FragMainMenuListener, FragUserProfListener, FragPeopleRVListener {
 
   private static final String TAG = "MainActivity";
 
@@ -36,7 +32,9 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private FragMainMenu fragMainMenu;
   private FragInvitationRV fragInvitationRV;
   private FragUserProf fragUserProf;
+  private FragPeopleRV fragPeopleRV;
   private int calledInviteListType;
+  private int calledPeopleListType;
 
 
   @Override
@@ -120,8 +118,21 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     swapFrags(fragUserProf);
   }
 
+  public void goToFragPeopleRv(int peopleListType){
+    if(fragPeopleRV==null){
+      fragPeopleRV = new FragPeopleRV();
+    }
+    calledPeopleListType = peopleListType;
+    swapFrags(fragPeopleRV);
+  }
+
   @Override
   public int getCalledInviteListType() {
     return calledInviteListType;
+  }
+
+  @Override
+  public int getCalledPeopleListType(){
+    return calledPeopleListType;
   }
 }
