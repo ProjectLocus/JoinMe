@@ -24,8 +24,6 @@
 
   <EditText
     android:id="@+id/location_create"
-    ="85dp"
-    tools:layout_editor_absoluteY="260dp"
     android:layout_width="wrap_content"
     android:layout_height="51dp"
     android:layout_centerInParent="true"
@@ -34,8 +32,6 @@
 
   <EditText
     android:id="@+id/date_create"
-    tools:layout_editor_absoluteX="85dp"
-    tools:layout_editor_absoluteY="334dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="205dp"
@@ -46,8 +42,6 @@
 
   <EditText
     android:id="@+id/time_create"
-    tools:layout_editor_absoluteX="85dp"
-    tools:layout_editor_absoluteY="430dp"
     android:layout_width="214dp"
     android:layout_height="wrap_content"
     android:layout_marginBottom="137dp"
