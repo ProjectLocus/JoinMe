@@ -22,6 +22,7 @@ import edu.cnm.deepdive.joinme.view.FragInviteOut;
 import edu.cnm.deepdive.joinme.view.FragInviteOut.FragInviteOutListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
+import edu.cnm.deepdive.joinme.view.FragUserProf;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
     FragMainMenuListener {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private FragmentManager fragmentManager;
   private FragMainMenu fragMainMenu;
   private FragInvitationRV fragInvitationRV;
+  private FragUserProf fragUserProf;
   private int calledInviteListType;
 
 
@@ -108,6 +110,13 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     }
     calledInviteListType = inviteListType;
     swapFrags(fragInvitationRV);
+  }
+
+  public void goToFragUserProf() {
+    if(fragUserProf==null) {
+      fragUserProf = new FragUserProf();
+    }
+    swapFrags(fragUserProf);
   }
 
   @Override
