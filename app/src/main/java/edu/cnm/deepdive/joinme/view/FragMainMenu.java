@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import com.ramotion.circlemenu.CircleMenuView;
 import edu.cnm.deepdive.joinme.R;
 
@@ -63,6 +64,7 @@ public class FragMainMenu extends Fragment {
       @Override
       public void onButtonClickAnimationEnd(@NonNull CircleMenuView view, int index) {
         Log.d("D", "onButtonClickAnimationEnd| index: " + index);
+        
       }
     });
   }
