@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.view.FragInvitationRV;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
 import edu.cnm.deepdive.joinme.view.FragInviteIn;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
   private FrameLayout container;
   private FragmentManager fragmentManager;
   private FragMainMenu fragMainMenu;
+  private FragInvitationRV fragInvitationRV;
 
 
   @Override
@@ -110,5 +112,12 @@ public class MainActivity extends AppCompatActivity implements FragInviteOutList
       fragMainMenu = new FragMainMenu();
     }
     swapFrags(fragMainMenu);
+  }
+
+  public void goToFragInvitationRv(){
+    if(fragInvitationRV==null){
+      fragInvitationRV = new FragInvitationRV();
+    }
+    swapFrags(fragInvitationRV);
   }
 }
