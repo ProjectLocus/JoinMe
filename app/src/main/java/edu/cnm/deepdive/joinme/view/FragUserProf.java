@@ -19,6 +19,8 @@ public class FragUserProf extends Fragment {
   private TextView userDisplayName, userDescription;
   private FloatingActionButton userFA;
 
+  private FragUserProfListener fragUserProfListener;
+
   public interface FragUserProfListener {
 
   }

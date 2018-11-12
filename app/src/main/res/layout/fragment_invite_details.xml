@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <TextView
+    android:id="@+id/tv_invitation_details_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:text="Invitation Details"
+    android:textAlignment="center"
+    android:textSize="40dp"/>
+
+  <EditText
+    android:id="@+id/et_invitation_details_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="120dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center"
+    android:layout_centerHorizontal="true"
+    android:ems="16"
+    android:text="Title"/>
+
+  <EditText
+    android:id="@+id/et_invitation_details_location"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center"
+    android:layout_below="@+id/et_invitation_details_title"
+    android:layout_centerHorizontal="true"
+    android:ems="16"
+    android:text="Location"/>
+
+  <EditText
+    android:id="@+id/et_invitation_details_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center"
+    android:layout_below="@+id/et_invitation_details_location"
+    android:layout_centerHorizontal="true"
+    android:ems="16"
+    android:text="Date"/>
+
+  <EditText
+    android:id="@+id/et_invitation_details_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center"
+    android:layout_below="@+id/et_invitation_details_date"
+    android:layout_centerHorizontal="true"
+    android:ems="16"
+    android:text="Time"/>
+
+  <EditText
+    android:id="@+id/et_invitation_details_details"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center"
+    android:layout_below="@id/et_invitation_details_time"
+    android:layout_centerInParent="true"
+    android:ems="16"
+    android:text="Details"/>
+
+  <Button
+    android:id="@+id/bt_invitation_details_accept"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="72dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignStart="@+id/et_invitation_details_title"
+    android:text="Accept"/>
+
+  <Button
+    android:id="@+id/bt_invitation_details_decline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="72dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignEnd="@+id/et_invitation_details_title"
+    android:text="Decline"/>
+
+  <Button
+    android:id="@+id/bt_invitation_details_see_attendees"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="72dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:text="See Attendees"/>
+
+
+
+
+
+
+</RelativeLayout>

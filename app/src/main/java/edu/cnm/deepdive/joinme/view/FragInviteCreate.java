@@ -8,8 +8,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
 
@@ -17,7 +17,12 @@ public class FragInviteCreate extends Fragment {
 
   private static final String TAG = "FragInviteCreate";
 
-  private TextView tempText;
+  private TextView inviteCreateTitle0;
+  private EditText inviteCreateTitle1;
+  private EditText inviteCreateLocation;
+  private EditText inviteCreateDate;
+  private EditText inviteCreateTime;
+
   private FragInviteCreateListener fragInviteCreateListener;
 
   public interface FragInviteCreateListener{
@@ -36,7 +41,11 @@ public class FragInviteCreate extends Fragment {
   }
 
   private void initViews(View view) {
-
+    inviteCreateTitle0 = view.findViewById(R.id.tv_invite_create_title);
+    inviteCreateTitle1 = view.findViewById(R.id.et_invitation_create_title);
+    inviteCreateLocation = view.findViewById(R.id.et_invitation_create_location);
+    inviteCreateDate = view.findViewById(R.id.et_invitation_create_date);
+    inviteCreateTime = view.findViewById(R.id.et_invitation_create_time);
   }
 
   @Override

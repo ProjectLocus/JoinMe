@@ -3,17 +3,17 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-  
+
   <TextView
     android:id="@+id/tv_invite_create_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:layout_alignParentTop="true"
-    android:layout_alignStart="@+id/et_invitation_create_title"
+    android:layout_centerHorizontal="true"
     android:text="Create an Invitation"
     android:textAlignment="center"
-    android:textSize="24dp"/>
+    android:textSize="40dp"/>
 
   <EditText
     android:id="@+id/et_invitation_create_title"
@@ -23,7 +23,8 @@
     android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Title"/>
+    android:text="Title"
+    android:gravity="center"/>
 
   <EditText
     android:id="@+id/et_invitation_create_location"
@@ -34,7 +35,8 @@
     android:layout_below="@+id/et_invitation_create_title"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Location"/>
+    android:text="Location"
+    android:gravity="center"/>
 
   <EditText
     android:id="@+id/et_invitation_create_date"
@@ -45,7 +47,8 @@
     android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Date"/>
+    android:text="Date"
+    android:gravity="center"/>
 
   <EditText
     android:id="@+id/et_invitation_create_time"
@@ -55,9 +58,7 @@
     android:layout_marginTop="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Time"/>
-
-
-
+    android:text="Time"
+    android:gravity="center"/>
 
 </RelativeLayout>
