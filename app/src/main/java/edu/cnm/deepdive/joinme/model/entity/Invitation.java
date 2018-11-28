@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity(
     tableName = "invitation",
-    indices = {@Index(value = {"invitation_id", "user_sender_id", "user_recceiver_id"},
+    indices = {@Index(value = {"invitation_id", "user_sender_id", "user_receiver_id"},
         unique = true)}
 )
 public class Invitation {
