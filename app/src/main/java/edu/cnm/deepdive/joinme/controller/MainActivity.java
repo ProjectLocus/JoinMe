@@ -24,6 +24,9 @@ import edu.cnm.deepdive.joinme.view.FragPeopleRV;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
     FragMainMenuListener, FragUserProfListener, FragPeopleRVListener {
