@@ -46,7 +46,7 @@ public class DummyPersonGenerator {
     if(dummyList.size()>0){
       dummyList.get(0).setThisMe(true);
       dummyList.get(0).setDistanceToUser(0.0);
-      dummyList.get(0).setInvitesReceived(DummyInvitationGenerator.getXDummyInvitations(true, dummyList.get(0).getPersonId(), context, 50));
+      dummyList.get(0).setInvitesReceived(DummyInvitationGenerator.getXDummyInvitations(true, dummyList.get(0), context, 50));
     }
     return dummyList;
   }
