@@ -8,7 +8,6 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,22 +27,22 @@ public interface InvitationDao {
   List<Invitation> selectAll();
 
   @Query("SELECT * FROM invitation WHERE invitation_id=:invitationId")
-  Invitation selectAllInvitationId(UUID invitationId);
+  List<Invitation> selectAllInvitationId(UUID invitationId);
 
   @Query("SELECT * FROM invitation WHERE user_sender=:userSender")
-  Invitation selectAllUserSender(Person userSender);
+  List<Invitation> selectAllUserSender(Person userSender);
 
   @Query("SELECT * FROM invitation WHERE user_receiver=:userReceiver")
-  Invitation selectAllUserReceiver(Person userReceiver);
+  List<Invitation> selectAllUserReceiver(Person userReceiver);
 
   @Query("SELECT * FROM invitation WHERE date=:date")
-  Invitation selectAllDate(String date);
+  List<Invitation> selectAllDate(String date);
 
   @Query("SELECT * FROM invitation WHERE created=:created")
-  Invitation selectAllCreated(String created);
+  List<Invitation> selectAllCreated(String created);
 
   @Query("SELECT * FROM invitation WHERE description=:description")
-  Invitation selectAllDescription(String description);
+  List<Invitation> selectAllDescription(String description);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
   int update(Invitation invitation);
