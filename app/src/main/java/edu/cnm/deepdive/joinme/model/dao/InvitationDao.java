@@ -24,25 +24,25 @@ public interface InvitationDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   List<Long> insert(List<Invitation> invitations);
 
-  @Query("SELECT * FROM invitation ORDER BY invitation_id ASC")
+  @Query("SELECT * FROM invitations ORDER BY invitation_id ASC")
   List<Invitation> selectAll();
 
-  @Query("SELECT * FROM invitation WHERE invitation_id=:invitationId")
+  @Query("SELECT * FROM invitations WHERE invitation_id=:invitationId")
   Invitation selectAllInvitationId(UUID invitationId);
 
-  @Query("SELECT * FROM invitation WHERE user_sender=:userSender")
+  @Query("SELECT * FROM invitations WHERE user_sender=:userSender")
   Invitation selectAllUserSender(Person userSender);
 
-  @Query("SELECT * FROM invitation WHERE user_receiver=:userReceiver")
+  @Query("SELECT * FROM invitations WHERE user_receiver=:userReceiver")
   Invitation selectAllUserReceiver(Person userReceiver);
 
-  @Query("SELECT * FROM invitation WHERE date=:date")
+  @Query("SELECT * FROM invitations WHERE date=:date")
   Invitation selectAllDate(String date);
 
-  @Query("SELECT * FROM invitation WHERE created=:created")
+  @Query("SELECT * FROM invitations WHERE created=:created")
   Invitation selectAllCreated(String created);
 
-  @Query("SELECT * FROM invitation WHERE description=:description")
+  @Query("SELECT * FROM invitations WHERE description=:description")
   Invitation selectAllDescription(String description);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)

@@ -12,7 +12,7 @@ import java.util.UUID;
  * The type Invitation.
  */
 @Entity(
-    tableName = "invitation",
+    tableName = "invitations",
     indices = {@Index(value = {"invitation_id", "user_sender", "user_receiver"},
         unique = true)}
 )
@@ -24,11 +24,11 @@ public class Invitation {
 
   @NonNull
   @ColumnInfo(name = "user_sender")
-  private Person userSender;
+  private UUID userSender;
 
   @NonNull
   @ColumnInfo(name = "user_receiver")
-  private Person userReceiver;
+  private UUID userReceiver;
 
   @NonNull
   @ColumnInfo(name = "date")
@@ -66,7 +66,7 @@ public class Invitation {
    * @return the user sender
    */
   @NonNull
-  public Person getUserSender() {
+  public UUID getUserSender() {
     return userSender;
   }
 
@@ -75,7 +75,7 @@ public class Invitation {
    *
    * @param userSender the user sender
    */
-  public void setUserSender(@NonNull Person userSender) {
+  public void setUserSender(@NonNull UUID userSender) {
     this.userSender = userSender;
   }
 
@@ -85,7 +85,7 @@ public class Invitation {
    * @return the user receiver
    */
   @NonNull
-  public Person getUserReceiver() {
+  public UUID getUserReceiver() {
     return userReceiver;
   }
 
@@ -94,7 +94,7 @@ public class Invitation {
    *
    * @param userReceiver the user receiver
    */
-  public void setUserReceiver(@NonNull Person userReceiver) {
+  public void setUserReceiver(@NonNull UUID userReceiver) {
     this.userReceiver = userReceiver;
   }
 

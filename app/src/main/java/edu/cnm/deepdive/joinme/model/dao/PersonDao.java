@@ -19,30 +19,30 @@ public interface PersonDao {
   @Insert (onConflict = OnConflictStrategy.REPLACE)
   void insert(List<Person> persons);
 
-  @Query("SELECT * FROM person WHERE isThisMe=:isThisMe")
+  @Query("SELECT * FROM people WHERE isThisMe=:isThisMe")
   List<Person> select(boolean isThisMe);
 
-  @Query("SELECT * FROM person WHERE person_id=:personId")
+  @Query("SELECT * FROM people WHERE person_id=:personId")
   List<Person> select(UUID personId);
 
-  @Query("SELECT * FROM person WHERE display_name=:displayName")
+  @Query("SELECT * FROM people WHERE display_name=:displayName")
   List<Person> select(String displayName);
 
-  @Query("SELECT * FROM person")
+  @Query("SELECT * FROM people")
   List<Person> selectAll();
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-  int update(Person person);
+  int update(UUID person);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-  int update(Person... persons);
+  int update(UUID... persons);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-  int update(List<Person> persons);
+  int update(List<UUID> persons);
 
   @Delete
   int delete(UUID personId);
 
-  @Query("DELETE FROM person")
+  @Query("DELETE FROM people")
   int nuke();
 }
