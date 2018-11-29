@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private void initDB() {
   }
 
-  protected void swapFrags(Fragment fragIn){
+  public void swapFrags(Fragment fragIn){
     if(fragIn==null){
       Log.d(TAG, "swapFrags: null fragment");
       return;
