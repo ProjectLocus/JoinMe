@@ -1,11 +1,14 @@
 package edu.cnm.deepdive.joinme.model.entity;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.Relation;
 import android.support.annotation.NonNull;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -16,22 +19,23 @@ import java.util.UUID;
     indices = {@Index(value = {"invitation_id", "user_sender", "user_receiver"},
         unique = true)},
     foreignKeys = {@ForeignKey(entity = Person.class, parentColumns = "person_id",
-    childColumns = {"user_sender", "user_receiver"}
-    )}
+        childColumns = "user_sender"), @ForeignKey(entity = Person.class, parentColumns = "person_id",
+    childColumns = "user_receiver")}
 )
 public class Invitation {
 
-  @PrimaryKey(autoGenerate = true)
+  @NonNull
+  @PrimaryKey
   @ColumnInfo(name = "invitation_id")
   private UUID invitationId;
 
   @NonNull
   @ColumnInfo(name = "user_sender")
-  private Person userSender;
+  private UUID userSender;
 
   @NonNull
   @ColumnInfo(name = "user_receiver")
-  private Person userReceiver;
+  private UUID userReceiver;
 
   @NonNull
   @ColumnInfo(name = "date")
@@ -121,20 +125,20 @@ public class Invitation {
   }
 
   @NonNull
-  public Person getUserSender() {
+  public UUID getUserSender() {
     return userSender;
   }
 
-  public void setUserSender(@NonNull Person userSender) {
+  public void setUserSender(@NonNull UUID userSender) {
     this.userSender = userSender;
   }
 
   @NonNull
-  public Person getUserReceiver() {
+  public UUID getUserReceiver() {
     return userReceiver;
   }
 
-  public void setUserReceiver(@NonNull Person userReceiver) {
+  public void setUserReceiver(@NonNull UUID userReceiver) {
     this.userReceiver = userReceiver;
   }
 }

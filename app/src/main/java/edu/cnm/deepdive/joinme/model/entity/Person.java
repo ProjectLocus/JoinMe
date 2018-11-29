@@ -39,7 +39,7 @@ public class Person {
    * This is a person's unique ID
    */
   @NonNull
-  @PrimaryKey(autoGenerate = true)
+  @PrimaryKey
   @ColumnInfo(name = "person_id")
   private UUID personId;
 
@@ -97,20 +97,20 @@ public class Person {
   @Ignore
   private String userPassword;
 
-  /**
-   * This is the list of the invitations the user has sent to others
-   */
-  private List<Invitation> invitesSent;
+//  /**
+//   * This is the list of the invitations the user has sent to others
+//   */
+//  private List<Invitation> invitesSent;
+//
+//  /**
+//   * This is the list of the invitations the user has received from others
+//   */
+//  private List<Invitation> invitesReceived;
 
-  /**
-   * This is the list of the invitations the user has received from others
-   */
-  private List<Invitation> invitesReceived;
-
-  /**
-   * This is the list of invitations the user has created
-   */
-  private List<Invitation> invitesCreated;
+//  /**
+//   * This is the list of invitations the user has created
+//   */
+//  private List<Invitation> invitesCreated;
 
   //**************** INFO THAT IS CREATED USING DATA FROM SERVER ********************************//
 
@@ -124,7 +124,7 @@ public class Person {
   /**
    * This is the Person's user image
    */
-  private Drawable userImage;
+  private int userImage;
 
 
   //***************** GETTERS AND SETTERS *******************************************************//
@@ -348,61 +348,61 @@ public class Person {
     this.userPassword = userPassword;
   }
 
-  /**
-   * Gets invites sent.
-   *
-   * @return the invites sent
-   */
-  public List<Invitation> getInvitesSent() {
-    return invitesSent;
-  }
-
-  /**
-   * Sets invites sent.
-   *
-   * @param invitesSent the invites sent
-   */
-  public void setInvitesSent(List<Invitation> invitesSent) {
-    this.invitesSent = invitesSent;
-  }
-
-  /**
-   * Gets invites received.
-   *
-   * @return the invites received
-   */
-  public List<Invitation> getInvitesReceived() {
-    return invitesReceived;
-  }
-
-  /**
-   * Sets invites received.
-   *
-   * @param invitesReceived the invites received
-   */
-  public void setInvitesReceived(
-      List<Invitation> invitesReceived) {
-    this.invitesReceived = invitesReceived;
-  }
-
-  /**
-   * Gets invites created.
-   *
-   * @return the invites created
-   */
-  public List<Invitation> getInvitesCreated() {
-    return invitesCreated;
-  }
-
-  /**
-   * Sets invites created.
-   *
-   * @param invitesCreated the invites created
-   */
-  public void setInvitesCreated(
-      List<Invitation> invitesCreated) {
-    this.invitesCreated = invitesCreated;
-  }
+//  /**
+//   * Gets invites sent.
+//   *
+//   * @return the invites sent
+//   */
+//  public List<Invitation> getInvitesSent() {
+//    return invitesSent;
+//  }
+//
+//  /**
+//   * Sets invites sent.
+//   *
+//   * @param invitesSent the invites sent
+//   */
+//  public void setInvitesSent(List<Invitation> invitesSent) {
+//    this.invitesSent = invitesSent;
+//  }
+//
+//  /**
+//   * Gets invites received.
+//   *
+//   * @return the invites received
+//   */
+//  public List<Invitation> getInvitesReceived() {
+//    return invitesReceived;
+//  }
+//
+//  /**
+//   * Sets invites received.
+//   *
+//   * @param invitesReceived the invites received
+//   */
+//  public void setInvitesReceived(
+//      List<Invitation> invitesReceived) {
+//    this.invitesReceived = invitesReceived;
+//  }
+//
+//  /**
+//   * Gets invites created.
+//   *
+//   * @return the invites created
+//   */
+//  public List<Invitation> getInvitesCreated() {
+//    return invitesCreated;
+//  }
+//
+//  /**
+//   * Sets invites created.
+//   *
+//   * @param invitesCreated the invites created
+//   */
+//  public void setInvitesCreated(
+//      List<Invitation> invitesCreated) {
+//    this.invitesCreated = invitesCreated;
+//  }
 
   /**
    * Gets distance to user.
@@ -427,7 +427,7 @@ public class Person {
    *
    * @return the user image
    */
-  public Drawable getUserImage() {
+  public int getUserImage() {
     return userImage;
   }
 
@@ -436,7 +436,7 @@ public class Person {
    *
    * @param userImage the user image
    */
-  public void setUserImage(Drawable userImage) {
+  public void setUserImage(int userImage) {
     this.userImage = userImage;
   }
 }

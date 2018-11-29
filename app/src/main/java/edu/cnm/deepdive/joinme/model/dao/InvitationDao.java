@@ -39,10 +39,10 @@ public interface InvitationDao {
   List<Invitation> selectAllDescription(String description);
 
   @Query("SELECT * FROM invitations WHERE user_sender=:userSender")
-  List<Invitation> getInvitatiionsForUserSender(Person userSender);
+  List<Invitation> getInvitatiionsForUserSender(UUID userSender);
 
   @Query("SELECT * FROM invitations WHERE user_receiver=:userReceiver")
-  List<Invitation> getInvitationsForUserReceiver(Person userReceiver);
+  List<Invitation> getInvitationsForUserReceiver(UUID userReceiver);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
   int update(Invitation invitations);

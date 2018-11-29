@@ -32,16 +32,16 @@ public interface PersonDao {
   List<Person> selectAll();
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-  int update(UUID person);
+  int update(Person person);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-  int update(UUID... persons);
+  int update(Person... persons);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-  int update(List<UUID> persons);
+  int update(List<Person> persons);
 
   @Delete
-  int delete(UUID personId);
+  int delete(Person personId);
 
   @Query("DELETE FROM people")
   int nuke();
