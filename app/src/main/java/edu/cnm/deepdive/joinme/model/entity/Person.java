@@ -117,6 +117,144 @@ public class Person {
 
   //***************** GETTERS AND SETTERS *******************************************************//
 
-  
 
+  public double getLatitude() {
+    return latitude;
+  }
+
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
+  }
+
+  public double getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(double longitude) {
+    this.longitude = longitude;
+  }
+
+  @NonNull
+  public UUID getPersonId() {
+    return personId;
+  }
+
+  public void setPersonId(@NonNull UUID personId) {
+    this.personId = personId;
+  }
+
+  @NonNull
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(@NonNull String displayName) {
+    this.displayName = displayName;
+  }
+
+  public String getUserImageLocation() {
+    return userImageLocation;
+  }
+
+  public void setUserImageLocation(String userImageLocation) {
+    this.userImageLocation = userImageLocation;
+  }
+
+  public String getUserDescription() {
+    return userDescription;
+  }
+
+  public void setUserDescription(String userDescription) {
+    this.userDescription = userDescription;
+  }
+
+  public boolean isThisMe() {
+    return isThisMe;
+  }
+
+  public void setThisMe(boolean thisMe) {
+    isThisMe = thisMe;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public Date getUserBDay() {
+    return userBDay;
+  }
+
+  public void setUserBDay(Date userBDay) {
+    this.userBDay = userBDay;
+  }
+
+  public String getUserEmail() {
+    return userEmail;
+  }
+
+  public void setUserEmail(String userEmail) {
+    this.userEmail = userEmail;
+  }
+
+  public String getUserPassword() {
+    return userPassword;
+  }
+
+  public void setUserPassword(String userPassword) {
+    this.userPassword = userPassword;
+  }
+
+  public List<Invitation> getInvitesSent() {
+    return invitesSent;
+  }
+
+  public void setInvitesSent(List<Invitation> invitesSent) {
+    this.invitesSent = invitesSent;
+  }
+
+  public List<Invitation> getInvitesReceived() {
+    return invitesReceived;
+  }
+
+  public void setInvitesReceived(
+      List<Invitation> invitesReceived) {
+    this.invitesReceived = invitesReceived;
+  }
+
+  public List<Invitation> getInvitesCreated() {
+    return invitesCreated;
+  }
+
+  public void setInvitesCreated(
+      List<Invitation> invitesCreated) {
+    this.invitesCreated = invitesCreated;
+  }
+
+  public double getDistanceToUser() {
+    return distanceToUser;
+  }
+
+  public void setDistanceToUser(double distanceToUser) {
+    this.distanceToUser = distanceToUser;
+  }
+
+  public Drawable getUserImage() {
+    return userImage;
+  }
+
+  public void setUserImage(Drawable userImage) {
+    this.userImage = userImage;
+  }
 }
