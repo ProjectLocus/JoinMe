@@ -6,7 +6,11 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import java.util.Date;
+import java.util.UUID;
 
+/**
+ * The type Invitation.
+ */
 @Entity(
     tableName = "invitation",
     indices = {@Index(value = {"invitation_id", "user_sender_id", "user_receiver_id"},
@@ -16,15 +20,15 @@ public class Invitation {
 
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "invitation_id")
-  private long id;
+  private UUID id;
 
   @NonNull
-  @ColumnInfo(name = "user_sender_id")
-  private long userSenderId;
+  @ColumnInfo(name = "user_sender")
+  private Person userSender;
 
   @NonNull
-  @ColumnInfo(name = "user_receiver_id")
-  private long userReceiverId;
+  @ColumnInfo(name = "user_receiver")
+  private Person userReceiver;
 
   @NonNull
   @ColumnInfo(name = "date")
@@ -36,56 +40,118 @@ public class Invitation {
 
   @NonNull
   @ColumnInfo(name = "created")
-  private Date created;
+  private String created;
 
-  public long getId() {
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
+  public UUID getId() {
     return id;
   }
 
-  public void setId(long id) {
+  /**
+   * Sets id.
+   *
+   * @param id the id
+   */
+  public void setId(UUID id) {
     this.id = id;
   }
 
-  public long getUserSenderId() {
-    return userSenderId;
+  /**
+   * Gets user sender.
+   *
+   * @return the user sender
+   */
+  @NonNull
+  public Person getUserSender() {
+    return userSender;
   }
 
-  public void setUserSenderId(long userSenderId) {
-    this.userSenderId = userSenderId;
+  /**
+   * Sets user sender.
+   *
+   * @param userSender the user sender
+   */
+  public void setUserSender(@NonNull Person userSender) {
+    this.userSender = userSender;
   }
 
-  public long getUserReceiverId() {
-    return userReceiverId;
+  /**
+   * Gets user receiver.
+   *
+   * @return the user receiver
+   */
+  @NonNull
+  public Person getUserReceiver() {
+    return userReceiver;
   }
 
-  public void setUserReceiverId(long userReceiverId) {
-    this.userReceiverId = userReceiverId;
+  /**
+   * Sets user receiver.
+   *
+   * @param userReceiver the user receiver
+   */
+  public void setUserReceiver(@NonNull Person userReceiver) {
+    this.userReceiver = userReceiver;
   }
 
+  /**
+   * Gets date.
+   *
+   * @return the date
+   */
   @NonNull
   public String getDate() {
     return date;
   }
 
+  /**
+   * Sets date.
+   *
+   * @param date the date
+   */
   public void setDate(@NonNull String date) {
     this.date = date;
   }
 
+  /**
+   * Gets description.
+   *
+   * @return the description
+   */
   @NonNull
   public String getDescription() {
     return description;
   }
 
+  /**
+   * Sets description.
+   *
+   * @param description the description
+   */
   public void setDescription(@NonNull String description) {
     this.description = description;
   }
 
+  /**
+   * Gets created.
+   *
+   * @return the created
+   */
   @NonNull
-  public Date getCreated() {
+  public String getCreated() {
     return created;
   }
 
-  public void setCreated(@NonNull Date created) {
+  /**
+   * Sets created.
+   *
+   * @param created the created
+   */
+  public void setCreated(@NonNull String created) {
     this.created = created;
   }
 }
