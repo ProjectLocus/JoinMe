@@ -1,8 +1,10 @@
 package edu.cnm.deepdive.joinme.model.entity;
 
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -13,7 +15,11 @@ import java.util.UUID;
 /**
  * The type Person.
  */
-@Entity
+@Entity(
+    tableName = "person",
+    indices = {@Index(value={"person_id", "display_name"},
+    unique = true)}
+)
 public class Person {
 
   //**************** INFO ON OTHERS THAT COMES FROM SERVER ***************************************//
@@ -33,12 +39,14 @@ public class Person {
    */
   @NonNull
   @PrimaryKey(autoGenerate = true)
+  @ColumnInfo(name = "person_id")
   private UUID personId;
 
   /**
    * This is the display name a person has chosen
    */
   @NonNull
+  @ColumnInfo(name = "display_name")
   private String displayName;
 
   /**

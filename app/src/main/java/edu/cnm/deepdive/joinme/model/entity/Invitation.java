@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 @Entity(
     tableName = "invitation",
-    indices = {@Index(value = {"invitation_id", "user_sender_id", "user_receiver_id"},
+    indices = {@Index(value = {"invitation_id", "user_sender", "user_receiver"},
         unique = true)}
 )
 public class Invitation {
