@@ -2,6 +2,7 @@ package edu.cnm.deepdive.joinme.model.utility;
 
 import android.content.Context;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
+import edu.cnm.deepdive.joinme.model.entity.Person;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
