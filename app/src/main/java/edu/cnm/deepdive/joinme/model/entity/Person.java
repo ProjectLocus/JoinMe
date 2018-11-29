@@ -16,7 +16,7 @@ import java.util.UUID;
  * The type Person.
  */
 @Entity(
-    tableName = "person",
+    tableName = "people",
     indices = {@Index(value={"person_id", "display_name"},
     unique = true)}
 )
