@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.joinme.controller;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.model.entity.Invitation;
+import edu.cnm.deepdive.joinme.model.entity.Person;
+import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
+import edu.cnm.deepdive.joinme.model.utility.DummyPersonGenerator;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
@@ -20,6 +25,9 @@ import edu.cnm.deepdive.joinme.view.FragPeopleRV;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
     FragMainMenuListener, FragUserProfListener, FragPeopleRVListener {
@@ -65,6 +73,21 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   }
 
   private void initDB() {
+    //get db reference
+
+    fillWithDummyData();
+
+
+  }
+
+  private void fillWithDummyData() {
+    List<Person> dummyPeople = DummyPersonGenerator.getXDummyPersons(30, this);
+    List<Invitation> dummyInvites = DummyInvitationGenerator.getXDummyInvitations(true, dummyPeople.get(0), this, 50);
+    Person[] dumPeopArr = dummyPeople.toArray(new Person[0]);
+    Invitation[] dumInvArr = dummyInvites.toArray(new Invitation[0]);
+    int placeholder = 0;
+//    new AddInvitationTask().execute(dumInvArr);
+//    new AddPeopleTask().execute(dumPeopArr);
   }
 
   protected void swapFrags(Fragment fragIn){
@@ -134,5 +157,28 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   @Override
   public int getCalledPeopleListType(){
     return calledPeopleListType;
+  }
+
+  private class AddInvitationTask extends AsyncTask<Invitation, Void, Void> {
+
+    @Override
+    protected Void doInBackground(Invitation... invitations) {
+      List<Invitation> invitesList = new LinkedList<>();
+      invitesList.addAll(Arrays.asList(invitations));
+//      todo:  database.getInvitationDao().insert(invitesList);
+      return null;
+    }
+
+  }
+  private class AddPeopleTask extends AsyncTask<Person, Void, Void> {
+
+    @Override
+    protected Void doInBackground(Person... people) {
+      List<Person> peopleList = new LinkedList<>();
+      peopleList.addAll(Arrays.asList(people));
+//      todo:  database.getPersonDao().insert(peopleList);
+      return null;
+    }
+
   }
 }
