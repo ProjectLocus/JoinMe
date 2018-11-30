@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.joinme.controller;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.model.dao.PersonDao;
+import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
@@ -20,6 +24,9 @@ import edu.cnm.deepdive.joinme.view.FragPeopleRV;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
     FragMainMenuListener, FragUserProfListener, FragPeopleRVListener {
@@ -35,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private FragPeopleRV fragPeopleRV;
   private int calledInviteListType;
   private int calledPeopleListType;
+  private ClientDB clientDB;
+  private Context context;
 
 
   @Override
@@ -65,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   }
 
   private void initDB() {
+    clientDB = ClientDB.getInstance(this);
+    new ClientDBTask().execute();
   }
 
   public void swapFrags(Fragment fragIn){
@@ -134,5 +145,15 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   @Override
   public int getCalledPeopleListType(){
     return calledPeopleListType;
+  }
+
+  private class ClientDBTask extends AsyncTask<Void, Void, Void> {
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+      PersonDao personDao = clientDB.getPersonDao();
+      personDao.selectAll();
+      return null;
+    }
   }
 }

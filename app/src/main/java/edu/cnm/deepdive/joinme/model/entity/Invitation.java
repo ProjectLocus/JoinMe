@@ -1,10 +1,14 @@
 package edu.cnm.deepdive.joinme.model.entity;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.Relation;
 import android.support.annotation.NonNull;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,13 +17,17 @@ import java.util.UUID;
 @Entity(
     tableName = "invitations",
     indices = {@Index(value = {"invitation_id", "user_sender", "user_receiver"},
-        unique = true)}
+        unique = true)},
+    foreignKeys = {@ForeignKey(entity = Person.class, parentColumns = "person_id",
+        childColumns = "user_sender"), @ForeignKey(entity = Person.class, parentColumns = "person_id",
+    childColumns = "user_receiver")}
 )
 public class Invitation {
 
-  @PrimaryKey(autoGenerate = true)
+  @NonNull
+  @PrimaryKey
   @ColumnInfo(name = "invitation_id")
-  private UUID id;
+  private UUID invitationId;
 
   @NonNull
   @ColumnInfo(name = "user_sender")
@@ -46,55 +54,17 @@ public class Invitation {
    *
    * @return the id
    */
-  public UUID getId() {
-    return id;
+  public UUID getInvitationId() {
+    return invitationId;
   }
 
   /**
    * Sets id.
    *
-   * @param id the id
+   * @param invitationId the invitationId
    */
-  public void setId(UUID id) {
-    this.id = id;
-  }
-
-  /**
-   * Gets user sender.
-   *
-   * @return the user sender
-   */
-  @NonNull
-  public UUID getUserSender() {
-    return userSender;
-  }
-
-  /**
-   * Sets user sender.
-   *
-   * @param userSender the user sender
-   */
-  public void setUserSender(@NonNull UUID userSender) {
-    this.userSender = userSender;
-  }
-
-  /**
-   * Gets user receiver.
-   *
-   * @return the user receiver
-   */
-  @NonNull
-  public UUID getUserReceiver() {
-    return userReceiver;
-  }
-
-  /**
-   * Sets user receiver.
-   *
-   * @param userReceiver the user receiver
-   */
-  public void setUserReceiver(@NonNull UUID userReceiver) {
-    this.userReceiver = userReceiver;
+  public void setInvitationId(UUID invitationId) {
+    this.invitationId = invitationId;
   }
 
   /**
@@ -152,5 +122,23 @@ public class Invitation {
    */
   public void setCreated(@NonNull String created) {
     this.created = created;
+  }
+
+  @NonNull
+  public UUID getUserSender() {
+    return userSender;
+  }
+
+  public void setUserSender(@NonNull UUID userSender) {
+    this.userSender = userSender;
+  }
+
+  @NonNull
+  public UUID getUserReceiver() {
+    return userReceiver;
+  }
+
+  public void setUserReceiver(@NonNull UUID userReceiver) {
+    this.userReceiver = userReceiver;
   }
 }
