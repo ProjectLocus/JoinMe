@@ -1,14 +1,11 @@
 package edu.cnm.deepdive.joinme.model.entity;
 
 import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Embedded;
-import android.arch.persistence.room.Entity;
+ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.Relation;
 import android.support.annotation.NonNull;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -16,8 +13,8 @@ import java.util.UUID;
  */
 @Entity(
     tableName = "invitations",
-    indices = {@Index(value = {"invitation_id", "user_sender", "user_receiver"},
-        unique = true)},
+    indices = {@Index(value = "invitation_id", unique = true), @Index(value = "user_sender",
+        unique = true), @Index(value = "user_receiver", unique = true)},
     foreignKeys = {@ForeignKey(entity = Person.class, parentColumns = "person_id",
         childColumns = "user_sender"), @ForeignKey(entity = Person.class, parentColumns = "person_id",
     childColumns = "user_receiver")}

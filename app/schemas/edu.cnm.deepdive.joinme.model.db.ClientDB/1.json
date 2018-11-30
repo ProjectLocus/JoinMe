@@ -1,0 +1,183 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "09cb42475ddc2db3c4254ed9ace9fb5a",
+    "entities": [
+      {
+        "tableName": "invitations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` TEXT NOT NULL, `user_sender` TEXT NOT NULL, `user_receiver` TEXT NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "invitationId",
+            "columnName": "invitation_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userSender",
+            "columnName": "user_sender",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userReceiver",
+            "columnName": "user_receiver",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "created",
+            "columnName": "created",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "invitation_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_invitations_invitation_id",
+            "unique": true,
+            "columnNames": [
+              "invitation_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_invitations_invitation_id` ON `${TABLE_NAME}` (`invitation_id`)"
+          },
+          {
+            "name": "index_invitations_user_sender",
+            "unique": true,
+            "columnNames": [
+              "user_sender"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_invitations_user_sender` ON `${TABLE_NAME}` (`user_sender`)"
+          },
+          {
+            "name": "index_invitations_user_receiver",
+            "unique": true,
+            "columnNames": [
+              "user_receiver"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_invitations_user_receiver` ON `${TABLE_NAME}` (`user_receiver`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "people",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_sender"
+            ],
+            "referencedColumns": [
+              "person_id"
+            ]
+          },
+          {
+            "table": "people",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_receiver"
+            ],
+            "referencedColumns": [
+              "person_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "people",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `person_id` TEXT NOT NULL, `display_name` TEXT NOT NULL, `userImageLocation` TEXT, `userDescription` TEXT, `isThisMe` INTEGER NOT NULL, `userImage` INTEGER NOT NULL, PRIMARY KEY(`person_id`))",
+        "fields": [
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "personId",
+            "columnName": "person_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "display_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userImageLocation",
+            "columnName": "userImageLocation",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userDescription",
+            "columnName": "userDescription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isThisMe",
+            "columnName": "isThisMe",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userImage",
+            "columnName": "userImage",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "person_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_people_person_id_display_name",
+            "unique": true,
+            "columnNames": [
+              "person_id",
+              "display_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_people_person_id_display_name` ON `${TABLE_NAME}` (`person_id`, `display_name`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"09cb42475ddc2db3c4254ed9ace9fb5a\")"
+    ]
+  }
+}
