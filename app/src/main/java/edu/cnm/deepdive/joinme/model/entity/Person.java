@@ -18,8 +18,9 @@ import java.util.UUID;
  */
 @Entity(
     tableName = "people",
-    indices = {@Index(value={"person_id", "display_name"},
-    unique = true)}
+    indices = {
+        @Index(value= "person_id", unique = true),
+        @Index(value = "display_name", unique = true)}
 )
 public class Person {
 

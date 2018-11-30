@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "09cb42475ddc2db3c4254ed9ace9fb5a",
+    "identityHash": "55b4cfad2c6ffa09719330a0c3c732b1",
     "entities": [
       {
         "tableName": "invitations",
@@ -163,13 +163,20 @@
         },
         "indices": [
           {
-            "name": "index_people_person_id_display_name",
+            "name": "index_people_person_id",
             "unique": true,
             "columnNames": [
-              "person_id",
+              "person_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_people_person_id` ON `${TABLE_NAME}` (`person_id`)"
+          },
+          {
+            "name": "index_people_display_name",
+            "unique": true,
+            "columnNames": [
               "display_name"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_people_person_id_display_name` ON `${TABLE_NAME}` (`person_id`, `display_name`)"
+            "createSql": "CREATE UNIQUE INDEX `index_people_display_name` ON `${TABLE_NAME}` (`display_name`)"
           }
         ],
         "foreignKeys": []
@@ -177,7 +184,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"09cb42475ddc2db3c4254ed9ace9fb5a\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"55b4cfad2c6ffa09719330a0c3c732b1\")"
     ]
   }
 }

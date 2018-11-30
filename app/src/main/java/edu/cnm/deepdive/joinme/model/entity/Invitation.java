@@ -13,11 +13,14 @@ import java.util.UUID;
  */
 @Entity(
     tableName = "invitations",
-    indices = {@Index(value = "invitation_id", unique = true), @Index(value = "user_sender",
-        unique = true), @Index(value = "user_receiver", unique = true)},
-    foreignKeys = {@ForeignKey(entity = Person.class, parentColumns = "person_id",
-        childColumns = "user_sender"), @ForeignKey(entity = Person.class, parentColumns = "person_id",
-    childColumns = "user_receiver")}
+    indices = {@Index(value = "invitation_id", unique = true),
+        @Index(value = "user_sender", unique = true),
+        @Index(value = "user_receiver", unique = true)},
+    foreignKeys = {
+        @ForeignKey(entity = Person.class, parentColumns = "person_id",
+            childColumns = "user_sender"),
+        @ForeignKey(entity = Person.class, parentColumns = "person_id",
+            childColumns = "user_receiver")}
 )
 public class Invitation {
 
