@@ -18,7 +18,9 @@ import edu.cnm.deepdive.joinme.model.dao.PersonDao;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
+import edu.cnm.deepdive.joinme.view.FragInviteCreate;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
+import edu.cnm.deepdive.joinme.view.FragInviteDetails;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails.FragInviteDetailsListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private FragInvitationRV fragInvitationRV;
   private FragUserProf fragUserProf;
   private FragPeopleRV fragPeopleRV;
+  private FragInviteDetails fragInviteDetails;
+  private FragInviteCreate fragInviteCreate;
   private int calledInviteListType;
   private int calledPeopleListType;
   private ClientDB clientDB;
@@ -56,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
 //    initDB();
 //    initViews();
 //    initDataIntoViews();
-    getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container, new FragPeopleRV()).commit();
+    getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
+        new FragPeopleRV()).commit();
   }
 
   private void initDataIntoViews() {
@@ -138,6 +143,13 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     }
     calledPeopleListType = peopleListType;
     swapFrags(fragPeopleRV);
+  }
+
+  public void goToFragInviteDetails(){
+    if(fragInviteDetails==null) {
+      fragInviteDetails = new FragInviteDetails();
+    }
+    swapFrags(fragInviteDetails);
   }
 
   public int getCalledInviteListType() {

@@ -3,15 +3,11 @@ package edu.cnm.deepdive.joinme.model.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * The type Person.
@@ -42,7 +38,7 @@ public class Person {
   @NonNull
   @PrimaryKey
   @ColumnInfo(name = "person_id")
-  private UUID personId;
+  private int personId;
 
   /**
    * This is the display name a person has chosen
@@ -173,7 +169,7 @@ public class Person {
    * @return the person id
    */
   @NonNull
-  public UUID getPersonId() {
+  public int getPersonId() {
     return personId;
   }
 
@@ -182,7 +178,7 @@ public class Person {
    *
    * @param personId the person id
    */
-  public void setPersonId(@NonNull UUID personId) {
+  public void setPersonId(@NonNull int personId) {
     this.personId = personId;
   }
 

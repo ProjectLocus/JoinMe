@@ -70,7 +70,7 @@ public class DummyPersonGenerator {
     tempDummy.setUserDescription("I am a person and my ID is: " + new UUID(10, 10));
     tempDummy.setUserEmail(email);
     tempDummy.setUserPassword(password);
-    tempDummy.setPersonId(UUID.randomUUID());
+    tempDummy.setPersonId(rng.nextInt()+1);
 
     tempDummy.setThisMe(isMe);
 

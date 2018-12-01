@@ -10,7 +10,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import edu.cnm.deepdive.joinme.model.dao.InvitationDao;
 import edu.cnm.deepdive.joinme.model.dao.PersonDao;
-import edu.cnm.deepdive.joinme.model.db.ClientDB.Converters;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import java.util.UUID;
@@ -24,7 +23,6 @@ import java.util.UUID;
     version = 1,
     exportSchema = true
 )
-@TypeConverters(Converters.class)
 public abstract class ClientDB extends RoomDatabase {
 
   private static final String DB_NAME = "client_db";
@@ -65,18 +63,6 @@ public abstract class ClientDB extends RoomDatabase {
     }
   }
 
-  public static class Converters {
 
-    @TypeConverter
-    public String stringFromUUID(UUID id) {
-      return id.toString();
-    }
-
-    @TypeConverter
-    public UUID uuidFromString(String str) {
-      return UUID.fromString(str);
-    }
-
-  }
 
 }

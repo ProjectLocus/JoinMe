@@ -23,7 +23,7 @@ public interface PersonDao {
   List<Person> select(boolean isThisMe);
 
   @Query("SELECT * FROM people WHERE person_id=:personId")
-  List<Person> select(UUID personId);
+  List<Person> select(int personId);
 
   @Query("SELECT * FROM people WHERE display_name=:displayName")
   List<Person> select(String displayName);

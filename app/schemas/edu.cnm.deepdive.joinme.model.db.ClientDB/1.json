@@ -2,28 +2,28 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5e652082b003b359fe37526958568c01",
+    "identityHash": "f70bc534eaeaba51f02de76dee89056e",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` TEXT NOT NULL, `user_sender` TEXT NOT NULL, `user_receiver` TEXT NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "invitationId",
             "columnName": "invitation_id",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "userSender",
             "columnName": "user_sender",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "userReceiver",
             "columnName": "user_receiver",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -116,7 +116,7 @@
       },
       {
         "tableName": "people",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `person_id` TEXT NOT NULL, `display_name` TEXT NOT NULL, `userImageLocation` TEXT, `userDescription` TEXT, `isThisMe` INTEGER NOT NULL, `userImage` INTEGER NOT NULL, PRIMARY KEY(`person_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `person_id` INTEGER NOT NULL, `display_name` TEXT NOT NULL, `userImageLocation` TEXT, `userDescription` TEXT, `isThisMe` INTEGER NOT NULL, `userImage` INTEGER NOT NULL, PRIMARY KEY(`person_id`))",
         "fields": [
           {
             "fieldPath": "latitude",
@@ -133,7 +133,7 @@
           {
             "fieldPath": "personId",
             "columnName": "person_id",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -196,7 +196,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5e652082b003b359fe37526958568c01\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f70bc534eaeaba51f02de76dee89056e\")"
     ]
   }
 }

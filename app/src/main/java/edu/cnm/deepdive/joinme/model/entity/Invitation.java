@@ -6,7 +6,6 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
-import java.util.UUID;
 
 /**
  * The type Invitation.
@@ -27,15 +26,15 @@ public class Invitation {
   @NonNull
   @PrimaryKey
   @ColumnInfo(name = "invitation_id")
-  private UUID invitationId;
+  private int invitationId;
 
   @NonNull
   @ColumnInfo(name = "user_sender")
-  private UUID userSender;
+  private int userSender;
 
   @NonNull
   @ColumnInfo(name = "user_receiver")
-  private UUID userReceiver;
+  private int userReceiver;
 
   @NonNull
   @ColumnInfo(name = "date")
@@ -62,7 +61,7 @@ public class Invitation {
    *
    * @return the id
    */
-  public UUID getInvitationId() {
+  public int getInvitationId() {
     return invitationId;
   }
 
@@ -71,7 +70,7 @@ public class Invitation {
    *
    * @param invitationId the invitationId
    */
-  public void setInvitationId(UUID invitationId) {
+  public void setInvitationId(int invitationId) {
     this.invitationId = invitationId;
   }
 
@@ -133,20 +132,20 @@ public class Invitation {
   }
 
   @NonNull
-  public UUID getUserSender() {
+  public int getUserSender() {
     return userSender;
   }
 
-  public void setUserSender(@NonNull UUID userSender) {
+  public void setUserSender(@NonNull int userSender) {
     this.userSender = userSender;
   }
 
   @NonNull
-  public UUID getUserReceiver() {
+  public int getUserReceiver() {
     return userReceiver;
   }
 
-  public void setUserReceiver(@NonNull UUID userReceiver) {
+  public void setUserReceiver(@NonNull int userReceiver) {
     this.userReceiver = userReceiver;
   }
 
