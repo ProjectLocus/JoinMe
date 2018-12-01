@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    initDB();
-    initViews();
-    initDataIntoViews();
-
+//    initDB();
+//    initViews();
+//    initDataIntoViews();
+    getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container, new FragPeopleRV()).commit();
   }
 
   private void initDataIntoViews() {
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     new ClientDBTask().execute();
   }
 
-  protected void swapFrags(Fragment fragIn){
+  public void swapFrags(Fragment fragIn){
     if(fragIn==null){
       Log.d(TAG, "swapFrags: null fragment");
       return;

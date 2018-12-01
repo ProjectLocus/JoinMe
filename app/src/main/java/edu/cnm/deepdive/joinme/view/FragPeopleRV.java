@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.model.entity.Person;
+import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
+import edu.cnm.deepdive.joinme.model.utility.DummyPersonGenerator;
+import java.util.List;
 
 public class FragPeopleRV extends Fragment {
 
@@ -20,6 +25,7 @@ public class FragPeopleRV extends Fragment {
   private FragPeopleRVListener fragPeopleRVListener;
   private TextView listTitle;
   private RecyclerView recyclerView;
+  private DummyInvitationGenerator dummyInvitationGenerator
 
   public interface FragPeopleRVListener{
     int getCalledPeopleListType();
@@ -29,24 +35,35 @@ public class FragPeopleRV extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View theView = inflater.inflate(R.layout.rv_item_person_list, container, false);
-    initViews(theView);
+    View theView = inflater.inflate(R.layout.fragment_people_rv, container, false);
+    initViews();
+    initRecyclerview(theView);
     initData();
-    return super.onCreateView(inflater, container, savedInstanceState);
+    listTitle = theView.findViewById(R.id.tv_frag_people_rv_title);
+    recyclerView = theView.findViewById(R.id.rv_frag_people_rv_peoplelist);
+
+    List<Person> persons = DummyPersonGenerator.getXDummyPersonsNoDeviceUser(3,getContext());
+
+    PeopleAdapter adapter = new PeopleAdapter(getActivity(),persons);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    recyclerView.setAdapter(adapter);
+
+    return theView;
   }
 
   private void initData() {
   }
 
-  private void initViews(View theView) {
-    listTitle = theView.findViewById(R.id.tv_frag_people_rv_title);
-    recyclerView = theView.findViewById(R.id.rv_frag_people_rv_peoplelist);
+  private void initViews() {
+
   }
 
 
+  private void initRecyclerview(View theView) {
 
 
-  @Override
+  }
+    @Override
   public void onAttach(Context context) {
     super.onAttach(context);
     try {

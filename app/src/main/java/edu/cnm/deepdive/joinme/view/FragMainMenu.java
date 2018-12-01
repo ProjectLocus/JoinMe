@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.ramotion.circlemenu.CircleMenuView;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
 
 public class FragMainMenu extends Fragment {
   private static final String TAG = "FragMainMenu";
@@ -64,6 +65,7 @@ public class FragMainMenu extends Fragment {
       @Override
       public void onButtonClickAnimationEnd(@NonNull CircleMenuView view, int index) {
         Log.d("D", "onButtonClickAnimationEnd| index: " + index);
+         new MainActivity().swapFrags(new FragInvitationRV());
         Toast.makeText(getContext(), "onButtonClickAnimationEnd", Toast.LENGTH_SHORT).show();
       }
     });
