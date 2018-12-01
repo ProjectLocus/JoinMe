@@ -43,7 +43,8 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.Holder> {
     int[] picRes = {R.drawable.alex,R.drawable.brian,R.drawable.notdeb,R.drawable.johnrow,R.drawable.lily,R.drawable.weenie};
     Random rng = new Random();
     holder.image.setImageResource(picRes[rng.nextInt(picRes.length-1)]);
-    //holder.name.setText(listForRecycler.get(position).getFirstName());
+    //
+    // holder.name.setText(listForRecycler.get(position).getFirstName());
     //TODO fix error for above execution: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
     holder.comments.setText("Lorem Ipsum");
   }

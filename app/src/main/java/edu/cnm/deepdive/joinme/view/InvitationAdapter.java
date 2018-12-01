@@ -11,6 +11,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Describes an adapter for a {@link RecyclerView}.
@@ -38,8 +39,10 @@ public class InvitationAdapter extends RecyclerView.Adapter<InvitationAdapter.Ho
 
   @Override
   public void onBindViewHolder(@NonNull final Holder holder, int position) {
-    //TODO add image for invitation with Glide/Picasson implementation.
-  holder.comments.setText(listForRecycler.get(position).getDescription());
+    int[] picRes = {R.drawable.alex,R.drawable.brian,R.drawable.notdeb,R.drawable.johnrow,R.drawable.lily,R.drawable.weenie};
+    Random rng = new Random();
+    holder.image.setImageResource(picRes[rng.nextInt(picRes.length-1)]);
+    holder.comments.setText(listForRecycler.get(position).getDescription());
 
   }
 
