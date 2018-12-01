@@ -24,29 +24,14 @@ public class DummyPersonGenerator {
    * @param context the context the method is being called from
    * @return list
    */
-  public static List<Person> getXDummyPersons(int xDummies, Context context){
+  public static List<Person> getXDummyPersons(int xDummies, Context context) {
     List<Person> dummyList = new LinkedList<>();
-    for (int i = 0; i < xDummies; i++) {
-      Person tempDummy = new Person();
-      tempDummy.setDisplayName(i + " display name");
-      tempDummy.setDistanceToUser(rng.nextDouble());
-      tempDummy.setFirstName(i + " first name");
-      tempDummy.setLastName(i + " last name");
-      tempDummy.setLatitude(rng.nextDouble());
-      tempDummy.setLongitude(rng.nextDouble());
-      tempDummy.setPersonId(UUID.randomUUID());
-      tempDummy.setThisMe(false);
-      tempDummy.setUserBDay(new Date());
-      tempDummy.setUserDescription("I am a person and my ID is: " + tempDummy.getPersonId().toString());
-      tempDummy.setUserEmail(i + "@email.com");
-      tempDummy.setUserPassword("password");
-      //tempDummy.setUserImage(context.getResources().getDrawable(R.drawable.ic_assignment_ind_gray_24dp));
-      dummyList.add(tempDummy);
-    }
-    if(dummyList.size()>0){
+    if (dummyList.size() > 0) {
+
       dummyList.get(0).setThisMe(true);
       dummyList.get(0).setDistanceToUser(0.0);
-     // dummyList.get(0).setInvitesReceived(DummyInvitationGenerator.getXDummyInvitations(true, dummyList.get(0), context, 50));
+      // dummyList.get(0).setInvitesReceived(DummyInvitationGenerator.getXDummyInvitations(true, dummyList.get(0), context, 50));
+
     }
     return dummyList;
   }
@@ -59,26 +44,42 @@ public class DummyPersonGenerator {
    * @param context the context
    * @return the list
    */
-  public static List<Person> getXDummyPersonsNoDeviceUser (int xDummies, Context context){
+  public static List<Person> getXDummyPersonsNoDeviceUser(int xDummies, Context context) {
     List<Person> dummyList = new LinkedList<>();
-    for (int i = 0; i < xDummies; i++) {
-      Person tempDummy = new Person();
-      tempDummy.setDisplayName(i + " display name");
-      tempDummy.setDistanceToUser(rng.nextDouble());
-      tempDummy.setFirstName(i + " first name");
-      tempDummy.setLastName(i + " last name");
-      tempDummy.setLatitude(rng.nextDouble());
-      tempDummy.setLongitude(rng.nextDouble());
-      tempDummy.setPersonId(UUID.randomUUID());
-      tempDummy.setThisMe(false);
-      tempDummy.setUserBDay(new Date());
-      tempDummy.setUserDescription("I am a person and my ID is: " + tempDummy.getPersonId().toString());
-      tempDummy.setUserEmail(i + "@email.com");
-      tempDummy.setUserPassword("password");
-      //tempDummy.setUserImage(context.getResources().getDrawable(R.drawable.ic_assignment_ind_gray_24dp));
-      dummyList.add(tempDummy);
+    for(int i = 0; i<xDummies;i++){
+      dummyList.add(setUpPerson(false));
     }
     return dummyList;
   }
 
+
+
+  private static Person setUpPerson(boolean isMe) {
+
+    Person tempDummy = new Person();
+
+    String dName[] = {"Gangsta", "Purple man", "The word", "Friend finder"};
+    String fName[] = {"John", "Hero", "Tom", "Roger"};
+    String lName[] = {"Smith", "Garcia", "Ray", "Johnson"};
+    String email = "TestEmail@testEmail.com";
+    String password = "password123";
+
+    tempDummy.setDisplayName(dName[rng.nextInt(dName.length - 1)]);
+    tempDummy.setFirstName(fName[rng.nextInt(fName.length - 1)]);
+    tempDummy.setLastName(lName[rng.nextInt(lName.length - 1)]);
+    tempDummy.setUserDescription("I am a person and my ID is: " + new UUID(10, 10));
+    tempDummy.setUserEmail(email);
+    tempDummy.setUserPassword(password);
+    tempDummy.setPersonId(UUID.randomUUID());
+
+    tempDummy.setThisMe(isMe);
+
+    tempDummy.setUserBDay(new Date());
+
+    tempDummy.setDistanceToUser(rng.nextDouble());
+    tempDummy.setLatitude(rng.nextDouble());
+    tempDummy.setLongitude(rng.nextDouble());
+    //tempDummy.setUserImage(context.getResources().getDrawable(R.drawable.ic_assignment_ind_gray_24dp));
+    return tempDummy;
+  }
 }

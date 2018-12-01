@@ -17,6 +17,7 @@ import android.widget.Adapter;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
+import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +43,7 @@ public class FragInvitationRV extends Fragment {
       @Nullable Bundle savedInstanceState) {
     View theView = inflater.inflate(R.layout.fragment_invitation_rv, container, false);
     initViews(theView);
-    //initData();
+    initData();
     initRecyclerview();
     return theView;
   }
@@ -59,13 +60,13 @@ public class FragInvitationRV extends Fragment {
     //recyclerVIEW.setmanager(linear layout manager.
   }
 
-//  private void initData() {
-//    dummyInvite = DummyInvitationGenerator.getXDummyInvitations(true, new UUID(5,5), getContext(),1);
-//
-//
-//    reference to list
-//    ref = dummy invitationGenerator.get.xdummyinvit
-//  }
+  private void initData() {
+    dummyInvite = DummyInvitationGenerator.getXDummyInvitations(true,new Person(), getContext(),10);
+
+
+    //reference to list
+    //ref = dummy invitationGenerator.get.xdummyinvit
+  }
 
 
 

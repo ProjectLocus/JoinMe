@@ -43,7 +43,7 @@ public class FragPeopleRV extends Fragment {
     listTitle = theView.findViewById(R.id.tv_frag_people_rv_title);
     recyclerView = theView.findViewById(R.id.rv_frag_people_rv_peoplelist);
 
-    List<Person> persons = DummyPersonGenerator.getXDummyPersonsNoDeviceUser(3,getContext());
+    List<Person> persons = DummyPersonGenerator.getXDummyPersonsNoDeviceUser(10,getContext());
 
     PeopleAdapter adapter = new PeopleAdapter(getActivity(),persons);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

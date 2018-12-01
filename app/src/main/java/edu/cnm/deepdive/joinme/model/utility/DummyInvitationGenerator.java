@@ -23,17 +23,18 @@ public class DummyInvitationGenerator {
 //   * @return the list
 //   */
   public static List<Invitation> getXDummyInvitations(boolean isReceivedInvite, Person theUser, Context context, int xDummies){
+
    List<Invitation> dummyInvitations = new LinkedList<>();
+
+
     for (int i = 0; i < xDummies; i++) {
      Invitation tempInvitation = new Invitation();
      if(isReceivedInvite){
-       //tempInvitation.setUserSender(DummyPersonGenerator.getXDummyPersonsNoDeviceUser(1, context).get(0));
-        //tempInvitation.setUserReceiver(theUser);
-        tempInvitation.setDescription("An invite To: you.  From: " + tempInvitation.getUserSender().toString());
+       tempInvitation.setTitle("Received Invitation");
+       tempInvitation.setDescription("An invite to you. From: " + theUser.getFirstName() + " " + theUser.getLastName());
       }else{
-        //tempInvitation.setUserSender(theUser);
-        //tempInvitation.setUserReceiver(DummyPersonGenerator.getXDummyPersonsNoDeviceUser(1, context).get(0));
-        tempInvitation.setDescription("An invite To: " + tempInvitation.getUserReceiver().toString() + "From: you.");
+       tempInvitation.setTitle("Sent Invitation");
+       tempInvitation.setDescription("An invite to: " + theUser.getFirstName() + " " + theUser.getLastName());
       }
       tempInvitation.setCreated(new Date().toString());
       tempInvitation.setDate(new Date().toString());
