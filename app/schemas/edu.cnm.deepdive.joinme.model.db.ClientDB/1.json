@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "55b4cfad2c6ffa09719330a0c3c732b1",
+    "identityHash": "5e652082b003b359fe37526958568c01",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` TEXT NOT NULL, `user_sender` TEXT NOT NULL, `user_receiver` TEXT NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` TEXT NOT NULL, `user_sender` TEXT NOT NULL, `user_receiver` TEXT NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "invitationId",
@@ -41,6 +41,18 @@
           {
             "fieldPath": "created",
             "columnName": "created",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -184,7 +196,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"55b4cfad2c6ffa09719330a0c3c732b1\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5e652082b003b359fe37526958568c01\")"
     ]
   }
 }

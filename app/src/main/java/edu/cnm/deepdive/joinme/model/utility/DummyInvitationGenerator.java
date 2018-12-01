@@ -27,12 +27,12 @@ public class DummyInvitationGenerator {
     for (int i = 0; i < xDummies; i++) {
      Invitation tempInvitation = new Invitation();
      if(isReceivedInvite){
-       tempInvitation.setUserSender(DummyPersonGenerator.getXDummyPersonsNoDeviceUser(1, context).get(0));
-        tempInvitation.setUserReceiver(theUser);
+       //tempInvitation.setUserSender(DummyPersonGenerator.getXDummyPersonsNoDeviceUser(1, context).get(0));
+        //tempInvitation.setUserReceiver(theUser);
         tempInvitation.setDescription("An invite To: you.  From: " + tempInvitation.getUserSender().toString());
       }else{
-        tempInvitation.setUserSender(theUser);
-        tempInvitation.setUserReceiver(DummyPersonGenerator.getXDummyPersonsNoDeviceUser(1, context).get(0));
+        //tempInvitation.setUserSender(theUser);
+        //tempInvitation.setUserReceiver(DummyPersonGenerator.getXDummyPersonsNoDeviceUser(1, context).get(0));
         tempInvitation.setDescription("An invite To: " + tempInvitation.getUserReceiver().toString() + "From: you.");
       }
       tempInvitation.setCreated(new Date().toString());

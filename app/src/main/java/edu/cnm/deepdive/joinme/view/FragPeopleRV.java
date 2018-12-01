@@ -25,7 +25,8 @@ public class FragPeopleRV extends Fragment {
   private FragPeopleRVListener fragPeopleRVListener;
   private TextView listTitle;
   private RecyclerView recyclerView;
-  private DummyInvitationGenerator dummyInvitationGenerator
+  private DummyInvitationGenerator dummyInvitationGenerator;
+
 
   public interface FragPeopleRVListener{
     int getCalledPeopleListType();

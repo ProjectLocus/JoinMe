@@ -140,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     swapFrags(fragPeopleRV);
   }
 
-  @Override
   public int getCalledInviteListType() {
     return calledInviteListType;
   }
