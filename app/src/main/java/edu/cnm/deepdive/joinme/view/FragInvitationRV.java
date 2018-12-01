@@ -86,4 +86,7 @@ public class FragInvitationRV extends Fragment {
       Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
     }
   }
+
+
+  // TODO Add gson retrofit service object setup function here.
 }

@@ -61,8 +61,6 @@ public class FragPeopleRV extends Fragment {
 
 
   private void initRecyclerview(View theView) {
-
-
   }
     @Override
   public void onAttach(Context context) {
@@ -72,6 +70,9 @@ public class FragPeopleRV extends Fragment {
     } catch (ClassCastException e) {
       Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
     }
-
   }
+
+  // TODO Add gson retrofit service object setup function here.
+
+
 }
