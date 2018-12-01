@@ -12,7 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import edu.cnm.deepdive.joinme.JoinMeStetho;
+import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 
@@ -47,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
     super.onStart();
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     if(account != null){
-      JoinMeStetho.getInstance().setAccount(account);
+      JoinMeApplication.getInstance().setAccount(account);
       switchToMain();
     }
   }
@@ -58,7 +58,7 @@ public class SignInActivity extends AppCompatActivity {
       try {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
         account = task.getResult(ApiException.class);
-        JoinMeStetho.getInstance().setAccount(account);
+        JoinMeApplication.getInstance().setAccount(account);
       } catch (ApiException e) {
         //e.printStackTrace();
         Toast.makeText(this,"There was a error logging in", Toast.LENGTH_LONG).show();
@@ -69,7 +69,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
   private void signin(){
-    Intent intent = JoinMeStetho.getInstance().getClient().getSignInIntent();
+    Intent intent = JoinMeApplication.getInstance().getClient().getSignInIntent();
     startActivityForResult(intent, REQUEST_CODE);
   }
 

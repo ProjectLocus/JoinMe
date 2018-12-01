@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 public interface JoinMeBackEndService {
 
   @GET("vertices/people")
-  Call<List<Person>> getAllVerticiesPeople(@Header("Authorization") String authorization, );
+  Call<List<Person>> getAllVerticiesPeople(@Header("Authorization") String authorization);
 
   @PUT("person/{personId}")
   Call<Person> updatePerson(@Header("Authorization") String authorization,
