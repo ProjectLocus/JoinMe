@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
 //    initDB();
 //    initViews();
 //    initDataIntoViews();
-    getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
-        new FragPeopleRV()).commit();
+   // getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
+   //     new FragPeopleRV()).commit();
   }
 
   private void initDataIntoViews() {

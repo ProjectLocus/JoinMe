@@ -4,51 +4,34 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  tools:layout_editor_absoluteY="25dp">
 
   <TextView
     android:id="@+id/tv_frag_invitation_rv_title"
     android:textStyle="bold"
-    android:layout_width="0dp"
+    android:layout_width="368dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
     android:gravity="center_horizontal"
     android:textColor="@color/blackText"
     android:textSize="24sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp"
     tools:text="Title"/>
   <android.support.v7.widget.RecyclerView
     android:id="@+id/rv_frag_invitation_rv_invitations"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_frag_invitation_rv_title"
+    android:layout_width="368dp"
+    android:layout_height="511dp"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="48dp"
     tools:listitem="@layout/rv_item_invitation_list"/>
   <android.support.design.widget.FloatingActionButton
     android:id="@+id/fab_frag_invitation_rv_add"
     style="@style/Widget.MaterialComponents.FloatingActionButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
     android:clickable="true"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="1.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0"
-    app:srcCompat="@android:drawable/ic_input_add"/>
+    app:srcCompat="@android:drawable/ic_input_add"
+    tools:layout_editor_absoluteX="336dp"
+    tools:layout_editor_absoluteY="8dp"/>
 </android.support.constraint.ConstraintLayout>
