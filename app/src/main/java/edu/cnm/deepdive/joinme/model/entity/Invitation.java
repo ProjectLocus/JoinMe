@@ -49,6 +49,14 @@ public class Invitation {
   @ColumnInfo(name = "created")
   private String created;
 
+  @NonNull
+  @ColumnInfo(name = "title")
+  private String title;
+
+  @NonNull
+  @ColumnInfo(name = "location")
+  private String location;
+
   /**
    * Gets id.
    *
@@ -140,5 +148,23 @@ public class Invitation {
 
   public void setUserReceiver(@NonNull UUID userReceiver) {
     this.userReceiver = userReceiver;
+  }
+
+  @NonNull
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(@NonNull String title) {
+    this.title = title;
+  }
+
+  @NonNull
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(@NonNull String location) {
+    this.location = location;
   }
 }

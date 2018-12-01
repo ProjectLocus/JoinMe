@@ -18,6 +18,8 @@ import edu.cnm.deepdive.joinme.model.dao.PersonDao;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
+import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
+import edu.cnm.deepdive.joinme.view.FragInviteDetails.FragInviteDetailsListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV;
@@ -29,7 +31,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
-    FragMainMenuListener, FragUserProfListener, FragPeopleRVListener {
+    FragMainMenuListener, FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
+    FragInviteDetailsListener {
 
   private static final String TAG = "MainActivity";
 

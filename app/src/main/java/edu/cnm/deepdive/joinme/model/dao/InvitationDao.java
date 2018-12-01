@@ -44,6 +44,12 @@ public interface InvitationDao {
   @Query("SELECT * FROM invitations WHERE user_receiver=:userReceiver")
   List<Invitation> getInvitationsForUserReceiver(UUID userReceiver);
 
+  @Query("SELECT * FROM invitations WHERE title=:title")
+  List<Invitation> getAllTitle(String title);
+
+  @Query("SELECT * FROM invitations WHERE location=:location")
+  List<Invitation> getAllLocation(String location);
+
   @Update(onConflict = OnConflictStrategy.REPLACE)
   int update(Invitation invitations);
 
