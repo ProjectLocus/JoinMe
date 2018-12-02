@@ -12,9 +12,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
 import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
+import edu.cnm.deepdive.joinme.model.entity.Person;
 
 /**
  * The type Sign in activity.
@@ -27,6 +29,10 @@ public class SignInActivity extends AppCompatActivity {
    */
   SignInButton signIn;
   static GoogleSignInAccount account;
+  private JoinMeBackEndService joinMeBackEndService;
+  private Gson gson;
+  private Person person;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +54,13 @@ public class SignInActivity extends AppCompatActivity {
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     if(account != null){
       JoinMeApplication.getInstance().setAccount(account);
-      switchToMain();
+
     }
   }
 
   @Override
-  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
     if(requestCode== REQUEST_CODE){
       try {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
