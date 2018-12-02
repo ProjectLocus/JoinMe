@@ -28,6 +28,7 @@ import edu.cnm.deepdive.joinme.view.FragPeopleRV;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
+import edu.cnm.deepdive.joinme.view.SignInActivity;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,11 +58,11 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-//    initDB();
-//    initViews();
-//    initDataIntoViews();
-   // getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
-   //     new FragPeopleRV()).commit();
+   initDB();
+    initViews();
+    initDataIntoViews();
+//    getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
+//        new FragPeopleRV()).commit();
   }
 
   private void initDataIntoViews() {

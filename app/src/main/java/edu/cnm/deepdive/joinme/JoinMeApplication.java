@@ -9,10 +9,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
-/**
- * The type Joinme stetho.
- * I heard different stories about removing thhis but I left it in because I dont want to break my app.
- */
 public class JoinMeApplication extends Application {
 
   private static JoinMeApplication instance;
