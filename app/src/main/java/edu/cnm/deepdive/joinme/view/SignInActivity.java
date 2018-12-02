@@ -27,8 +27,7 @@ public class SignInActivity extends AppCompatActivity {
    * The Sign in.
    * add the
    */
-  SignInButton signIn;
-  static GoogleSignInAccount account;
+  private SignInButton signIn;
   private JoinMeBackEndService joinMeBackEndService;
   private Gson gson;
   private Person person;
@@ -39,36 +38,31 @@ public class SignInActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sign_in);
     signIn = findViewById(R.id.sign_in);
-    signIn.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        signIn();
-      }
-    });
+    signIn.setOnClickListener((view) -> signIn());
   }
 
   @Override
   protected void onStart() {
+    super.onStart();
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     if(account != null){
       JoinMeApplication.getInstance().setAccount(account);
+      switchToMain();
     }
-    super.onStart();
   }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
     if(requestCode == REQUEST_CODE){
       try {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-        account = task.getResult(ApiException.class);
+        GoogleSignInAccount account = task.getResult(ApiException.class);
         JoinMeApplication.getInstance().setAccount(account);
+        switchToMain();
       } catch (ApiException e) {
         //e.printStackTrace();
         Toast.makeText(this,"There was a error logging in", Toast.LENGTH_LONG).show();
       }
-      switchToMain();
     }
   }
 
