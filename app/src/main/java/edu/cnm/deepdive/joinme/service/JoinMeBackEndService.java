@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.joinme.view;
+package edu.cnm.deepdive.joinme.service;
 
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;

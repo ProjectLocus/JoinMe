@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 public class JoinMeApplication extends Application {
 
   private static JoinMeApplication instance;
+
   private GoogleSignInClient client;
   private GoogleSignInAccount account;
   private static Person person;
