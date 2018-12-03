@@ -25,6 +25,9 @@ public interface PersonDao {
   @Query("SELECT * FROM people WHERE person_id=:personId")
   List<Person> select(long personId);
 
+  @Query("SELECT * FROM people WHERE person_id=:personId")
+  Person selectPerson(long personId);
+
   @Query("SELECT * FROM people WHERE display_name=:displayName")
   Person select(String displayName);
 
