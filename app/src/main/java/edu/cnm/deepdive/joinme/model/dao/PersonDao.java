@@ -34,6 +34,9 @@ public interface PersonDao {
   @Query("SELECT * FROM people")
   List<Person> selectAll();
 
+  @Query("SELECT * FROM people WHERE latitude=:latitude")
+  Person selectLatitude(double latitude);
+
   @Update(onConflict = OnConflictStrategy.REPLACE)
   int update(Person person);
 

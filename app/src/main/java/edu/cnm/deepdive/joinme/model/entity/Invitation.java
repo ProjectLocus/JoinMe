@@ -56,6 +56,10 @@ public class Invitation {
   @ColumnInfo(name = "location")
   private String location;
 
+  @NonNull
+  @ColumnInfo(name = "Time")
+  private String time;
+
   /**
    * Gets id.
    *
@@ -165,5 +169,14 @@ public class Invitation {
 
   public void setLocation(@NonNull String location) {
     this.location = location;
+  }
+
+  @NonNull
+  public String getTime() {
+    return time;
+  }
+
+  public void setTime(@NonNull String time) {
+    this.time = time;
   }
 }

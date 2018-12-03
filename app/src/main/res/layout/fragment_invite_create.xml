@@ -60,5 +60,13 @@
     android:ems="16"
     android:text="Time"
     android:gravity="center"/>
+  <Button
+    android:id="@+id/bt_invitation_done"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/et_invitation_create_time"
+    android:layout_marginTop="8dp"
+    android:layout_centerHorizontal="true"
+    android:text="Done"/>
 
 </RelativeLayout>

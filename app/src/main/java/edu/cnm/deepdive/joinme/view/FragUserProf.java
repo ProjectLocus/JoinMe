@@ -47,6 +47,7 @@ public class FragUserProf extends Fragment {
     userDescription = view.findViewById(R.id.tv_user_profile_description);
     userFA = view.findViewById(R.id.fab_user_profile_next);
     userFA.setOnClickListener(v -> { });
+    new QueryTask().execute();
   }
 
   private class QueryTask extends AsyncTask<Void, Void, Person> {
@@ -54,7 +55,7 @@ public class FragUserProf extends Fragment {
     @Override
     protected Person doInBackground(Void... voids) {
       Person person = ClientDB.getInstance(getContext()).getPersonDao().selectPerson(
-          ((MainActivity) getActivity()).getPersonId());
+          new Person().getPersonId());
       return person;
     }
 

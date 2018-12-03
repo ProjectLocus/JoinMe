@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5230fd21f38f0e9506bb6b3fb793666a",
+    "identityHash": "b372c6d3dcd39b0e57db96fefc2e97fc",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `Time` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "invitationId",
@@ -53,6 +53,12 @@
           {
             "fieldPath": "location",
             "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "Time",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -196,7 +202,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5230fd21f38f0e9506bb6b3fb793666a\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b372c6d3dcd39b0e57db96fefc2e97fc\")"
     ]
   }
 }

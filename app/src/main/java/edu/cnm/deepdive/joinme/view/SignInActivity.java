@@ -1,7 +1,11 @@
 package edu.cnm.deepdive.joinme.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,7 +34,8 @@ public class SignInActivity extends AppCompatActivity {
    * add the
    */
   private SignInButton signIn;
-  private int personId;
+  private long personId;
+  private Context context;
 
 
   @Override
@@ -64,12 +69,26 @@ public class SignInActivity extends AppCompatActivity {
         String userImage = account.getPhotoUrl().toString();
         JoinMeApplication.getInstance().setAccount(account);
         new QueryTask().execute(name, email, givenName, familyName, userImage);
+        //getLocation();
         switchToMain();
       } catch (ApiException e) {
         Toast.makeText(this,"There was an error logging in", Toast.LENGTH_LONG).show();
       }
     }
   }
+
+//  private void getLocation() {
+//    if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
+//       checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//      Toast.makeText(context, "Enable Location Permissions", Toast.LENGTH_LONG).show();
+//    } else {
+//      LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//      Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//      double longitude = location.getLongitude();
+//      double latitude = location.getLatitude();
+//      new LocationTask().execute(latitude, longitude);
+//    }
+//  }
 
 
   private void signIn(){
@@ -113,7 +132,22 @@ public class SignInActivity extends AppCompatActivity {
      */
     @Override
     protected void onPostExecute(Long aLong) {
-      new MainActivity().setPersonId(aLong);
+      new Person().setPersonId(personId);
     }
   }
+
+//  private class LocationTask extends AsyncTask<Double, Void, Long> {
+//
+//    @Override
+//    protected Long doInBackground(Double... doubles) {
+//      Person person = ClientDB.getInstance(getApplicationContext()).getPersonDao().selectLatitude(doubles[0]);
+//      if (person == null) {
+//        person = new Person();
+//        person.setLatitude(doubles[0]);
+//        person.setLongitude(doubles[1]);
+//        return ClientDB.getInstance(getApplicationContext()).getPersonDao().insert(person);
+//      }
+//      return person.getPersonId();
+//    }
+//  }
 }

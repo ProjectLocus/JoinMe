@@ -1,10 +1,8 @@
 package edu.cnm.deepdive.joinme.controller;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.dao.PersonDao;
@@ -54,19 +49,18 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private int calledInviteListType;
   private int calledPeopleListType;
   private ClientDB clientDB;
-  private long personId;
 
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-   initDB();
+    initDB();
     initViews();
     initDataIntoViews();
-//    getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
-//        new FragPeopleRV()).commit();
-  }
+//   getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
+//       new FragUserProf()).commit();
+}
 
   private void initDataIntoViews() {
     fragmentManager = getSupportFragmentManager();
@@ -178,13 +172,6 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     return calledPeopleListType;
   }
 
-  public long getPersonId() {
-    return personId;
-  }
-
-  public void setPersonId(long personId) {
-    this.personId = personId;
-  }
 
   private class ClientDBTask extends AsyncTask<Void, Void, Void> {
 

@@ -30,8 +30,11 @@ public interface InvitationDao {
   @Query("SELECT * FROM invitations WHERE date=:date")
   List<Invitation> selectAllDate(String date);
 
+  @Query("SELECT * FROM invitations WHERE time=:time")
+  Invitation selectAllTime(String time);
+
   @Query("SELECT * FROM invitations WHERE created=:created")
-  List<Invitation> selectAllCreated(String created);
+  Invitation selectAllCreated(String created);
 
   @Query("SELECT * FROM invitations WHERE description=:description")
   List<Invitation> selectAllDescription(String description);
