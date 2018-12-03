@@ -4,15 +4,12 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverter;
-import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import edu.cnm.deepdive.joinme.model.dao.InvitationDao;
 import edu.cnm.deepdive.joinme.model.dao.PersonDao;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
-import java.util.UUID;
 
 
 /**

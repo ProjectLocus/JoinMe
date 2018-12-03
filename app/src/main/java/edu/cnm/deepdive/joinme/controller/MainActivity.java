@@ -1,8 +1,10 @@
 package edu.cnm.deepdive.joinme.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.dao.PersonDao;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
@@ -29,9 +35,6 @@ import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
     FragMainMenuListener, FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private int calledInviteListType;
   private int calledPeopleListType;
   private ClientDB clientDB;
-  private Context context;
+  private long personId;
 
 
   @Override
@@ -110,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
       case R.id.emergency_button:
         //todo: wired this up and swap to the emergency fragment
         break;
+      case R.id.sign_out:
+        signOut();
+        break;
       default:
         return super.onOptionsItemSelected(item);
     }
@@ -153,6 +159,16 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     swapFrags(fragInviteDetails);
   }
 
+  private void signOut() {
+    JoinMeApplication join = JoinMeApplication.getInstance();
+    join.getClient().signOut().addOnCompleteListener(this, (task) -> {
+      join.setAccount(null);
+      Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+    });
+  }
+
   public int getCalledInviteListType() {
     return calledInviteListType;
   }
@@ -160,6 +176,14 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   @Override
   public int getCalledPeopleListType(){
     return calledPeopleListType;
+  }
+
+  public long getPersonId() {
+    return personId;
+  }
+
+  public void setPersonId(long personId) {
+    this.personId = personId;
   }
 
   private class ClientDBTask extends AsyncTask<Void, Void, Void> {

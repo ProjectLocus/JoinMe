@@ -23,10 +23,10 @@ public interface PersonDao {
   List<Person> select(boolean isThisMe);
 
   @Query("SELECT * FROM people WHERE person_id=:personId")
-  List<Person> select(int personId);
+  List<Person> select(long personId);
 
   @Query("SELECT * FROM people WHERE display_name=:displayName")
-  List<Person> select(String displayName);
+  Person select(String displayName);
 
   @Query("SELECT * FROM people")
   List<Person> selectAll();

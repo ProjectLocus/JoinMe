@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.joinme.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.google.gson.Gson;
 import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
+import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.service.JoinMeBackEndService;
 
@@ -27,9 +30,7 @@ public class SignInActivity extends AppCompatActivity {
    * add the
    */
   private SignInButton signIn;
-  private JoinMeBackEndService joinMeBackEndService;
-  private Gson gson;
-  private Person person;
+  private int personId;
 
 
   @Override
@@ -56,11 +57,16 @@ public class SignInActivity extends AppCompatActivity {
       try {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
         GoogleSignInAccount account = task.getResult(ApiException.class);
+        String name = account.getDisplayName();
+        String email = account.getEmail();
+        String givenName = account.getGivenName();
+        String familyName = account.getFamilyName();
+        String userImage = account.getPhotoUrl().toString();
         JoinMeApplication.getInstance().setAccount(account);
+        new QueryTask().execute(name, email, givenName, familyName, userImage);
         switchToMain();
       } catch (ApiException e) {
-        //e.printStackTrace();
-        Toast.makeText(this,"There was a error logging in", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"There was an error logging in", Toast.LENGTH_LONG).show();
       }
     }
   }
@@ -73,7 +79,41 @@ public class SignInActivity extends AppCompatActivity {
 
   private void switchToMain(){
     Intent intent = new Intent(this, MainActivity.class);
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
+  }
+
+  private class QueryTask extends AsyncTask<String, Void, Long> {
+
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and
+     * inserts the email and user name data into the Person entity.
+     * @param strings
+     * @return
+     */
+    @Override
+    protected Long doInBackground(String... strings) {
+      Person person = ClientDB.getInstance(getApplicationContext()).getPersonDao().select(strings[0]);
+      if (person==null) {
+        person = new Person();
+        person.setUserEmail(strings[0]);
+        person.setDisplayName(strings[1]);
+        person.setFirstName(strings[2]);
+        person.setLastName(strings[3]);
+        person.setUserImage(strings[4]);
+        return ClientDB.getInstance(getApplicationContext()).getPersonDao().insert(person);
+      }
+      return person.getPersonId();
+    }
+
+    /**
+     * Sets an ID for the user when the email and user name are successfully inserted.
+     * @param aLong
+     */
+    @Override
+    protected void onPostExecute(Long aLong) {
+      new MainActivity().setPersonId(aLong);
+    }
   }
 }

@@ -26,15 +26,15 @@ public class Invitation {
   @NonNull
   @PrimaryKey
   @ColumnInfo(name = "invitation_id")
-  private int invitationId;
+  private long invitationId;
 
   @NonNull
   @ColumnInfo(name = "user_sender")
-  private int userSender;
+  private long userSender;
 
   @NonNull
   @ColumnInfo(name = "user_receiver")
-  private int userReceiver;
+  private long userReceiver;
 
   @NonNull
   @ColumnInfo(name = "date")
@@ -61,7 +61,7 @@ public class Invitation {
    *
    * @return the id
    */
-  public int getInvitationId() {
+  public long getInvitationId() {
     return invitationId;
   }
 
@@ -70,7 +70,7 @@ public class Invitation {
    *
    * @param invitationId the invitationId
    */
-  public void setInvitationId(int invitationId) {
+  public void setInvitationId(long invitationId) {
     this.invitationId = invitationId;
   }
 
@@ -132,20 +132,20 @@ public class Invitation {
   }
 
   @NonNull
-  public int getUserSender() {
+  public long getUserSender() {
     return userSender;
   }
 
-  public void setUserSender(@NonNull int userSender) {
+  public void setUserSender(@NonNull long userSender) {
     this.userSender = userSender;
   }
 
   @NonNull
-  public int getUserReceiver() {
+  public long getUserReceiver() {
     return userReceiver;
   }
 
-  public void setUserReceiver(@NonNull int userReceiver) {
+  public void setUserReceiver(@NonNull long userReceiver) {
     this.userReceiver = userReceiver;
   }
 

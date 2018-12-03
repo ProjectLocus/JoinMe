@@ -25,7 +25,7 @@ public interface InvitationDao {
   List<Invitation> selectAll();
 
   @Query("SELECT * FROM invitations WHERE invitation_id=:invitationId")
-  List<Invitation> selectAllInvitationId(int invitationId);
+  List<Invitation> selectAllInvitationId(long invitationId);
 
   @Query("SELECT * FROM invitations WHERE date=:date")
   List<Invitation> selectAllDate(String date);
@@ -37,10 +37,10 @@ public interface InvitationDao {
   List<Invitation> selectAllDescription(String description);
 
   @Query("SELECT * FROM invitations WHERE user_sender=:userSender")
-  List<Invitation> getInvitatiionsForUserSender(int userSender);
+  List<Invitation> getInvitatiionsForUserSender(long userSender);
 
   @Query("SELECT * FROM invitations WHERE user_receiver=:userReceiver")
-  List<Invitation> getInvitationsForUserReceiver(int userReceiver);
+  List<Invitation> getInvitationsForUserReceiver(long userReceiver);
 
   @Query("SELECT * FROM invitations WHERE title=:title")
   List<Invitation> getAllTitle(String title);

@@ -30,7 +30,7 @@ public interface JoinMeBackEndService {
    */
   @GET("people/{personId}")
   Call<Person> getPerson(@Header("Authorization") String authorization,
-      @Path("personId") int personId);
+      @Path("personId") long personId);
 
   /**
    * Updates a certain person by their ID
@@ -41,7 +41,7 @@ public interface JoinMeBackEndService {
    */
   @PUT("people/{personId}")
   Call<Person> updatePerson(@Header("Authorization") String authorization,
-      @Path("personId") int personId, @Body Person person);
+      @Path("personId") long personId, @Body Person person);
 
   /**
    * Creates a new person
@@ -59,7 +59,7 @@ public interface JoinMeBackEndService {
    */
   @DELETE("people/{personId}")
   Call<Person> deletePerson(@Header("Authorization") String authorization,
-      @Path("personId") int personId);
+      @Path("personId") long personId);
 
   /**
    * Gets all people near a person
@@ -70,7 +70,7 @@ public interface JoinMeBackEndService {
    */
   @GET("people/{personId}/people")
   Call<List<Person>> getAllPeopleNearPerson(@Header("Authorization") String authorization,
-      @Body Person person, @Path("personId") int personId);
+      @Body Person person, @Path("personId") long personId);
 
   /**
    * Gets all invitations per user by their ID
@@ -80,7 +80,7 @@ public interface JoinMeBackEndService {
    */
   @GET("people/{personId}/invitation")
   Call<List<Invitation>> getAllInvitationsPerPerson(@Header("Authorization") String Authorization,
-      @Path("personId") int personId);
+      @Path("personId") long personId);
 
   /**
    * Gets a specific invitation by its ID, that a certain person created
@@ -93,7 +93,7 @@ public interface JoinMeBackEndService {
    */
   @GET("people/{personId}/invitation/{invitationId}")
   Call<Invitation> getInvitationPerPerson(@Header("Authorization") String authorization,
-      @Path("personId") int personId, @Body Person person, @Path("invitationId") int invitationId,
+      @Path("personId") long personId, @Body Person person, @Path("invitationId") long invitationId,
       @Body Invitation invitation);
 
   /**
@@ -106,7 +106,7 @@ public interface JoinMeBackEndService {
    */
   @POST("people/{personId}/invitation")
   Call<Invitation> addInvitation(@Header("Authorization") String authorization,
-      @Path("personId") int personId, @Path("invitationId") int invitationId,
+      @Path("personId") long personId, @Path("invitationId") long invitationId,
       @Body Invitation invitation);
 
   /**
@@ -118,7 +118,7 @@ public interface JoinMeBackEndService {
    */
   @PUT("people/{personId}/invitation/{invitationId}")
   Call<Invitation> updateInvitation(@Header("Authorization") String authorization,
-      @Path("personId") int personId, @Path("invitationId") int invitationId);
+      @Path("personId") long personId, @Path("invitationId") long invitationId);
 
   /**
    * Deletes a specific invitation that a person created
@@ -129,7 +129,7 @@ public interface JoinMeBackEndService {
    */
   @DELETE("people/{personId}/invitation/{invitationId}")
   Call<Invitation> deleteInvitation(@Header("Authorization") String authorization,
-      @Path("personId") int personId, @Path("invitationId") int invitationId);
+      @Path("personId") long personId, @Path("invitationId") long invitationId);
 
   /**
    * Gets all invitations
@@ -147,7 +147,7 @@ public interface JoinMeBackEndService {
    */
   @GET("invitations/{invitationId}")
   Call<Invitation> getInvitation(@Header("Authorization") String authorization,
-      @Path("invitationId") int invitationId);
+      @Path("invitationId") long invitationId);
 
   /**
    * Gets all people associated with an invitation
@@ -158,5 +158,5 @@ public interface JoinMeBackEndService {
    */
   @GET("invitations/{invitationId}/people")
   Call<List<Invitation>> getPeoplePerInvitation(@Header("Authorization") String authorization,
-      @Path("invitaitonId") int invitationId, @Body Invitation invitation);
+      @Path("invitaitonId") long invitationId, @Body Invitation invitation);
 }

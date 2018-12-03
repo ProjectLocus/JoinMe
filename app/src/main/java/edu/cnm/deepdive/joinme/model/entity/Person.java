@@ -36,9 +36,9 @@ public class Person {
    * This is a person's unique ID
    */
   @NonNull
-  @PrimaryKey
+  @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "person_id")
-  private int personId;
+  private long personId;
 
   /**
    * This is the display name a person has chosen
@@ -121,7 +121,7 @@ public class Person {
   /**
    * This is the Person's user image
    */
-  private int userImage;
+  private String userImage;
 
 
   //***************** GETTERS AND SETTERS *******************************************************//
@@ -169,7 +169,7 @@ public class Person {
    * @return the person id
    */
   @NonNull
-  public int getPersonId() {
+  public long getPersonId() {
     return personId;
   }
 
@@ -178,7 +178,7 @@ public class Person {
    *
    * @param personId the person id
    */
-  public void setPersonId(@NonNull int personId) {
+  public void setPersonId(@NonNull long personId) {
     this.personId = personId;
   }
 
@@ -424,7 +424,7 @@ public class Person {
    *
    * @return the user image
    */
-  public int getUserImage() {
+  public String getUserImage() {
     return userImage;
   }
 
@@ -433,7 +433,7 @@ public class Person {
    *
    * @param userImage the user image
    */
-  public void setUserImage(int userImage) {
+  public void setUserImage(String userImage) {
     this.userImage = userImage;
   }
 }
