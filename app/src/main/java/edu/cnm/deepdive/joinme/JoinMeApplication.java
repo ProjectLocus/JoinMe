@@ -13,8 +13,8 @@ public class JoinMeApplication extends Application {
 
   private static JoinMeApplication instance;
 
-  private GoogleSignInClient client;
-  private GoogleSignInAccount account;
+  private static GoogleSignInClient client;
+  private static GoogleSignInAccount account;
   private static Person person;
 
   @Override
@@ -29,6 +29,8 @@ public class JoinMeApplication extends Application {
         .build();
     client = GoogleSignIn.getClient(this, options);
   }
+
+
 
   /**
    * Gets instance.
