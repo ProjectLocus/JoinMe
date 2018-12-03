@@ -20,6 +20,7 @@ public class FragMainMenu extends Fragment {
   private FragMainMenuListener fragMainMenuListener;
 
   public interface FragMainMenuListener{
+    public void swapFrags(Fragment fragIn);
 
   }
 
@@ -64,6 +65,8 @@ public class FragMainMenu extends Fragment {
       @Override
       public void onButtonClickAnimationEnd(@NonNull CircleMenuView view, int index) {
         Log.d("D", "onButtonClickAnimationEnd| index: " + index);
+     //   fragMainMenuListener.swapFrags(FragInvitationRV);
+
   //         new MainActivity().swapFrags(new FragInvitationRV());
   //      Toast.makeText(getContext(), "onButtonClickAnimationEnd", Toast.LENGTH_SHORT).show();
       }
