@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.joinme.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -45,6 +46,7 @@ public class SignInActivity extends AppCompatActivity {
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     if(account != null){
       JoinMeApplication.getInstance().setAccount(account);
+      new ExistingUserTask().execute(account.getId());
     }
   }
 
@@ -60,8 +62,9 @@ public class SignInActivity extends AppCompatActivity {
         String givenName = account.getGivenName();
         String familyName = account.getFamilyName();
         String userImage = account.getPhotoUrl().toString();
+        String googleId = account.getId();
         JoinMeApplication.getInstance().setAccount(account);
-        new QueryTask().execute(email, name, givenName, familyName, userImage);
+        new QueryTask().execute(email, name, givenName, familyName, userImage, googleId);
         //getLocation();
 
       } catch (ApiException e) {
@@ -98,6 +101,7 @@ public class SignInActivity extends AppCompatActivity {
 
   private class QueryTask extends AsyncTask<String, Void, Long> {
 
+    private MainActivity mainActivity;
 
     /**
      * Creates an instance of the Client database, grabs a query from the Person Dao, and
@@ -115,6 +119,7 @@ public class SignInActivity extends AppCompatActivity {
         person.setFirstName(strings[2]);
         person.setLastName(strings[3]);
         person.setUserImage(strings[4]);
+        person.setGoogleUserId(strings[5]);
         return ClientDB.getInstance(getApplicationContext()).getPersonDao().insert(person);
       }
       return person.getPersonId();
@@ -127,6 +132,24 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onPostExecute(Long aLong) {
       switchToMain(aLong);
+    }
+  }
+
+  private class ExistingUserTask extends AsyncTask<String, Void, Person> {
+
+    private Context context;
+
+    @Override
+    protected Person doInBackground(String... strings) {
+      Person person = ClientDB.getInstance(getApplicationContext()).getPersonDao().selectGoogleUserId(
+          strings[0]);
+      return person;
+    }
+
+    @Override
+    protected void onPostExecute(Person person) {
+      super.onPostExecute(person);
+      switchToMain(person.getPersonId());
     }
   }
 

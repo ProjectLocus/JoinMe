@@ -23,6 +23,7 @@ import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
+import java.util.Objects;
 
 public class FragUserProf extends Fragment {
 
@@ -31,6 +32,7 @@ public class FragUserProf extends Fragment {
   private FloatingActionButton userFA;
   private FragmentActivity fragmentActivity;
   private FragUserProfListener fragUserProfListener;
+  private View view;
 
   public interface FragUserProfListener {
 
@@ -41,19 +43,19 @@ public class FragUserProf extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_user_profile_ar, container, false);
-    initView(view);
-    new QueryTask().execute();
+    view = inflater.inflate(R.layout.fragment_user_profile_ar, container, false);
+    initView();
     return view;
   }
 
-  private void initView(View view) {
+  private void initView() {
     userProfPic = view.findViewById(R.id.iv_user_profile_prof_image);
     userDisplayName = view.findViewById(R.id.tv_user_profile_display_name);
     userDescription = view.findViewById(R.id.tv_user_profile_description);
     userFA = view.findViewById(R.id.fab_user_profile_next);
     //TODO add a behavior for the listener
     userFA.setOnClickListener(v -> { });
+    new QueryTask().execute();
   }
 
   private class QueryTask extends AsyncTask<Void, Void, Person> {

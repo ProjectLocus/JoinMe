@@ -37,6 +37,10 @@ public interface PersonDao {
   @Query("SELECT * FROM people WHERE latitude=:latitude")
   Person selectLatitude(double latitude);
 
+  @Query("SELECT * FROM people WHERE google_user_id=:googleUserId")
+  Person selectGoogleUserId(String googleUserId);
+
+
   @Update(onConflict = OnConflictStrategy.REPLACE)
   int update(Person person);
 

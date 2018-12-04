@@ -52,6 +52,10 @@ public class Person {
    */
   private String userImageLocation;
 
+  @NonNull
+  @ColumnInfo(name = "google_user_id")
+  private String googleUserId;
+
   /**
    * This is the user's description
    */
@@ -435,5 +439,13 @@ public class Person {
    */
   public void setUserImage(String userImage) {
     this.userImage = userImage;
+  }
+
+  public String getGoogleUserId() {
+    return googleUserId;
+  }
+
+  public void setGoogleUserId(String googleUserId) {
+    this.googleUserId = googleUserId;
   }
 }
