@@ -70,11 +70,17 @@ public class FragMainMenu extends Fragment {
             break;
 
           case 1:
-            fragMainMenuListener.swapFrags(new FragInviteCreate());
+            fragMainMenuListener.swapFrags(new FragPeopleRV());
             break;
 
           case 2:
-            fragMainMenuListener.swapFrags(new FragPeopleRV());
+            fragMainMenuListener.swapFrags(new FragInviteCreate());
+
+          case 3:
+            fragMainMenuListener.swapFrags(new FragInviteDetails());
+
+          case 4:
+            fragMainMenuListener.swapFrags(new FragInvitationRV());
 
         }
       }
