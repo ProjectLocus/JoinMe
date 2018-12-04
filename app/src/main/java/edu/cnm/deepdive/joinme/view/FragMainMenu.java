@@ -64,10 +64,19 @@ public class FragMainMenu extends Fragment {
       @Override
       public void onButtonClickAnimationEnd(@NonNull CircleMenuView view, int index) {
         Log.d("D", "onButtonClickAnimationEnd| index: " + index);
-     //   fragMainMenuListener.swapFrags(FragInvitationRV);
+        switch (index){
+          case 0:
+            fragMainMenuListener.swapFrags(new FragUserProf());
+            break;
 
-  //         new MainActivity().swapFrags(new FragInvitationRV());
-  //      Toast.makeText(getContext(), "onButtonClickAnimationEnd", Toast.LENGTH_SHORT).show();
+          case 1:
+            fragMainMenuListener.swapFrags(new FragInviteCreate());
+            break;
+
+          case 2:
+            fragMainMenuListener.swapFrags(new FragPeopleRV());
+
+        }
       }
     });
   }

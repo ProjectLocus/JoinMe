@@ -39,7 +39,7 @@ public class FragInviteCreate extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View theView = inflater.inflate(R.layout.fragment_invite_create, container, false);
+    View theView = inflater.inflate(R.layout.fragment_invite_create, container,false);
     //do stuff
     initViews(theView);
 
