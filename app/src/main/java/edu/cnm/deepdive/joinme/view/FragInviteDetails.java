@@ -1,23 +1,25 @@
 package edu.cnm.deepdive.joinme.view;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
+import edu.cnm.deepdive.joinme.model.db.ClientDB;
+import edu.cnm.deepdive.joinme.model.entity.Invitation;
 
 public class FragInviteDetails extends Fragment {
 
-  private TextView tInvitationDetailsTitle;
-  private EditText eInviteDetailsTitle, inviteDetailsLocation, inviteDetailsDate,
-      inviteDetailsTime, inviteDetailsDetails;
+  private TextView tInvitationDetailsTitle, eInviteDetailsTitle, inviteDetailsLocation,
+      inviteDetailsDate, inviteDetailsDescription;
+
   private Button inviteDetailsAccept, inviteDetailsDecline, inviteDetailsSeeAttendees;
 
   private FragInviteDetailsListener fragInviteDetailsListener;
@@ -41,31 +43,34 @@ public class FragInviteDetails extends Fragment {
     eInviteDetailsTitle = view.findViewById(R.id.et_invitation_details_title);
     inviteDetailsLocation = view.findViewById(R.id.et_invitation_details_location);
     inviteDetailsDate = view.findViewById(R.id.et_invitation_details_date);
-    inviteDetailsTime = view.findViewById(R.id.et_invitation_details_time);
-    inviteDetailsDetails = view.findViewById(R.id.et_invitation_details_details);
+    inviteDetailsDescription = view.findViewById(R.id.et_invitation_details_description);
+    new QueryTask().execute();
     inviteDetailsAccept = view.findViewById(R.id.bt_invitation_details_accept);
-    inviteDetailsAccept.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-      }
-    });
+    inviteDetailsAccept.setOnClickListener(v -> { });
     inviteDetailsDecline = view.findViewById(R.id.bt_invitation_details_decline);
-    inviteDetailsDecline.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-      }
-    });
+    inviteDetailsDecline.setOnClickListener(v -> { });
     inviteDetailsSeeAttendees = view.findViewById(R.id.bt_invitation_details_see_attendees);
-    inviteDetailsSeeAttendees.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-      }
-    });
+    inviteDetailsSeeAttendees.setOnClickListener(v -> { });
 
   }
 
+  private class QueryTask extends AsyncTask<Void, Void, Invitation> {
+
+    @Override
+    protected Invitation doInBackground(Void... voids) {
+      Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao()
+          .selectAllInvitationId(
+              ((MainActivity) getActivity()).getInvitationId());
+      return invitation;
+    }
+
+    @Override
+    protected void onPostExecute(Invitation invitation) {
+      eInviteDetailsTitle.setText(invitation.getTitle());
+      inviteDetailsLocation.setText(invitation.getLocation());
+      inviteDetailsDate.setText(invitation.getDate());
+      inviteDetailsDescription.setText(invitation.getDescription());
+    }
+  }
 
 }

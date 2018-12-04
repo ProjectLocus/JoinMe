@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private int calledInviteListType;
   private int calledPeopleListType;
   private ClientDB clientDB;
+  private long invitationId;
 
 
   @Override
@@ -161,6 +162,14 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
       startActivity(intent);
     });
+  }
+
+  public long getInvitationId() {
+    return invitationId;
+  }
+
+  public void setInvitationId(long invitationId) {
+    this.invitationId = invitationId;
   }
 
   public int getCalledInviteListType() {

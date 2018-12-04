@@ -25,7 +25,7 @@ public interface InvitationDao {
   List<Invitation> selectAll();
 
   @Query("SELECT * FROM invitations WHERE invitation_id=:invitationId")
-  List<Invitation> selectAllInvitationId(long invitationId);
+  Invitation selectAllInvitationId(long invitationId);
 
   @Query("SELECT * FROM invitations WHERE date=:date")
   List<Invitation> selectAllDate(String date);

@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 
@@ -25,7 +27,7 @@ public class FragInviteCreate extends Fragment {
   private EditText inviteCreateTitle1;
   private EditText inviteCreateLocation;
   private EditText inviteCreateDate;
-  private EditText inviteCreateTime;
+  private EditText inviteCreateDescription;
   private Button doneButton;
   private long invitationId;
 
@@ -54,8 +56,8 @@ public class FragInviteCreate extends Fragment {
     String result1 = inviteCreateLocation.getText().toString();
     inviteCreateDate = view.findViewById(R.id.et_invitation_create_date);
     String result2 = inviteCreateDate.getText().toString();
-    inviteCreateTime = view.findViewById(R.id.et_invitation_create_time);
-    String result3 = inviteCreateTime.getText().toString();
+    inviteCreateDescription = view.findViewById(R.id.et_invitation_create_description);
+    String result3 = inviteCreateDescription.getText().toString();
     doneButton = view.findViewById(R.id.bt_invitation_done);
     doneButton.setOnClickListener(v -> new QueryTask().execute(result, result1, result2, result3));
   }
@@ -88,7 +90,7 @@ public class FragInviteCreate extends Fragment {
 
     @Override
     protected void onPostExecute(Long aLong) {
-      new Invitation().setInvitationId(invitationId);
+      ((MainActivity) getActivity()).setInvitationId(invitationId);
     }
   }
 }

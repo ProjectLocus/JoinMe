@@ -19,7 +19,7 @@
     android:id="@+id/et_invitation_create_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="192dp"
+    android:layout_marginTop="120dp"
     android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
@@ -47,25 +47,25 @@
     android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Date"
+    android:text="Date and Time"
     android:gravity="center"/>
 
   <EditText
-    android:id="@+id/et_invitation_create_time"
+    android:id="@+id/et_invitation_create_description"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@+id/et_invitation_create_date"
     android:layout_marginTop="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Time"
+    android:text="Description"
     android:gravity="center"/>
   <Button
     android:id="@+id/bt_invitation_done"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/et_invitation_create_time"
-    android:layout_marginTop="8dp"
+    android:layout_marginBottom="72dp"
+    android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:text="Done"/>
 
