@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">JoinMe</string>
+  <string name="person_id_key">person_id</string>
 </resources>

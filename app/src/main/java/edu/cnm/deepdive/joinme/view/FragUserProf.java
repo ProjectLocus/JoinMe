@@ -68,7 +68,6 @@ public class FragUserProf extends Fragment {
     @Override
     protected void onPostExecute(Person person) {
       userDisplayName.setText(person.getDisplayName());
-      userDescription.setText(person.getUserDescription());
       userProfPic.loadUrl(person.getUserImage());
     }
   }

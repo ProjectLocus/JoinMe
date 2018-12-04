@@ -1,11 +1,7 @@
 package edu.cnm.deepdive.joinme.view;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,13 +12,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.gson.Gson;
 import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Person;
-import edu.cnm.deepdive.joinme.service.JoinMeBackEndService;
 
 /**
  * The type Sign in activity.
@@ -51,7 +45,6 @@ public class SignInActivity extends AppCompatActivity {
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     if(account != null){
       JoinMeApplication.getInstance().setAccount(account);
-      switchToMain();
     }
   }
 
@@ -70,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
         JoinMeApplication.getInstance().setAccount(account);
         new QueryTask().execute(email, name, givenName, familyName, userImage);
         //getLocation();
-        switchToMain();
+
       } catch (ApiException e) {
         Toast.makeText(this,"There was an error logging in", Toast.LENGTH_LONG).show();
       }
@@ -96,9 +89,10 @@ public class SignInActivity extends AppCompatActivity {
     startActivityForResult(intent, REQUEST_CODE);
   }
 
-  private void switchToMain(){
+  private void switchToMain(Long personId){
     Intent intent = new Intent(this, MainActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.putExtra(getString(R.string.person_id_key),personId);
     startActivity(intent);
   }
 
@@ -132,7 +126,7 @@ public class SignInActivity extends AppCompatActivity {
      */
     @Override
     protected void onPostExecute(Long aLong) {
-      new MainActivity().setPersonId(aLong);
+      switchToMain(aLong);
     }
   }
 
