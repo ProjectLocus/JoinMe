@@ -59,12 +59,13 @@ public class FragInviteCreate extends Fragment {
     inviteCreateLocation = view.findViewById(R.id.et_invitation_create_location);
     inviteCreateDate = view.findViewById(R.id.et_invitation_create_date);
     inviteCreateDescription = view.findViewById(R.id.et_invitation_create_description);
-    String result = inviteCreateTitle1.getText().toString();
+    doneButton = view.findViewById(R.id.bt_invitation_done);
+    doneButton.setOnClickListener(v ->
+    {String result = inviteCreateTitle1.getText().toString();
     String result1 = inviteCreateLocation.getText().toString();
     String result2 = inviteCreateDate.getText().toString();
     String result3 = inviteCreateDescription.getText().toString();
-    doneButton = view.findViewById(R.id.bt_invitation_done);
-    doneButton.setOnClickListener(v -> new QueryTask().execute(result, result1, result2, result3));
+        new QueryTask().execute(result, result1, result2, result3);});
   }
 
   @Override
@@ -85,7 +86,7 @@ public class FragInviteCreate extends Fragment {
           .selectAllDate(strings[0]);
       if (invitation == null) {
         invitation = new Invitation();
-        invitation.setUserSender(new Person().getPersonId());
+        invitation.setUserSender(((SignInActivity) getActivity()).getPersonId());
         invitation.setTitle(strings[0]);
         invitation.setLocation(strings[1]);
         invitation.setDate(strings[2]);

@@ -102,6 +102,14 @@ public class SignInActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
+  public long getPersonId() {
+    return personId;
+  }
+
+  public void setPersonId(long personId) {
+    this.personId = personId;
+  }
+
   private class QueryTask extends AsyncTask<String, Void, Long> {
 
 
@@ -132,7 +140,7 @@ public class SignInActivity extends AppCompatActivity {
      */
     @Override
     protected void onPostExecute(Long aLong) {
-      new Person().setPersonId(personId);
+      setPersonId(aLong);
     }
   }
 

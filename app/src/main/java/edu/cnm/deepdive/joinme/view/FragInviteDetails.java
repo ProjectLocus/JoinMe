@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
@@ -63,7 +65,7 @@ public class FragInviteDetails extends Fragment {
     @Override
     protected Invitation doInBackground(Void... voids) {
       Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao()
-          .selectAllInvitationId(new Invitation().getInvitationId());
+          .selectAllInvitationId(((MainActivity) getActivity()).getInvitationId());
       new Invitation().setUserReceiver(new Person().getPersonId());
       return invitation;
     }

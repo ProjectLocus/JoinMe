@@ -56,7 +56,7 @@ public class FragUserProf extends Fragment {
     @Override
     protected Person doInBackground(Void... voids) {
       Person person = ClientDB.getInstance(getContext()).getPersonDao().selectPerson(
-          new Person().getPersonId());
+          ((SignInActivity) getActivity()).getPersonId());
       return person;
     }
 
