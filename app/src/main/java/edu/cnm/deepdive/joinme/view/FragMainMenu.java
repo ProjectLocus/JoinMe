@@ -9,10 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-import com.ramotion.circlemenu.CircleMenuView;
 import edu.cnm.deepdive.joinme.R;
-import edu.cnm.deepdive.joinme.controller.MainActivity;
+
 
 public class FragMainMenu extends Fragment {
   private static final String TAG = "FragMainMenu";
@@ -21,6 +19,7 @@ public class FragMainMenu extends Fragment {
   private FragMainMenuListener fragMainMenuListener;
 
   public interface FragMainMenuListener{
+    public void swapFrags(Fragment fragIn);
 
   }
 
@@ -65,8 +64,10 @@ public class FragMainMenu extends Fragment {
       @Override
       public void onButtonClickAnimationEnd(@NonNull CircleMenuView view, int index) {
         Log.d("D", "onButtonClickAnimationEnd| index: " + index);
-         new MainActivity().swapFrags(new FragInvitationRV());
-        Toast.makeText(getContext(), "onButtonClickAnimationEnd", Toast.LENGTH_SHORT).show();
+     //   fragMainMenuListener.swapFrags(FragInvitationRV);
+
+  //         new MainActivity().swapFrags(new FragInvitationRV());
+  //      Toast.makeText(getContext(), "onButtonClickAnimationEnd", Toast.LENGTH_SHORT).show();
       }
     });
   }

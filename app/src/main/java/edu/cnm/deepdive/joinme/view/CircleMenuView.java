@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
+import com.ramotion.circlemenu.RingEffectView;
 import edu.cnm.deepdive.joinme.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -221,7 +222,7 @@ public class CircleMenuView extends FrameLayout {
         iconsIds.recycle();
       }
 
-      mIconMenu = a.getResourceId(R.styleable.CircleMenuView_icon_menu, R.drawable.ic_menu_black_24dp);
+      mIconMenu = /*a.getResourceId(R.styleable.CircleMenuView_icon_menu, */R.drawable.ic_joinme/*)*/;
       mIconClose = a.getResourceId(R.styleable.CircleMenuView_icon_close, R.drawable.ic_close_black_24dp);
 
       mDurationRing = a.getInteger(R.styleable.CircleMenuView_duration_ring, getResources().getInteger(android.R.integer.config_mediumAnimTime));
@@ -255,7 +256,7 @@ public class CircleMenuView extends FrameLayout {
     final float density = context.getResources().getDisplayMetrics().density;
     final float defaultDistance = DEFAULT_DISTANCE * density;
 
-    mIconMenu = R.drawable.ic_menu_black_24dp;
+    mIconMenu = R.drawable.ic_joinme;
     mIconClose = R.drawable.ic_close_black_24dp;
 
     mDurationRing = getResources().getInteger(android.R.integer.config_mediumAnimTime);
