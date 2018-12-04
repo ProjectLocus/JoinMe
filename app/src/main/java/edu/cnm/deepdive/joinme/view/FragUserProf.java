@@ -49,7 +49,7 @@ public class FragUserProf extends Fragment {
   }
 
   private void initView() {
-    userProfPic = view.findViewById(R.id.iv_user_profile_prof_image);
+    userProfPic = view.findViewById(R.id.wv_user_profile_prof_image);
     userDisplayName = view.findViewById(R.id.tv_user_profile_display_name);
     userDescription = view.findViewById(R.id.tv_user_profile_description);
     userFA = view.findViewById(R.id.fab_user_profile_next);
@@ -63,7 +63,8 @@ public class FragUserProf extends Fragment {
     @Override
     protected Person doInBackground(Void... voids) {
       Person person = ClientDB.getInstance(getContext()).getPersonDao().selectPerson(
-          ((MainActivity) getActivity()).getPersonId());
+          ((MainActivity) getActivity()).getPersonId()
+      );
       return person;
     }
 
