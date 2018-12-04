@@ -34,7 +34,6 @@ public class SignInActivity extends AppCompatActivity {
    * add the
    */
   private SignInButton signIn;
-  private long personId;
   private Context context;
 
 
@@ -62,13 +61,14 @@ public class SignInActivity extends AppCompatActivity {
       try {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
         GoogleSignInAccount account = task.getResult(ApiException.class);
+        assert account != null;
         String name = account.getDisplayName();
         String email = account.getEmail();
         String givenName = account.getGivenName();
         String familyName = account.getFamilyName();
         String userImage = account.getPhotoUrl().toString();
         JoinMeApplication.getInstance().setAccount(account);
-        new QueryTask().execute(name, email, givenName, familyName, userImage);
+        new QueryTask().execute(email, name, givenName, familyName, userImage);
         //getLocation();
         switchToMain();
       } catch (ApiException e) {
@@ -102,14 +102,6 @@ public class SignInActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
-  public long getPersonId() {
-    return personId;
-  }
-
-  public void setPersonId(long personId) {
-    this.personId = personId;
-  }
-
   private class QueryTask extends AsyncTask<String, Void, Long> {
 
 
@@ -140,7 +132,7 @@ public class SignInActivity extends AppCompatActivity {
      */
     @Override
     protected void onPostExecute(Long aLong) {
-      setPersonId(aLong);
+      new MainActivity().setPersonId(aLong);
     }
   }
 

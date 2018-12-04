@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b372c6d3dcd39b0e57db96fefc2e97fc",
+    "identityHash": "310f925b19b90770a5fe17f00472be91",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `Time` TEXT NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `time` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "invitationId",
@@ -58,8 +58,26 @@
           },
           {
             "fieldPath": "time",
-            "columnName": "Time",
+            "columnName": "time",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wasDelivered",
+            "columnName": "wasDelivered",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "willAttend",
+            "columnName": "willAttend",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "degreesRemaining",
+            "columnName": "degreesRemaining",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -202,7 +220,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b372c6d3dcd39b0e57db96fefc2e97fc\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"310f925b19b90770a5fe17f00472be91\")"
     ]
   }
 }

@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private int calledPeopleListType;
   private ClientDB clientDB;
   private long invitationId;
+  private long personId;
 
 
   @Override
@@ -170,6 +171,14 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
 
   public void setInvitationId(long invitationId) {
     this.invitationId = invitationId;
+  }
+
+  public long getPersonId() {
+    return personId;
+  }
+
+  public void setPersonId(long personId) {
+    this.personId = personId;
   }
 
   public int getCalledInviteListType() {

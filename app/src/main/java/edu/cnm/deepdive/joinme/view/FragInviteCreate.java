@@ -86,7 +86,7 @@ public class FragInviteCreate extends Fragment {
           .selectAllDate(strings[0]);
       if (invitation == null) {
         invitation = new Invitation();
-        invitation.setUserSender(((SignInActivity) getActivity()).getPersonId());
+        invitation.setUserSender(((MainActivity) getActivity()).getPersonId());
         invitation.setTitle(strings[0]);
         invitation.setLocation(strings[1]);
         invitation.setDate(strings[2]);

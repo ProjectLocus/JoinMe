@@ -43,6 +43,7 @@ public class FragUserProf extends Fragment {
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_user_profile_ar, container, false);
     initView(view);
+    new QueryTask().execute();
     return view;
   }
 
@@ -53,7 +54,6 @@ public class FragUserProf extends Fragment {
     userFA = view.findViewById(R.id.fab_user_profile_next);
     //TODO add a behavior for the listener
     userFA.setOnClickListener(v -> { });
-    new QueryTask().execute();
   }
 
   private class QueryTask extends AsyncTask<Void, Void, Person> {
@@ -61,7 +61,7 @@ public class FragUserProf extends Fragment {
     @Override
     protected Person doInBackground(Void... voids) {
       Person person = ClientDB.getInstance(getContext()).getPersonDao().selectPerson(
-          ((SignInActivity) getActivity()).getPersonId());
+          ((MainActivity) getActivity()).getPersonId());
       return person;
     }
 
