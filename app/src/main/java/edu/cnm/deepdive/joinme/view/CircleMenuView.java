@@ -222,7 +222,7 @@ public class CircleMenuView extends FrameLayout {
         iconsIds.recycle();
       }
 
-      //mIconMenu = a.getResourceId(R.styleable.CircleMenuView_icon_menu, R.drawable.ic_joinme);
+      mIconMenu = a.getResourceId(R.styleable.CircleMenuView_icon_menu, R.drawable.ic_joinme);
       mIconClose = a.getResourceId(R.styleable.CircleMenuView_icon_close, R.drawable.ic_close_black_24dp);
 
       mDurationRing = a.getInteger(R.styleable.CircleMenuView_duration_ring, getResources().getInteger(android.R.integer.config_mediumAnimTime));
