@@ -5,15 +5,11 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <ImageView
-    android:id="@+id/iv_user_profile_prof_image"
+  <WebView
+    android:id="@+id/wv_user_profile_prof_image"
     android:layout_width="376dp"
     android:layout_height="296dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    app:srcCompat="@drawable/ic_image"/>
+    android:layout_margin="8dp"/>
 
   <TextView
     android:id="@+id/tv_user_profile_display_name"
@@ -21,7 +17,7 @@
     android:layout_height="48dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:layout_alignBottom="@+id/iv_user_profile_prof_image"
+    android:layout_alignBottom="@+id/wv_user_profile_prof_image"
     android:background="#80000000"
     android:text="Display Name"
     android:textSize="32dp"
@@ -44,7 +40,7 @@
     android:layout_width="64dp"
     android:layout_height="64dp"
     android:layout_alignBottom="@+id/tv_user_profile_description"
-    android:layout_alignEnd="@+id/tv_user_profile_display_name"
+    android:layout_alignEnd="@+id/iv_user_profile_prof_image"
     android:backgroundTint="#FF748C"
     android:clickable="true"/>
 

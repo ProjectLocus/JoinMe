@@ -18,6 +18,7 @@ import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
+import edu.cnm.deepdive.joinme.model.entity.Person;
 
 public class FragInviteCreate extends Fragment {
 
@@ -31,9 +32,13 @@ public class FragInviteCreate extends Fragment {
   private Button doneButton;
   private long invitationId;
 
+  /**
+   * Class for creating an invitation. The class grabs he inputed data and sets it in the Client
+   * database with both an invitation ID and person ID to then be sent out.
+   */
   private FragInviteCreateListener fragInviteCreateListener;
 
-  public interface FragInviteCreateListener{
+  public interface FragInviteCreateListener {
 
   }
 
@@ -51,12 +56,12 @@ public class FragInviteCreate extends Fragment {
   private void initViews(View view) {
     inviteCreateTitle0 = view.findViewById(R.id.tv_invite_create_title);
     inviteCreateTitle1 = view.findViewById(R.id.et_invitation_create_title);
-    String result = inviteCreateTitle1.getText().toString();
     inviteCreateLocation = view.findViewById(R.id.et_invitation_create_location);
-    String result1 = inviteCreateLocation.getText().toString();
     inviteCreateDate = view.findViewById(R.id.et_invitation_create_date);
-    String result2 = inviteCreateDate.getText().toString();
     inviteCreateDescription = view.findViewById(R.id.et_invitation_create_description);
+    String result = inviteCreateTitle1.getText().toString();
+    String result1 = inviteCreateLocation.getText().toString();
+    String result2 = inviteCreateDate.getText().toString();
     String result3 = inviteCreateDescription.getText().toString();
     doneButton = view.findViewById(R.id.bt_invitation_done);
     doneButton.setOnClickListener(v -> new QueryTask().execute(result, result1, result2, result3));
@@ -76,21 +81,19 @@ public class FragInviteCreate extends Fragment {
 
     @Override
     protected Long doInBackground(String... strings) {
-      Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao().selectAllTime(strings[0]);
+      Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao()
+          .selectAllDate(strings[0]);
       if (invitation == null) {
         invitation = new Invitation();
+        invitation.setUserSender(new Person().getPersonId());
         invitation.setTitle(strings[0]);
         invitation.setLocation(strings[1]);
         invitation.setDate(strings[2]);
-        invitation.setTime(strings[3]);
+        invitation.setDescription(strings[3]);
         return ClientDB.getInstance(getContext()).getInvitationDao().insert(invitation);
       }
       return invitation.getInvitationId();
     }
 
-    @Override
-    protected void onPostExecute(Long aLong) {
-      ((MainActivity) getActivity()).setInvitationId(invitationId);
-    }
   }
 }

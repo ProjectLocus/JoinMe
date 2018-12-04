@@ -57,8 +57,20 @@ public class Invitation {
   private String location;
 
   @NonNull
-  @ColumnInfo(name = "Time")
+  @ColumnInfo(name = "time")
   private String time;
+
+  @NonNull
+  @ColumnInfo(name = "wasDelivered")
+  private boolean wasDelivered;
+
+  @NonNull
+  @ColumnInfo(name = "willAttend")
+  private boolean willAttend;
+
+  @NonNull
+  @ColumnInfo(name = "degreesRemaining")
+  private long degreesRemaining;
 
   /**
    * Gets id.
@@ -178,5 +190,29 @@ public class Invitation {
 
   public void setTime(@NonNull String time) {
     this.time = time;
+  }
+
+  public boolean isWasDelivered() {
+    return wasDelivered;
+  }
+
+  public void setWasDelivered(boolean wasDelivered) {
+    this.wasDelivered = wasDelivered;
+  }
+
+  public boolean isWillAttend() {
+    return willAttend;
+  }
+
+  public void setWillAttend(boolean willAttend) {
+    this.willAttend = willAttend;
+  }
+
+  public long getDegreesRemaining() {
+    return degreesRemaining;
+  }
+
+  public void setDegreesRemaining(long degreesRemaining) {
+    this.degreesRemaining = degreesRemaining;
   }
 }

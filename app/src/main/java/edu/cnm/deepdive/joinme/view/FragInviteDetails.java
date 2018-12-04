@@ -11,10 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
-import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
+import edu.cnm.deepdive.joinme.model.entity.Person;
 
+/**
+ * Class that allows a certain person view an invitation. It takes the invitation ID and the
+ * userSender ID to show the appropriate invitation.
+ */
 public class FragInviteDetails extends Fragment {
 
   private TextView tInvitationDetailsTitle, eInviteDetailsTitle, inviteDetailsLocation,
@@ -35,6 +39,7 @@ public class FragInviteDetails extends Fragment {
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_invite_details, container, false);
     initViews(view);
+    new QueryTask().execute();
     return view;
   }
 
@@ -44,7 +49,6 @@ public class FragInviteDetails extends Fragment {
     inviteDetailsLocation = view.findViewById(R.id.et_invitation_details_location);
     inviteDetailsDate = view.findViewById(R.id.et_invitation_details_date);
     inviteDetailsDescription = view.findViewById(R.id.et_invitation_details_description);
-    new QueryTask().execute();
     inviteDetailsAccept = view.findViewById(R.id.bt_invitation_details_accept);
     inviteDetailsAccept.setOnClickListener(v -> { });
     inviteDetailsDecline = view.findViewById(R.id.bt_invitation_details_decline);
@@ -59,8 +63,8 @@ public class FragInviteDetails extends Fragment {
     @Override
     protected Invitation doInBackground(Void... voids) {
       Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao()
-          .selectAllInvitationId(
-              ((MainActivity) getActivity()).getInvitationId());
+          .selectAllInvitationId(new Invitation().getInvitationId());
+      new Invitation().setUserReceiver(new Person().getPersonId());
       return invitation;
     }
 

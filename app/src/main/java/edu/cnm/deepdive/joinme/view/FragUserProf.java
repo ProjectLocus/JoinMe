@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -21,7 +22,7 @@ import edu.cnm.deepdive.joinme.model.entity.Person;
 
 public class FragUserProf extends Fragment {
 
-  private ImageView userProfPic;
+  private WebView userProfPic;
   private TextView userDisplayName, userDescription;
   private FloatingActionButton userFA;
 
@@ -63,7 +64,7 @@ public class FragUserProf extends Fragment {
     protected void onPostExecute(Person person) {
       userDisplayName.setText(person.getDisplayName());
       userDescription.setText(person.getUserDescription());
-      Glide.with(getContext()).load(person.getUserImage()).into(userProfPic);
+      userProfPic.loadUrl(person.getUserImage());
     }
   }
 }
