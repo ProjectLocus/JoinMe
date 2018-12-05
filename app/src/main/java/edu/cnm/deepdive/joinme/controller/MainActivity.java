@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity
   public static final int ERROR_DIALOG_REQUEST = 9001;
   private static final int UPDATE_INTERVAL_MS = 30000;
   private static final int FASTEST_INTERVAL_MS = 25000;
+  private static boolean SHOULD_FILL_DB_W_TEST = false;
   private Toolbar toolbar;
   private FrameLayout container;
   private FragmentManager fragmentManager;
@@ -142,6 +143,14 @@ public class MainActivity extends AppCompatActivity
     fragmentManager = getSupportFragmentManager();
     fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     getLastKnownLocation();
+    if (SHOULD_FILL_DB_W_TEST) {
+//      fillDBwithTest();
+    } else {
+      fillDBwithAPI();
+    }
+  }
+
+  private void fillDBwithAPI() {
   }
 
   private void getLastKnownLocation() {
