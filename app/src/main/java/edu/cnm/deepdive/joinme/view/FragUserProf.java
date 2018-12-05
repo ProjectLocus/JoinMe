@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +51,15 @@ public class FragUserProf extends Fragment {
     userDescription = view.findViewById(R.id.tv_user_profile_description);
     userFA = view.findViewById(R.id.fab_user_profile_next);
     //TODO add a behavior for the listener
-    userFA.setOnClickListener(v -> { });
+    userFA.setOnClickListener(v -> goToFragInviteRV());
     new QueryTask().execute();
+  }
+
+  private void goToFragInviteRV() {
+    FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack(null);
+    fragmentTransaction.replace(R.id.fl_main_frag_container, new FragInvitationRV());
+    fragmentTransaction.commit();
   }
 
   private class QueryTask extends AsyncTask<Void, Void, Person> {
@@ -66,6 +75,9 @@ public class FragUserProf extends Fragment {
     @Override
     protected void onPostExecute(Person person) {
       userDisplayName.setText(person.getDisplayName());
+      if (person.getUserImage() == null) {
+        userProfPic.loadUrl("file:///android_res/drawable/ic_person_white.xml");
+      }
       userProfPic.loadUrl(person.getUserImage());
     }
   }
