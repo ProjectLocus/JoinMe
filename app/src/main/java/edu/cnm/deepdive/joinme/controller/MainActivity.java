@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
@@ -31,9 +30,15 @@ import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
 
-public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
-    FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
-    FragInviteDetailsListener {
+/**
+ * Main Activity class that defines how to switch fragments, has setters and getters for Invitation
+ * ID and Person ID and build the Client Database.
+ */
+public class MainActivity extends AppCompatActivity
+    //implements FragInvitationRVListener,
+    //FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
+    //FragInviteDetailsListener
+    {
 
   private static final String TAG = "MainActivity";
 
@@ -62,9 +67,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     initViews();
     initDataIntoViews();
     setPersonId(getIntent().getLongExtra(getString(R.string.person_id_key), 0));
-//   getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
-//       new FragUserProf()).commit();
-}
+  }
 
   private void initDataIntoViews() {
     fragmentManager = getSupportFragmentManager();
@@ -75,12 +78,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private void initViews() {
     toolbar = findViewById(R.id.tb_main_toolbar);
     container = findViewById(R.id.fl_main_frag_container);
-    toolbar.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        goToFragMainMenu();
-      }
-    });
+    toolbar.setOnClickListener(v -> goToFragMainMenu());
   }
 
   private void initDB() {
@@ -88,10 +86,14 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     new ClientDBTask().execute();
   }
 
-
+  /**
+   * Main fragment switcher from the Main Screen.
+   * @param fragment
+   * @param useStack
+   * @param variant
+   * @param manager
+   */
   public static void switchFragment(Fragment fragment, boolean useStack, String variant, FragmentManager manager) {
-
-
     String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
     if (manager.findFragmentByTag(tag) != null) {
       manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -126,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     return true;
   }
 
+  /**
+   * Method that automatically switches to the Main Menu Frag after sign in.
+   */
   public void goToFragMainMenu(){
     if(fragMainMenu==null){
       fragMainMenu = new FragMainMenu();
@@ -180,27 +185,50 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     });
   }
 
+  /**
+   * Gives rest of project access to the Invitation ID.
+   * @return
+   */
   public long getInvitationId() {
     return invitationId;
   }
 
+  /**
+   * Allows rest of project to set an Invitation ID.
+   * @param invitationId
+   */
   public void setInvitationId(long invitationId) {
     this.invitationId = invitationId;
   }
 
+  /**
+   * Gives rest of project access to the current Person ID.
+   * @return
+   */
   public long getPersonId() {
     return personId;
   }
 
+  /**
+   * Allows rest of project to set an Invitation ID.
+   * @param personId
+   */
   public void setPersonId(long personId) {
     this.personId = personId;
   }
 
+  /**
+   * Gives rest of project access to a list of invites.
+   * @return
+   */
   public int getCalledInviteListType() {
     return calledInviteListType;
   }
 
-  @Override
+  /**
+   * Gives rest of project access to a lit of people.
+   * @return
+   */
   public int getCalledPeopleListType(){
     return calledPeopleListType;
   }

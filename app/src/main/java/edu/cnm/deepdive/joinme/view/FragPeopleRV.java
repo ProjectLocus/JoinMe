@@ -18,6 +18,9 @@ import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
 import edu.cnm.deepdive.joinme.model.utility.DummyPersonGenerator;
 import java.util.List;
 
+/**
+ * Recycler View fragment which shows lists of Person objects.
+ */
 public class FragPeopleRV extends Fragment {
 
   private static final String TAG = "FragPeopleRV";
@@ -63,13 +66,13 @@ public class FragPeopleRV extends Fragment {
   private void initRecyclerview(View theView) {
   }
     @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    try {
-      fragPeopleRVListener = (FragPeopleRVListener) getActivity();
-    } catch (ClassCastException e) {
-      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
-    }
+      public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+          fragPeopleRVListener = (FragPeopleRVListener) getActivity();
+        } catch (ClassCastException e) {
+          Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
+        }
   }
 
   // TODO Add gson retrofit service object setup function here.

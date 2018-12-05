@@ -9,6 +9,10 @@ import android.arch.persistence.room.Update;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import java.util.List;
 
+/**
+ * The Invitation Dao which defines how the project inserts, queries, updates and deletes Invitation
+ * objects.
+ */
 @Dao
 public interface InvitationDao {
 
@@ -30,11 +34,11 @@ public interface InvitationDao {
   @Query("SELECT * FROM invitations WHERE date=:date")
   Invitation selectAllDate(String date);
 
-  @Query("SELECT * FROM invitations WHERE time=:time")
-  Invitation selectAllTime(String time);
-
-  @Query("SELECT * FROM invitations WHERE created=:created")
-  Invitation selectAllCreated(String created);
+//  @Query("SELECT * FROM invitations WHERE time=:time")
+//  Invitation selectAllTime(String time);
+//
+//  @Query("SELECT * FROM invitations WHERE created=:created")
+//  Invitation selectAllCreated(String created);
 
   @Query("SELECT * FROM invitations WHERE description=:description")
   List<Invitation> selectAllDescription(String description);

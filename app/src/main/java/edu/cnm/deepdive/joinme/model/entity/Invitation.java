@@ -44,9 +44,9 @@ public class Invitation {
   @ColumnInfo(name = "description")
   private String description;
 
-  @NonNull
-  @ColumnInfo(name = "created")
-  private String created;
+//  @NonNull
+//  @ColumnInfo(name = "created")
+//  private String created;
 
   @NonNull
   @ColumnInfo(name = "title")
@@ -56,19 +56,19 @@ public class Invitation {
   @ColumnInfo(name = "location")
   private String location;
 
-  @NonNull
-  @ColumnInfo(name = "time")
-  private String time;
+//  @NonNull
+//  @ColumnInfo(name = "time")
+//  private String time;
 
-  @NonNull
+
   @ColumnInfo(name = "wasDelivered")
   private boolean wasDelivered;
 
-  @NonNull
+
   @ColumnInfo(name = "willAttend")
   private boolean willAttend;
 
-  @NonNull
+
   @ColumnInfo(name = "degreesRemaining")
   private long degreesRemaining;
 
@@ -128,69 +128,102 @@ public class Invitation {
     this.description = description;
   }
 
-  /**
-   * Gets created.
-   *
-   * @return the created
-   */
-  @NonNull
-  public String getCreated() {
-    return created;
-  }
+//  /**
+//   * Gets created.
+//   *
+//   * @return the created
+//   */
+//  @NonNull
+//  public String getCreated() {
+//    return created;
+//  }
+//
+//  /**
+//   * Sets created.
+//   *
+//   * @param created the created
+//   */
+//  public void setCreated(@NonNull String created) {
+//    this.created = created;
+//  }
 
   /**
-   * Sets created.
-   *
-   * @param created the created
+   * Gets the id of the person creating the invtation.
+   * @return
    */
-  public void setCreated(@NonNull String created) {
-    this.created = created;
-  }
-
   @NonNull
   public long getUserSender() {
     return userSender;
   }
 
+  /**
+   * Sets the id of the person receiving the invitation.
+   * @param userSender
+   */
   public void setUserSender(@NonNull long userSender) {
     this.userSender = userSender;
   }
 
+  /**
+   * Gets the id of the person receiving the invitation
+   * @return
+   */
   @NonNull
   public long getUserReceiver() {
     return userReceiver;
   }
 
-  public void setUserReceiver(@NonNull long userReceiver) {
+  /**
+   * Sets the id of the person receiving the invitation.
+   * @param userReceiver
+   */
+  public void setUserReceiver(long userReceiver) {
     this.userReceiver = userReceiver;
   }
 
+  /**
+   * Gets title.
+   * @return
+   */
   @NonNull
   public String getTitle() {
     return title;
   }
 
+  /**
+   * Sets title
+   * @param title
+   */
   public void setTitle(@NonNull String title) {
     this.title = title;
   }
 
+  /**
+   * Gets location.
+   * @return
+   */
   @NonNull
   public String getLocation() {
     return location;
   }
 
+  /**
+   * Sets location
+   * @param location
+   */
   public void setLocation(@NonNull String location) {
     this.location = location;
   }
 
-  @NonNull
-  public String getTime() {
-    return time;
-  }
+//  @NonNull
+//  public String getTime() {
+//    return time;
+//  }
+//
+//  public void setTime(@NonNull String time) {
+//    this.time = time;
+//  }
 
-  public void setTime(@NonNull String time) {
-    this.time = time;
-  }
 
   public boolean isWasDelivered() {
     return wasDelivered;

@@ -23,7 +23,7 @@
     android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Title"
+    android:hint="Title"
     android:gravity="center"/>
 
   <EditText
@@ -35,7 +35,7 @@
     android:layout_below="@+id/et_invitation_create_title"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Location"
+    android:hint="Location"
     android:gravity="center"/>
 
   <EditText
@@ -47,7 +47,7 @@
     android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Date and Time"
+    android:hint="Date and Time"
     android:gravity="center"/>
 
   <EditText
@@ -58,7 +58,7 @@
     android:layout_marginTop="8dp"
     android:layout_centerHorizontal="true"
     android:ems="16"
-    android:text="Description"
+    android:hint="Description"
     android:gravity="center"/>
   <Button
     android:id="@+id/bt_invitation_done"

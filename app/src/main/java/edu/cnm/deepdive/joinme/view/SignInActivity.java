@@ -23,11 +23,9 @@ import edu.cnm.deepdive.joinme.model.entity.Person;
  * The type Sign in activity.
  */
 public class SignInActivity extends AppCompatActivity {
+
   private static final int REQUEST_CODE = 1010;
-  /**
-   * The Sign in.
-   * add the
-   */
+
   private SignInButton signIn;
   private Context context;
 
@@ -61,10 +59,10 @@ public class SignInActivity extends AppCompatActivity {
         String email = account.getEmail();
         String givenName = account.getGivenName();
         String familyName = account.getFamilyName();
-       // String userImage = account.getPhotoUrl().toString();
+        String userImage = account.getPhotoUrl().toString();
         String googleId = account.getId();
         JoinMeApplication.getInstance().setAccount(account);
-        new QueryTask().execute(email, name, givenName, familyName,  googleId);
+        new QueryTask().execute(email, name, givenName, familyName, userImage, googleId);
         //getLocation();
 
       } catch (ApiException e) {
@@ -118,8 +116,8 @@ public class SignInActivity extends AppCompatActivity {
         person.setDisplayName(strings[1]);
         person.setFirstName(strings[2]);
         person.setLastName(strings[3]);
-      //  person.setUserImage(strings[4]);
-        person.setGoogleUserId(strings[4]);
+        person.setUserImage(strings[4]);
+        person.setGoogleUserId(strings[5]);
         return ClientDB.getInstance(getApplicationContext()).getPersonDao().insert(person);
       }
       return person.getPersonId();

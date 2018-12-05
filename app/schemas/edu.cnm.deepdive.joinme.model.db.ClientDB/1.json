@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "666a1994c702889b59e4a55ab545ce67",
+    "identityHash": "73bb600c528a0c8cf09e9a6ef380811a",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `time` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "invitationId",
@@ -39,12 +39,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "created",
-            "columnName": "created",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
@@ -53,12 +47,6 @@
           {
             "fieldPath": "location",
             "columnName": "location",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "time",
-            "columnName": "time",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -140,7 +128,7 @@
       },
       {
         "tableName": "people",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `display_name` TEXT NOT NULL, `userImageLocation` TEXT, `google_user_id` TEXT NOT NULL, `userDescription` TEXT, `isThisMe` INTEGER NOT NULL, `userImage` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `display_name` TEXT NOT NULL, `userImageLocation` TEXT, `google_user_id` TEXT NOT NULL, `user_description` TEXT, `isThisMe` INTEGER NOT NULL, `user_image` TEXT)",
         "fields": [
           {
             "fieldPath": "latitude",
@@ -180,7 +168,7 @@
           },
           {
             "fieldPath": "userDescription",
-            "columnName": "userDescription",
+            "columnName": "user_description",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -192,7 +180,7 @@
           },
           {
             "fieldPath": "userImage",
-            "columnName": "userImage",
+            "columnName": "user_image",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -226,7 +214,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"666a1994c702889b59e4a55ab545ce67\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"73bb600c528a0c8cf09e9a6ef380811a\")"
     ]
   }
 }

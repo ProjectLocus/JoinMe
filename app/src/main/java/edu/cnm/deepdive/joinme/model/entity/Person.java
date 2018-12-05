@@ -50,6 +50,7 @@ public class Person {
   /**
    * This is a string representation of the get function for the user's image
    */
+
   private String userImageLocation;
 
   @NonNull
@@ -59,6 +60,7 @@ public class Person {
   /**
    * This is the user's description
    */
+  @ColumnInfo(name = "user_description")
   private String userDescription;
 
   //**************** INFO THAT IS NOT DISTRIBUTED TO OTHER USERS ********************************//
@@ -125,6 +127,7 @@ public class Person {
   /**
    * This is the Person's user image
    */
+  @ColumnInfo(name = "user_image")
   private String userImage;
 
 
@@ -441,10 +444,18 @@ public class Person {
     this.userImage = userImage;
   }
 
+  /**
+   * Gets the Google User Id.
+   * @return
+   */
   public String getGoogleUserId() {
     return googleUserId;
   }
 
+  /**
+   * Sets a Google User Id.
+   * @param googleUserId
+   */
   public void setGoogleUserId(String googleUserId) {
     this.googleUserId = googleUserId;
   }
