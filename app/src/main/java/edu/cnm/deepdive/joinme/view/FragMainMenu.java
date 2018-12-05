@@ -10,18 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
 
 
 public class FragMainMenu extends Fragment {
   private static final String TAG = "FragMainMenu";
 
   private CircleMenuView circleMenuView;
-  private FragMainMenuListener fragMainMenuListener;
 
-  public interface FragMainMenuListener{
-    public void swapFrags(Fragment fragIn);
-
-  }
 
   @Nullable
   @Override
@@ -66,22 +62,20 @@ public class FragMainMenu extends Fragment {
         Log.d("D", "onButtonClickAnimationEnd| index: " + index);
         switch (index){
           case 0:
-            fragMainMenuListener.swapFrags(new FragUserProf());
+            MainActivity.switchFragment(new FragUserProf(), true, "",getFragmentManager());
             break;
-
           case 1:
-            fragMainMenuListener.swapFrags(new FragPeopleRV());
+            MainActivity.switchFragment(new FragPeopleRV(), true, "",getFragmentManager());
             break;
-
           case 2:
-            fragMainMenuListener.swapFrags(new FragInviteCreate());
-
+            MainActivity.switchFragment(new FragInviteCreate(), true, "",getFragmentManager());
+            break;
           case 3:
-            fragMainMenuListener.swapFrags(new FragInviteDetails());
-
+            MainActivity.switchFragment(new FragInviteDetails(), true, "",getFragmentManager());
+            break;
           case 4:
-            fragMainMenuListener.swapFrags(new FragInvitationRV());
-
+            MainActivity.switchFragment(new FragInvitationRV(), true, "",getFragmentManager());
+            break;
         }
       }
     });
@@ -91,7 +85,7 @@ public class FragMainMenu extends Fragment {
   public void onAttach(Context context) {
     super.onAttach(context);
     try {
-      fragMainMenuListener = (FragMainMenuListener) getActivity();
+      //fragMainMenuListener = (FragMainMenuListener) getActivity();
     } catch (ClassCastException e) {
       Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
     }
