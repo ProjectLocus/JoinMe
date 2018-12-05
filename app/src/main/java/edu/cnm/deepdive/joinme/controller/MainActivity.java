@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,7 +25,7 @@ import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails.FragInviteDetailsListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
-import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
+//import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
@@ -32,7 +33,8 @@ import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
-    FragMainMenuListener, FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
+    //FragMainMenuListener,
+    FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
     FragInviteDetailsListener {
 
   private static final String TAG = "MainActivity";
@@ -87,14 +89,20 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     new ClientDBTask().execute();
   }
 
-  public void swapFrags(Fragment fragIn){
-    if(fragIn==null){
-      Log.d(TAG, "swapFrags: null fragment");
-      return;
+
+  public static void switchFragment(Fragment fragment, boolean useStack, String variant, FragmentManager manager) {
+
+
+    String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
+    if (manager.findFragmentByTag(tag) != null) {
+      manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
-    fragmentManager.beginTransaction()
-        .replace(container.getId(), fragIn)
-        .commit();
+    FragmentTransaction transaction = manager.beginTransaction();
+    transaction.replace(R.id.fl_main_frag_container, fragment, tag);
+    if (useStack) {
+      transaction.addToBackStack(tag);
+    }
+    transaction.commit();
   }
 
   @Override
@@ -123,38 +131,38 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     if(fragMainMenu==null){
       fragMainMenu = new FragMainMenu();
     }
-    swapFrags(fragMainMenu);
+   switchFragment(fragMainMenu,false,"",fragmentManager);
   }
 
-  public void goToFragInvitationRv(int inviteListType){
-    if(fragInvitationRV==null){
-      fragInvitationRV = new FragInvitationRV();
-    }
-    calledInviteListType = inviteListType;
-    swapFrags(fragInvitationRV);
-  }
-
-  public void goToFragUserProf() {
-    if(fragUserProf==null) {
-      fragUserProf = new FragUserProf();
-    }
-    swapFrags(fragUserProf);
-  }
-
-  public void goToFragPeopleRv(int peopleListType){
-    if(fragPeopleRV==null){
-      fragPeopleRV = new FragPeopleRV();
-    }
-    calledPeopleListType = peopleListType;
-    swapFrags(fragPeopleRV);
-  }
-
-  public void goToFragInviteDetails(){
-    if(fragInviteDetails==null) {
-      fragInviteDetails = new FragInviteDetails();
-    }
-    swapFrags(fragInviteDetails);
-  }
+//  public void goToFragInvitationRv(int inviteListType){
+//    if(fragInvitationRV==null){
+//      fragInvitationRV = new FragInvitationRV();
+//    }
+//    calledInviteListType = inviteListType;
+//    switchFragment(fragInvitationRV, true, "");
+//  }
+//
+//  public void goToFragUserProf() {
+//    if(fragUserProf==null) {
+//      fragUserProf = new FragUserProf();
+//    }
+//    swapFrags(fragUserProf);
+//  }
+//
+//  public void goToFragPeopleRv(int peopleListType){
+//    if(fragPeopleRV==null){
+//      fragPeopleRV = new FragPeopleRV();
+//    }
+//    calledPeopleListType = peopleListType;
+//    swapFrags(fragPeopleRV);
+//  }
+//
+//  public void goToFragInviteDetails(){
+//    if(fragInviteDetails==null) {
+//      fragInviteDetails = new FragInviteDetails();
+//    }
+//    swapFrags(fragInviteDetails);
+//  }
 
   private void signOut() {
     JoinMeApplication join = JoinMeApplication.getInstance();
