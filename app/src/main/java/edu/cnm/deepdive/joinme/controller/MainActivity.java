@@ -24,7 +24,6 @@ import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails.FragInviteDetailsListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
-import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
@@ -32,7 +31,7 @@ import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
 
 public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
-    FragMainMenuListener, FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
+    FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
     FragInviteDetailsListener {
 
   private static final String TAG = "MainActivity";
@@ -51,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private ClientDB clientDB;
   private long invitationId;
   private long personId;
+
 
 
   @Override
@@ -154,6 +154,13 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
       fragInviteDetails = new FragInviteDetails();
     }
     swapFrags(fragInviteDetails);
+  }
+
+  public void goToFragInviteCreate() {
+    if(fragInviteCreate==null) {
+      fragInviteCreate = new FragInviteCreate();
+    }
+    swapFrags(fragInviteCreate);
   }
 
   private void signOut() {
