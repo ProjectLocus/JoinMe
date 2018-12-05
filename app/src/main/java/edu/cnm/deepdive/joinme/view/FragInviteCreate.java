@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
@@ -34,6 +35,7 @@ public class FragInviteCreate extends Fragment {
   private EditText inviteCreateDate;
   private EditText inviteCreateDescription;
   private Button doneButton;
+  private Context context;
   private View view;
 
   private FragInviteCreateListener fragInviteCreateListener;

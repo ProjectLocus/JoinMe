@@ -1,6 +1,9 @@
 package edu.cnm.deepdive.joinme.controller;
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -236,6 +239,7 @@ public class MainActivity extends AppCompatActivity
   public int getCalledPeopleListType(){
     return calledPeopleListType;
   }
+
 
 
   private class ClientDBTask extends AsyncTask<Void, Void, Void> {
