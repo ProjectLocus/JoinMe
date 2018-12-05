@@ -37,7 +37,6 @@ public class JoinMeApplication extends Application {
     clientDB = ClientDB.getInstance(this);
     clientDB.getPersonDao();
     clientDB.getInvitationDao();
-
   }
 
 

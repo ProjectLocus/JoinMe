@@ -1,4 +1,14 @@
 <resources>
   <string name="app_name">JoinMe</string>
   <string name="person_id_key">person_id</string>
+  <string name="check_google_svc_version">isServicesOK: checking google services version</string>
+  <string name="google_play_svcs_is_working">isServicesOK: Google Play Services is working</string>
+  <string name="google_play_svcs_error_can_fix">isServicesOK: an error occurred but we can fix it</string>
+  <string name="cannot_make_map_requests">You can\'t make map requests</string>
+  <string name="could_not_load_resource">Could not load resources at</string>
+  <string name="start_loc">Your Start Location</string>
+  <string name="google_directions_error">Error connecting to Google for directions.</string>
+  <string name="return_to_main_menu">[ Return to Main Menu ]</string>
+  <string name="requires_gps">This application requires GPS to work properly, do you want to enable it?</string>
+  <string name="yes">Yes</string>
 </resources>
