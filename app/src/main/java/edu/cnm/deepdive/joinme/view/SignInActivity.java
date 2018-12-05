@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -59,7 +60,12 @@ public class SignInActivity extends AppCompatActivity {
         String email = account.getEmail();
         String givenName = account.getGivenName();
         String familyName = account.getFamilyName();
-        String userImage = account.getPhotoUrl().toString();
+        String userImage = null;
+        try {
+          userImage = account.getPhotoUrl().toString();
+        } catch (NullPointerException e) {
+          userImage = "default";
+        }
         String googleId = account.getId();
         JoinMeApplication.getInstance().setAccount(account);
         new QueryTask().execute(email, name, givenName, familyName, userImage, googleId);
@@ -115,7 +121,11 @@ public class SignInActivity extends AppCompatActivity {
         person.setDisplayName(strings[1]);
         person.setFirstName(strings[2]);
         person.setLastName(strings[3]);
-        person.setUserImage(strings[4]);
+        if(strings[4].equals("default")){
+          person.setUserImage("file:///android_res/drawable/ic_joinme.jpg");
+        }else{
+          person.setUserImage(strings[4]);
+        }
         person.setGoogleUserId(strings[5]);
         return ClientDB.getInstance(getApplicationContext()).getPersonDao().insert(person);
       }
