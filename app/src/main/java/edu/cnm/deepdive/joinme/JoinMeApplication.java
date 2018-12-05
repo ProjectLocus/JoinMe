@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import edu.cnm.deepdive.joinme.model.db.ClientDB;
 
 public class JoinMeApplication extends Application {
 
@@ -16,10 +17,12 @@ public class JoinMeApplication extends Application {
   private static GoogleSignInClient client;
   private static GoogleSignInAccount account;
   private static Person person;
+  ClientDB clientDB;
 
   @Override
   public void onCreate() {
     super.onCreate();
+    initDB();
     instance = this;
     Stetho.initializeWithDefaults(this);
     GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -30,6 +33,12 @@ public class JoinMeApplication extends Application {
     client = GoogleSignIn.getClient(this, options);
   }
 
+  private void initDB() {
+    clientDB = ClientDB.getInstance(this);
+    clientDB.getPersonDao();
+    clientDB.getInvitationDao();
+
+  }
 
 
   /**
