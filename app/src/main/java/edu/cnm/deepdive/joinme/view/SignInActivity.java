@@ -64,7 +64,6 @@ public class SignInActivity extends AppCompatActivity {
         JoinMeApplication.getInstance().setAccount(account);
         new QueryTask().execute(email, name, givenName, familyName, userImage, googleId);
         //getLocation();
-
       } catch (ApiException e) {
         Toast.makeText(this,"There was an error logging in", Toast.LENGTH_LONG).show();
       }

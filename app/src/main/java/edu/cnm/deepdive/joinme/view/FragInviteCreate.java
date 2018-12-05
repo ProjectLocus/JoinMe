@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,10 +60,28 @@ public class FragInviteCreate extends Fragment {
   private void initViews() {
     inviteCreateTitle0 = view.findViewById(R.id.tv_invite_create_title);
     inviteCreateTitle1 = view.findViewById(R.id.et_invitation_create_title);
+    inviteCreateTitle1.addTextChangedListener(textWatcher);
     inviteCreateLocation = view.findViewById(R.id.et_invitation_create_location);
     inviteCreateDate = view.findViewById(R.id.et_invitation_create_date);
     inviteCreateDescription = view.findViewById(R.id.et_invitation_create_description);
   }
+
+  private TextWatcher textWatcher = new TextWatcher() {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+  };
 
   private void initButton() {
     doneButton = view.findViewById(R.id.bt_invitation_done);
