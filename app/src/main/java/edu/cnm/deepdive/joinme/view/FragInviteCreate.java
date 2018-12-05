@@ -30,7 +30,7 @@ public class FragInviteCreate extends Fragment {
   private EditText inviteCreateDate;
   private EditText inviteCreateDescription;
   private Button doneButton;
-  private long invitationId;
+  private View view;
 
   /**
    * Class for creating an invitation. The class grabs he inputed data and sets it in the Client
@@ -46,26 +46,29 @@ public class FragInviteCreate extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View theView = inflater.inflate(R.layout.fragment_invite_create, container,false);
+    view = inflater.inflate(R.layout.fragment_invite_create, container,false);
     //do stuff
-    initViews(theView);
-
-    return theView;
+    initViews();
+    initButton();
+    return view;
   }
 
-  private void initViews(View view) {
+  private void initViews() {
     inviteCreateTitle0 = view.findViewById(R.id.tv_invite_create_title);
     inviteCreateTitle1 = view.findViewById(R.id.et_invitation_create_title);
     inviteCreateLocation = view.findViewById(R.id.et_invitation_create_location);
     inviteCreateDate = view.findViewById(R.id.et_invitation_create_date);
     inviteCreateDescription = view.findViewById(R.id.et_invitation_create_description);
+  }
+
+  private void initButton() {
     doneButton = view.findViewById(R.id.bt_invitation_done);
     doneButton.setOnClickListener(v ->
     {String result = inviteCreateTitle1.getText().toString();
-    String result1 = inviteCreateLocation.getText().toString();
-    String result2 = inviteCreateDate.getText().toString();
-    String result3 = inviteCreateDescription.getText().toString();
-        new QueryTask().execute(result, result1, result2, result3);});
+      String result1 = inviteCreateLocation.getText().toString();
+      String result2 = inviteCreateDate.getText().toString();
+      String result3 = inviteCreateDescription.getText().toString();
+      new QueryTask().execute(result, result1, result2, result3);});
   }
 
   @Override
@@ -96,5 +99,9 @@ public class FragInviteCreate extends Fragment {
       return invitation.getInvitationId();
     }
 
+    @Override
+    protected void onPostExecute(Long aLong) {
+      ((MainActivity) getActivity()).setInvitationId(aLong);
+    }
   }
 }

@@ -10,12 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
-import edu.cnm.deepdive.joinme.model.entity.Person;
 
 /**
  * Class that allows a certain person view an invitation. It takes the invitation ID and the
@@ -27,6 +25,7 @@ public class FragInviteDetails extends Fragment {
       inviteDetailsDate, inviteDetailsDescription;
 
   private Button inviteDetailsAccept, inviteDetailsDecline, inviteDetailsSeeAttendees;
+  private View view;
 
   private FragInviteDetailsListener fragInviteDetailsListener;
 
@@ -39,13 +38,13 @@ public class FragInviteDetails extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_invite_details, container, false);
-    initViews(view);
+    view = inflater.inflate(R.layout.fragment_invite_details, container, false);
+    initViews();
     new QueryTask().execute();
     return view;
   }
 
-  private void initViews(View view) {
+  private void initViews() {
     tInvitationDetailsTitle = view.findViewById(R.id.tv_invitation_details_title);
     eInviteDetailsTitle = view.findViewById(R.id.et_invitation_details_title);
     inviteDetailsLocation = view.findViewById(R.id.et_invitation_details_location);
@@ -66,7 +65,6 @@ public class FragInviteDetails extends Fragment {
     protected Invitation doInBackground(Void... voids) {
       Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao()
           .selectAllInvitationId(((MainActivity) getActivity()).getInvitationId());
-      new Invitation().setUserReceiver(new Person().getPersonId());
       return invitation;
     }
 
