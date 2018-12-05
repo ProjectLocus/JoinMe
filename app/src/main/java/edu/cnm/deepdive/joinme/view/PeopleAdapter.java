@@ -24,6 +24,11 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.Holder> {
   private List<Person> listForRecycler;
   private Activity activity;
 
+  /**
+   * Constructor
+   * @param activity
+   * @param listForRecycler
+   */
   public PeopleAdapter(Activity activity, List<Person> listForRecycler) {
     this.activity = activity;
     this.listForRecycler = listForRecycler;

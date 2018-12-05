@@ -41,7 +41,7 @@ public class DummyInvitationGenerator {
        tempInvitation.setTitle("Sent Invitation");
        tempInvitation.setDescription("An invite to: " + theUser.getFirstName() + " " + theUser.getLastName());
       }
-      tempInvitation.setCreated(new Date().toString());
+      //tempInvitation.setCreated(new Date().toString());
       tempInvitation.setDate(new Date().toString());
       tempInvitation.setInvitationId(rng.nextInt()+1);
       dummyInvitations.add(tempInvitation);

@@ -22,6 +22,9 @@ import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * A recycler view fragment that shows a list of Invitation objects.
+ */
 public class FragInvitationRV extends Fragment {
 
   private static final String TAG = "FragInvitationRV";
@@ -77,15 +80,15 @@ public class FragInvitationRV extends Fragment {
     floatingActionButton = theView.findViewById(R.id.fab_frag_invitation_rv_add);
   }
 
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    try {
-      fragInvitationRVListener = (FragInvitationRVListener) getActivity();
-    } catch (ClassCastException e) {
-      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
-    }
-  }
+//  @Override
+//  public void onAttach(Context context) {
+//    super.onAttach(context);
+//    try {
+//      fragInvitationRVListener = (FragInvitationRVListener) getActivity();
+//    } catch (ClassCastException e) {
+//      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
+//    }
+//  }
 
 
   // TODO Add gson retrofit service object setup function here.

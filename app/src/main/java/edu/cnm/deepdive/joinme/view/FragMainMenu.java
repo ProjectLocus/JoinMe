@@ -9,14 +9,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
+import edu.cnm.deepdive.joinme.model.entity.Invitation;
 
-
+/**
+ * The Main circle button view after signing in. Also defines which buttons go to which fragment.
+ */
 public class FragMainMenu extends Fragment {
   private static final String TAG = "FragMainMenu";
 
   private CircleMenuView circleMenuView;
+  private Invitation invitation;
+  private Context context;
 
 
   @Nullable
@@ -71,7 +77,7 @@ public class FragMainMenu extends Fragment {
             MainActivity.switchFragment(new FragInviteCreate(), true, "",getFragmentManager());
             break;
           case 3:
-            MainActivity.switchFragment(new FragInviteDetails(), true, "",getFragmentManager());
+            MainActivity.switchFragment(new FragInviteDetails(), true, "", getFragmentManager());
             break;
           case 4:
             MainActivity.switchFragment(new FragInvitationRV(), true, "",getFragmentManager());

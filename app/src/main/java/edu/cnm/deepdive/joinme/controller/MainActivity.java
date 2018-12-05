@@ -51,9 +51,15 @@ import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
 
-public class MainActivity extends AppCompatActivity implements FragInvitationRVListener,
-    FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
-    FragInviteDetailsListener {
+/**
+ * Main Activity class that defines how to switch fragments, has setters and getters for Invitation
+ * ID and Person ID and build the Client Database.
+ */
+public class MainActivity extends AppCompatActivity
+    //implements FragInvitationRVListener,
+    //FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
+    //FragInviteDetailsListener
+    {
 
   private static final String TAG = "MainActivity";
 
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   public static final int ERROR_DIALOG_REQUEST = 9001;
   private static final int UPDATE_INTERVAL_MS = 30000;
   private static final int FASTEST_INTERVAL_MS = 25000;
+  private static boolean SHOULD_FILL_DB_W_TEST = false;
   private Toolbar toolbar;
   private FrameLayout container;
   private FragmentManager fragmentManager;
@@ -97,13 +104,12 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    initDB();
     initViews();
     initDataIntoViews();
     initData();
     initLoc();
-
-//   getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_frag_container,
-//       new FragUserProf()).commit();
+    setPersonId(getIntent().getLongExtra(getString(R.string.person_id_key), 0));
   }
 
   private void initLoc() {
@@ -137,6 +143,14 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     fragmentManager = getSupportFragmentManager();
     fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     getLastKnownLocation();
+    if (SHOULD_FILL_DB_W_TEST) {
+//      fillDBwithTest();
+    } else {
+      fillDBwithAPI();
+    }
+  }
+
+  private void fillDBwithAPI() {
   }
 
   private void getLastKnownLocation() {
@@ -354,12 +368,7 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
   private void initViews() {
     toolbar = findViewById(R.id.tb_main_toolbar);
     container = findViewById(R.id.fl_main_frag_container);
-    toolbar.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        goToFragMainMenu();
-      }
-    });
+    toolbar.setOnClickListener(v -> goToFragMainMenu());
   }
 
   private void initDB() {
@@ -369,10 +378,14 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     new ClientDBTask().execute();
   }
 
-
-  public static void switchFragment(Fragment fragment, boolean useStack, String variant,
-      FragmentManager manager) {
-
+  /**
+   * Main fragment switcher from the Main Screen.
+   * @param fragment
+   * @param useStack
+   * @param variant
+   * @param manager
+   */
+  public static void switchFragment(Fragment fragment, boolean useStack, String variant, FragmentManager manager) {
     String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
     try {
       if (manager.findFragmentByTag(tag) != null) {
@@ -411,8 +424,11 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     return true;
   }
 
-  public void goToFragMainMenu() {
-    if (fragMainMenu == null) {
+  /**
+   * Method that automatically switches to the Main Menu Frag after sign in.
+   */
+  public void goToFragMainMenu(){
+    if(fragMainMenu==null){
       fragMainMenu = new FragMainMenu();
     }
     switchFragment(fragMainMenu, false, "", fragmentManager);
@@ -465,30 +481,54 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
     });
   }
 
+  /**
+   * Gives rest of project access to the Invitation ID.
+   * @return
+   */
   public long getInvitationId() {
     return invitationId;
   }
 
+  /**
+   * Allows rest of project to set an Invitation ID.
+   * @param invitationId
+   */
   public void setInvitationId(long invitationId) {
     this.invitationId = invitationId;
   }
 
+  /**
+   * Gives rest of project access to the current Person ID.
+   * @return
+   */
   public long getPersonId() {
     return personId;
   }
 
+  /**
+   * Allows rest of project to set an Invitation ID.
+   * @param personId
+   */
   public void setPersonId(long personId) {
     this.personId = personId;
   }
 
+  /**
+   * Gives rest of project access to a list of invites.
+   * @return
+   */
   public int getCalledInviteListType() {
     return calledInviteListType;
   }
 
-  @Override
-  public int getCalledPeopleListType() {
+  /**
+   * Gives rest of project access to a lit of people.
+   * @return
+   */
+  public int getCalledPeopleListType(){
     return calledPeopleListType;
   }
+
 
 
   private class ClientDBTask extends AsyncTask<Void, Void, Void> {

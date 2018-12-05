@@ -1,6 +1,5 @@
 package edu.cnm.deepdive.joinme.view;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,23 +7,21 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.ImageView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Person;
-import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
-import java.util.Objects;
 
+/**
+ * Fragment that shows user information.
+ */
 public class FragUserProf extends Fragment {
 
   private WebView userProfPic;
@@ -54,8 +51,15 @@ public class FragUserProf extends Fragment {
     userDescription = view.findViewById(R.id.tv_user_profile_description);
     userFA = view.findViewById(R.id.fab_user_profile_next);
     //TODO add a behavior for the listener
-    userFA.setOnClickListener(v -> { });
+    userFA.setOnClickListener(v -> goToFragInviteRV());
     new QueryTask().execute();
+  }
+
+  private void goToFragInviteRV() {
+    FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack(null);
+    fragmentTransaction.replace(R.id.fl_main_frag_container, new FragInvitationRV());
+    fragmentTransaction.commit();
   }
 
   private class QueryTask extends AsyncTask<Void, Void, Person> {
@@ -71,6 +75,9 @@ public class FragUserProf extends Fragment {
     @Override
     protected void onPostExecute(Person person) {
       userDisplayName.setText(person.getDisplayName());
+      if (person.getUserImage() == null) {
+        userProfPic.loadUrl("file:///android_res/drawable/ic_person_white.xml");
+      }
       userProfPic.loadUrl(person.getUserImage());
     }
   }

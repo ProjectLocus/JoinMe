@@ -16,8 +16,8 @@ import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 
 /**
- * Class that allows a certain person view an invitation. It takes the invitation ID and the
- * userSender ID to show the appropriate invitation.
+ * Class that allows a certain person view an Invitation Object. It takes the invitation ID and the
+ * userSender ID to show the appropriate details.
  */
 public class FragInviteDetails extends Fragment {
 

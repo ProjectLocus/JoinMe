@@ -58,10 +58,18 @@ public class RingEffectView extends View {
     return mPaint.getAlpha() / 255;
   }
 
+  /**
+   * Gets angle.
+   * @return
+   */
   public float getAngle() {
     return mAngle;
   }
 
+  /**
+   * Sets angle.
+   * @param angle
+   */
   public void setAngle(@FloatRange(from = 0.0, to = 360.0) float angle) {
     final float diff = angle - mAngle;
     final int stepCount = (int) (diff / STEP_DEGREE);
@@ -87,10 +95,18 @@ public class RingEffectView extends View {
     invalidate();
   }
 
+  /**
+   * Gets start angle.
+   * @return
+   */
   public float getStartAngle() {
     return mStartAngle;
   }
 
+  /**
+   * Sets start angle.
+   * @param startAngle
+   */
   public void setStartAngle(@FloatRange(from = 0.0, to = 360.0) float startAngle) {
     mStartAngle = startAngle;
     mAngle = 0;
@@ -104,18 +120,34 @@ public class RingEffectView extends View {
     mPath.moveTo(x, y);
   }
 
+  /**
+   * Sets stroke color.
+   * @param color
+   */
   public void setStrokeColor(int color) {
     mPaint.setColor(color);
   }
 
+  /**
+   * Sets stroke width.
+   * @param width
+   */
   public void setStrokeWidth(int width) {
     mPaint.setStrokeWidth(width);
   }
 
+  /**
+   * Sets radius.
+   * @param radius
+   */
   public void setRadius(int radius) {
     mRadius = radius;
   }
 
+  /**
+   * Gets radius.
+   * @return
+   */
   public int getRadius() {
     return mRadius;
   }

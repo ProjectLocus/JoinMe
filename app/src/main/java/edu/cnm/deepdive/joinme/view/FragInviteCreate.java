@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
@@ -20,6 +21,10 @@ import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 
+/**
+ * Class for creating an invitation. The class grabs he inputed data and sets it in the Client
+ * database with both an invitation ID and person ID to then be sent out.
+ */
 public class FragInviteCreate extends Fragment {
 
   private static final String TAG = "FragInviteCreate";
@@ -30,12 +35,9 @@ public class FragInviteCreate extends Fragment {
   private EditText inviteCreateDate;
   private EditText inviteCreateDescription;
   private Button doneButton;
+  private Context context;
   private View view;
 
-  /**
-   * Class for creating an invitation. The class grabs he inputed data and sets it in the Client
-   * database with both an invitation ID and person ID to then be sent out.
-   */
   private FragInviteCreateListener fragInviteCreateListener;
 
   public interface FragInviteCreateListener {
@@ -71,15 +73,15 @@ public class FragInviteCreate extends Fragment {
       new QueryTask().execute(result, result1, result2, result3);});
   }
 
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    try {
-      fragInviteCreateListener = (FragInviteCreateListener) getActivity();
-    } catch (ClassCastException e) {
-      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
-    }
-  }
+//  @Override
+//  public void onAttach(Context context) {
+//    super.onAttach(context);
+//    try {
+//      fragInviteCreateListener = (FragInviteCreateListener) getActivity();
+//    } catch (ClassCastException e) {
+//      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
+//    }
+//  }
 
   private class QueryTask extends AsyncTask<String, Void, Long> {
 

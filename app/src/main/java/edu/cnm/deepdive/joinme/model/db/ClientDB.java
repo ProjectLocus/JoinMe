@@ -26,6 +26,12 @@ public abstract class ClientDB extends RoomDatabase {
 
   private static ClientDB instance = null;
 
+  /**
+   * This method allows the rest of project to access the database for inserting, querying, updating
+   * and deleting.
+   * @param context
+   * @return
+   */
   public static synchronized ClientDB getInstance(Context context) {
     if (instance == null) {
       instance = Room.databaseBuilder(context,
@@ -36,10 +42,22 @@ public abstract class ClientDB extends RoomDatabase {
     return instance;
   }
 
+  /**
+   * Allows rest of project to forget the instance of he Client database.
+   * @param context
+   */
   public static synchronized void forgetInstance(Context context) {instance = null;}
 
+  /**
+   * Allows access into the Person Dao
+   * @return
+   */
   public abstract PersonDao getPersonDao();
 
+  /**
+   * Allows access into the Invitation Dao
+   * @return
+   */
   public abstract InvitationDao getInvitationDao();
 
   private static class Callback extends RoomDatabase.Callback {

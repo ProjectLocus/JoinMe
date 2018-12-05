@@ -10,6 +10,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 
+/**
+ * Main application class for Join Me
+ */
 public class JoinMeApplication extends Application {
 
   private static JoinMeApplication instance;
@@ -85,10 +88,18 @@ public class JoinMeApplication extends Application {
     this.account = account;
   }
 
+  /**
+   * Gets person
+   * @return
+   */
   public static Person getPerson() {
     return person;
   }
 
+  /**
+   * Sets person
+   * @param person
+   */
   public static void setPerson(Person person) {
     JoinMeApplication.person = person;
   }

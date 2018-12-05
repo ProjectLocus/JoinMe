@@ -10,6 +10,9 @@ import edu.cnm.deepdive.joinme.model.entity.Person;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The Person Dao which defines how the project inserts, queries, updates and deletes a Person object.
+ */
 @Dao
 public interface PersonDao {
 

@@ -23,6 +23,11 @@ public class InvitationAdapter extends RecyclerView.Adapter<InvitationAdapter.Ho
   private List<Invitation> listForRecycler;
   private Activity activity;
 
+  /**
+   * Constructor
+   * @param activity
+   * @param listForRecycler
+   */
   public InvitationAdapter(Activity activity, List<Invitation> listForRecycler) {
     this.activity = activity;
     this.listForRecycler = listForRecycler;
