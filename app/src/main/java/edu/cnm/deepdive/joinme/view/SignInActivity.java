@@ -118,7 +118,7 @@ public class SignInActivity extends AppCompatActivity {
         person.setDisplayName(strings[1]);
         person.setFirstName(strings[2]);
         person.setLastName(strings[3]);
-      //  person.setUserImage(strings[4]);
+        person.setUserImage(strings[4]);
         person.setGoogleUserId(strings[4]);
         return ClientDB.getInstance(getApplicationContext()).getPersonDao().insert(person);
       }
