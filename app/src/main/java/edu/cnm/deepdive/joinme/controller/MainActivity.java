@@ -93,14 +93,18 @@ public class MainActivity extends AppCompatActivity implements FragInvitationRVL
 
 
     String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
-    if (manager.findFragmentByTag(tag) != null) {
-      manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    try {
+      if (manager.findFragmentByTag(tag) != null) {
+        manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+      }
+    } catch (IllegalStateException e) {
+      //do nothing, by design
     }
     FragmentTransaction transaction = manager.beginTransaction();
     transaction.replace(R.id.fl_main_frag_container, fragment, tag);
-    if (useStack) {
-      transaction.addToBackStack(tag);
-    }
+      if (useStack) {
+        transaction.addToBackStack(tag);
+      }
     transaction.commit();
   }
 
