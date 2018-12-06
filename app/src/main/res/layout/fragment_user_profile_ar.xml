@@ -7,40 +7,42 @@
 
   <WebView
     android:id="@+id/wv_user_profile_prof_image"
-    android:layout_width="376dp"
-    android:layout_height="296dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:scaleType="fitCenter"
     android:layout_margin="8dp"/>
 
   <TextView
     android:id="@+id/tv_user_profile_display_name"
-    android:layout_width="376dp"
+    android:layout_width="wrap_content"
     android:layout_height="48dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_alignBottom="@+id/wv_user_profile_prof_image"
     android:background="#80000000"
     android:text="Display Name"
-    android:textSize="32dp"
+    android:textSize="32sp"
     android:textColor="#FFFFFFFF"/>
 
   <TextView
     android:id="@+id/tv_user_profile_description"
     android:layout_width="376dp"
     android:layout_height="248dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_alignParentBottom="true"
-    android:text="Description"
-    android:textSize="24dp"
-    android:textColor="#000000"/>
+    android:layout_margin="8dp"
+    android:layout_alignParentEnd="true"
+    android:layout_below="@+id/wv_user_profile_prof_image"
+    android:text="Hello there! I love to drink coffee."
+    android:textColor="#000000"
+    android:textSize="24sp"/>
 
   <android.support.design.widget.FloatingActionButton
     android:id="@+id/fab_user_profile_next"
     android:layout_width="64dp"
     android:layout_height="64dp"
-    android:layout_alignBottom="@+id/tv_user_profile_description"
-    android:layout_alignEnd="@+id/wv_user_profile_prof_image"
+    android:layout_margin="8dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
     android:backgroundTint="#FF748C"
     android:clickable="true"/>
 

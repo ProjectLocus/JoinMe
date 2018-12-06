@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
