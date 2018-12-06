@@ -14,6 +14,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
@@ -29,7 +31,6 @@ public class SignInActivity extends AppCompatActivity {
 
   private SignInButton signIn;
   private Context context;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
