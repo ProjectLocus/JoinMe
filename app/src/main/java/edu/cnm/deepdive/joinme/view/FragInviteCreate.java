@@ -53,7 +53,6 @@ public class FragInviteCreate extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_invite_create, container, false);
-    //do stuff
     initViews();
     initButton();
     //doneButton.setEnabled(false);
@@ -166,7 +165,7 @@ public class FragInviteCreate extends Fragment {
       FragmentManager fragmentManager = getFragmentManager();
       FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
           .addToBackStack(null);
-      fragmentTransaction.replace(R.id.fl_main_frag_container, new FragMainMenu());
+      fragmentTransaction.replace(R.id.fl_main_frag_container, new FragMainMenu()).commit();
     });
   }
 

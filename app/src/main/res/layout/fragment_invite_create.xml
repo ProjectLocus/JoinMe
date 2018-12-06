@@ -32,7 +32,7 @@
       android:layout_marginBottom="8dp"
       android:layout_centerHorizontal="true"
       android:ems="16"
-      android:hint="Title"
+      android:text="Meet Me for Coffee"
       android:gravity="center"/>
 
     <EditText
@@ -44,7 +44,7 @@
       android:layout_below="@+id/et_invitation_create_title"
       android:layout_centerHorizontal="true"
       android:ems="16"
-      android:hint="Location"
+      android:text="Starbucks"
       android:gravity="center"/>
 
 
@@ -57,7 +57,7 @@
       android:layout_marginBottom="8dp"
       android:layout_centerHorizontal="true"
       android:ems="16"
-      android:hint="Date and Time"
+      android:text="Today at Noon"
       android:gravity="center"/>
     <EditText
       android:id="@+id/et_invitation_create_description"
@@ -67,7 +67,7 @@
       android:layout_marginTop="8dp"
       android:layout_centerHorizontal="true"
       android:ems="16"
-      android:hint="Description"
+      android:text="Come have coffee with me."
       android:gravity="center"/>
     <Button
       android:id="@+id/bt_invitation_done"

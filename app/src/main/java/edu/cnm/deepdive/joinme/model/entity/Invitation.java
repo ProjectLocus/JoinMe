@@ -34,11 +34,11 @@ public class Invitation {
   @ColumnInfo(name = "user_receiver")
   private long userReceiver;
 
-
+  @NonNull
   @ColumnInfo(name = "date")
   private String date;
 
-
+  @NonNull
   @ColumnInfo(name = "description")
   private String description;
 
@@ -46,11 +46,11 @@ public class Invitation {
 //  @ColumnInfo(name = "created")
 //  private String created;
 
-
+  @NonNull
   @ColumnInfo(name = "title")
   private String title;
 
-
+  @NonNull
   @ColumnInfo(name = "location")
   private String location;
 
@@ -103,7 +103,7 @@ public class Invitation {
    *
    * @param date the date
    */
-  public void setDate( String date) {
+  public void setDate(@NonNull String date) {
     this.date = date;
   }
 
@@ -112,6 +112,7 @@ public class Invitation {
    *
    * @return the description
    */
+  @NonNull
   public String getDescription() {
     return description;
   }
@@ -121,7 +122,7 @@ public class Invitation {
    *
    * @param description the description
    */
-  public void setDescription( String description) {
+  public void setDescription(@NonNull String description) {
     this.description = description;
   }
 
@@ -148,7 +149,7 @@ public class Invitation {
    * Gets the id of the person creating the invtation.
    * @return
    */
-
+  @NonNull
   public long getUserSender() {
     return userSender;
   }
@@ -157,7 +158,7 @@ public class Invitation {
    * Sets the id of the person receiving the invitation.
    * @param userSender
    */
-  public void setUserSender(long userSender) {
+  public void setUserSender(@NonNull long userSender) {
     this.userSender = userSender;
   }
 
@@ -182,7 +183,7 @@ public class Invitation {
    * Gets title.
    * @return
    */
-
+  @NonNull
   public String getTitle() {
     return title;
   }
@@ -191,7 +192,7 @@ public class Invitation {
    * Sets title
    * @param title
    */
-  public void setTitle( String title) {
+  public void setTitle(@NonNull String title) {
     this.title = title;
   }
 
@@ -199,7 +200,7 @@ public class Invitation {
    * Gets location.
    * @return
    */
-
+  @NonNull
   public String getLocation() {
     return location;
   }
@@ -208,7 +209,7 @@ public class Invitation {
    * Sets location
    * @param location
    */
-  public void setLocation( String location) {
+  public void setLocation(@NonNull String location) {
     this.location = location;
   }
 
