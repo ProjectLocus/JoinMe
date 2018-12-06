@@ -55,10 +55,6 @@ public class FragInviteCreate extends Fragment {
     view = inflater.inflate(R.layout.fragment_invite_create, container, false);
     initViews();
     initButton();
-    //doneButton.setEnabled(false);
-    //if (textWatcher != null & textWatcher1 != null & textWatcher2 != null & textWatcher3 != null) {
-    //  doneButton.setEnabled(true);
-    //}
     return view;
   }
 
