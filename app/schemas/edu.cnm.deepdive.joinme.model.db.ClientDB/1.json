@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "73bb600c528a0c8cf09e9a6ef380811a",
+    "identityHash": "a02fe13f72a6f73a9d76813007cbe7f3",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL, PRIMARY KEY(`invitation_id`), FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_receiver`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL, FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "invitationId",
@@ -73,7 +73,7 @@
           "columnNames": [
             "invitation_id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [
           {
@@ -108,17 +108,6 @@
             "onUpdate": "NO ACTION",
             "columns": [
               "user_sender"
-            ],
-            "referencedColumns": [
-              "person_id"
-            ]
-          },
-          {
-            "table": "people",
-            "onDelete": "NO ACTION",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "user_receiver"
             ],
             "referencedColumns": [
               "person_id"
@@ -214,7 +203,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"73bb600c528a0c8cf09e9a6ef380811a\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a02fe13f72a6f73a9d76813007cbe7f3\")"
     ]
   }
 }

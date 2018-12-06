@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -50,47 +52,122 @@ public class FragInviteCreate extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    view = inflater.inflate(R.layout.fragment_invite_create, container,false);
+    view = inflater.inflate(R.layout.fragment_invite_create, container, false);
     //do stuff
     initViews();
     initButton();
+    //doneButton.setEnabled(false);
+    //if (textWatcher != null & textWatcher1 != null & textWatcher2 != null & textWatcher3 != null) {
+    //  doneButton.setEnabled(true);
+    //}
     return view;
   }
 
   private void initViews() {
     inviteCreateTitle0 = view.findViewById(R.id.tv_invite_create_title);
     inviteCreateTitle1 = view.findViewById(R.id.et_invitation_create_title);
-    inviteCreateTitle1.addTextChangedListener(textWatcher);
+   // inviteCreateTitle1.addTextChangedListener(textWatcher);
     inviteCreateLocation = view.findViewById(R.id.et_invitation_create_location);
+   // inviteCreateLocation.addTextChangedListener(textWatcher1);
     inviteCreateDate = view.findViewById(R.id.et_invitation_create_date);
+   // inviteCreateDate.addTextChangedListener(textWatcher2);
     inviteCreateDescription = view.findViewById(R.id.et_invitation_create_description);
+    //inviteCreateDescription.addTextChangedListener(textWatcher3);
   }
 
-  private TextWatcher textWatcher = new TextWatcher() {
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-    }
-  };
+//  private TextWatcher textWatcher = new TextWatcher() {
+//    @Override
+//    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//    }
+//
+//    @Override
+//    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//    }
+//
+//    @Override
+//    public void afterTextChanged(Editable s) {
+//      String result = inviteCreateTitle1.getText().toString();
+//      if (result.equals("")) {
+//        Toast.makeText(context, "Create a title.", Toast.LENGTH_LONG).show();
+//      }
+//    }
+//  };
+//
+//  private TextWatcher textWatcher1 = new TextWatcher() {
+//    @Override
+//    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//    }
+//
+//    @Override
+//    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//    }
+//
+//    @Override
+//    public void afterTextChanged(Editable s) {
+//      String result1 = inviteCreateLocation.getText().toString();
+//      if (result1.equals("")) {
+//        Toast.makeText(context, "Set a location", Toast.LENGTH_LONG).show();
+//      }
+//    }
+//  };
+//
+//  private TextWatcher textWatcher2 = new TextWatcher() {
+//    @Override
+//    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//    }
+//
+//    @Override
+//    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//    }
+//
+//    @Override
+//    public void afterTextChanged(Editable s) {
+//      String result2 = inviteCreateDate.getText().toString();
+//      if (result2.equals("")) {
+//        Toast.makeText(context, "Define a date.", Toast.LENGTH_SHORT).show();
+//      }
+//    }
+//  };
+//
+//  private TextWatcher textWatcher3 = new TextWatcher() {
+//    @Override
+//    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//    }
+//
+//    @Override
+//    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//    }
+//
+//    @Override
+//    public void afterTextChanged(Editable s) {
+//      String result3 = inviteCreateDescription.getText().toString();
+//      if (result3.equals("")) {
+//        Toast.makeText(context, "Define a description.", Toast.LENGTH_SHORT).show();
+//      }
+//    }
+//  };
 
   private void initButton() {
     doneButton = view.findViewById(R.id.bt_invitation_done);
-    doneButton.setOnClickListener(v ->
-    {String result = inviteCreateTitle1.getText().toString();
+    doneButton.setOnClickListener(v -> {
+      String result = inviteCreateTitle1.getText().toString();
       String result1 = inviteCreateLocation.getText().toString();
       String result2 = inviteCreateDate.getText().toString();
       String result3 = inviteCreateDescription.getText().toString();
-      new QueryTask().execute(result, result1, result2, result3);});
+      new QueryTask().execute(result, result1, result2, result3);
+      FragmentManager fragmentManager = getFragmentManager();
+      FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+          .addToBackStack(null);
+      fragmentTransaction.replace(R.id.fl_main_frag_container, new FragMainMenu());
+    });
   }
 
 //  @Override
