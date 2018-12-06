@@ -16,20 +16,20 @@
 
   <RelativeLayout
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
     <TextView
-      android:id="@+id/tv_invite_create_title"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="16sp"
-      android:fontFamily="sans-serif-condensed"
-      android:text="Create an Invitation"
-      android:textAlignment="center"
-      android:textSize="40sp"/>
+        android:id="@+id/tv_invite_create_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16sp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Create an Invitation"
+        android:textAlignment="center"
+        android:textSize="40sp" />
 
     <EditText
       android:id="@+id/et_invitation_create_title"
