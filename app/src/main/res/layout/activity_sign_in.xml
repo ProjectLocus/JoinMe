@@ -5,8 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#5DBCD2"
+    android:background="@color/background"
     tools:context="view.SignInActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_color="#3d9CB2"
+        app:civ_border_width="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_main_screen_logo"
+        />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in"
@@ -16,13 +24,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
-
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="center"
-        android:src="@drawable/ic_main_screen_logo"
-        />
-
     </android.support.constraint.ConstraintLayout>
