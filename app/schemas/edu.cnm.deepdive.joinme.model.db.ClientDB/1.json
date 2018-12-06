@@ -117,7 +117,7 @@
       },
       {
         "tableName": "people",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `display_name` TEXT NOT NULL, `userImageLocation` TEXT, `google_user_id` TEXT NOT NULL, `user_description` TEXT, `isThisMe` INTEGER NOT NULL, `user_image` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `person_id` INTEGER NOT NULL, `display_name` TEXT NOT NULL, `userImageLocation` TEXT, `google_user_id` TEXT NOT NULL, `user_description` TEXT, `isThisMe` INTEGER NOT NULL, `user_image` TEXT, PRIMARY KEY(`person_id`))",
         "fields": [
           {
             "fieldPath": "latitude",
@@ -178,7 +178,7 @@
           "columnNames": [
             "person_id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [
           {
@@ -196,6 +196,14 @@
               "display_name"
             ],
             "createSql": "CREATE UNIQUE INDEX `index_people_display_name` ON `${TABLE_NAME}` (`display_name`)"
+          },
+          {
+            "name": "index_people_google_user_id",
+            "unique": true,
+            "columnNames": [
+              "google_user_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_people_google_user_id` ON `${TABLE_NAME}` (`google_user_id`)"
           }
         ],
         "foreignKeys": []
@@ -203,7 +211,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a02fe13f72a6f73a9d76813007cbe7f3\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"4c530c65ca227705e10d5ad5363d5969\")"
     ]
   }
 }

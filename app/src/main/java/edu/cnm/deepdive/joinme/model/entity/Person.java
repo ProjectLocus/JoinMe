@@ -16,7 +16,8 @@ import java.util.Date;
     tableName = "people",
     indices = {
         @Index(value= "person_id", unique = true),
-        @Index(value = "display_name", unique = true)}
+        @Index(value = "display_name", unique = true),
+        @Index(value = "google_user_id", unique = true)}
 )
 public class Person {
 
@@ -36,7 +37,7 @@ public class Person {
    * This is a person's unique ID
    */
   @NonNull
-  @PrimaryKey(autoGenerate = true)
+  @PrimaryKey(autoGenerate = false)
   @ColumnInfo(name = "person_id")
   private long personId;
 
