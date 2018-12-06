@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">JoinMe</string>
+  <string name="app_name">Join Me!</string>
   <string name="person_id_key">person_id</string>
   <string name="check_google_svc_version">isServicesOK: checking google services version</string>
   <string name="google_play_svcs_is_working">isServicesOK: Google Play Services is working</string>
