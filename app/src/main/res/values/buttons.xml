@@ -2,7 +2,7 @@
 <resources>
   <array name="icons">
     <item>@drawable/ic_person_white</item>
-    <item>@drawable/ic_person_white</item>
+    <item>@drawable/ic_aroundme</item>
     <item>@drawable/ic_person_white</item>
     <item>@drawable/ic_person_white</item>
     <item>@drawable/ic_person_white</item>

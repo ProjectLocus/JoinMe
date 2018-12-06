@@ -6,10 +6,6 @@
     android:icon="@drawable/ic_launcher_foreground"
     android:title="@string/app_name"
     app:showAsAction="always"/>
-  <item
-    android:id="@+id/home"
-    android:title="Home"
-    app:showAsAction="always"/>
 
   <item android:id="@+id/sign_out"
     android:title="Sign Out"

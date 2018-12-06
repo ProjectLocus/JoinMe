@@ -506,9 +506,6 @@ public class MainActivity extends AppCompatActivity
       case R.id.sign_out:
         signOut();
         break;
-      case R.id.home:
-        goToFragMainMenu();
-        break;
       default:
         return super.onOptionsItemSelected(item);
     }
