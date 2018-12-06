@@ -2,9 +2,10 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:background="#90a4ae">
 
-  <WebView
+  <ImageView
     android:id="@+id/wv_user_profile_prof_image"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
 
   <TextView
     android:id="@+id/tv_user_profile_display_name"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="48dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
@@ -22,18 +23,23 @@
     android:background="#80000000"
     android:text="Display Name"
     android:textSize="32sp"
+    android:fontFamily="@font/robotoslab_bold"
     android:textColor="#FFFFFFFF"/>
 
   <TextView
     android:id="@+id/tv_user_profile_description"
-    android:layout_width="376dp"
+    android:layout_width="match_parent"
     android:layout_height="248dp"
-    android:layout_margin="8dp"
-    android:layout_alignParentEnd="true"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_alignParentStart="true"
     android:layout_below="@+id/wv_user_profile_prof_image"
     android:text="Hello there! I love to drink coffee."
     android:textColor="#000000"
-    android:textSize="24sp"/>
+    android:textSize="24sp"
+    android:fontFamily="@font/robotoslab_bold"
+    android:background="#FFFFFF"/>
 
   <android.support.design.widget.FloatingActionButton
     android:id="@+id/fab_user_profile_next"

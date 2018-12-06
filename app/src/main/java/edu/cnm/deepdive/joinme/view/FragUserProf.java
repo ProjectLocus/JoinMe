@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
@@ -25,7 +27,7 @@ import edu.cnm.deepdive.joinme.model.entity.Person;
  */
 public class FragUserProf extends Fragment {
 
-  private WebView userProfPic;
+  private ImageView userProfPic;
   private TextView userDisplayName, userDescription;
   private FloatingActionButton userFA;
   private FragmentActivity fragmentActivity;
@@ -48,6 +50,7 @@ public class FragUserProf extends Fragment {
 
   private void initView() {
     userProfPic = view.findViewById(R.id.wv_user_profile_prof_image);
+
     userDisplayName = view.findViewById(R.id.tv_user_profile_display_name);
     userDescription = view.findViewById(R.id.tv_user_profile_description);
     userFA = view.findViewById(R.id.fab_user_profile_next);
@@ -76,7 +79,7 @@ public class FragUserProf extends Fragment {
     @Override
     protected void onPostExecute(Person person) {
       userDisplayName.setText(person.getDisplayName());
-      userProfPic.loadUrl(person.getUserImage());
+      Glide.with(getActivity()).load(person.getUserImage()).into(userProfPic);
     }
   }
 }
