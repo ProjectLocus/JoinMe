@@ -21,6 +21,7 @@ import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Person;
+import java.security.SecureRandom;
 
 /**
  * The type Sign in activity.
@@ -31,11 +32,13 @@ public class SignInActivity extends AppCompatActivity {
 
   private SignInButton signIn;
   private Context context;
+  private SecureRandom rng;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sign_in);
+    rng = new SecureRandom();
     signIn = findViewById(R.id.sign_in);
     signIn.setOnClickListener((view) -> signIn());
   }
@@ -128,6 +131,7 @@ public class SignInActivity extends AppCompatActivity {
           person.setUserImage(strings[4]);
         }
         person.setGoogleUserId(strings[5]);
+        person.setPersonId(rng.nextLong());
         return ClientDB.getInstance(getApplicationContext()).getPersonDao().insert(person);
       }
       return person.getPersonId();

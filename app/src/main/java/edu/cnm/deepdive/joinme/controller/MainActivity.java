@@ -2,6 +2,7 @@ package edu.cnm.deepdive.joinme.controller;
 
 import android.Manifest.permission;
 import android.app.Dialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +39,8 @@ import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.dao.PersonDao;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
+import edu.cnm.deepdive.joinme.model.entity.Person;
+import edu.cnm.deepdive.joinme.service.JoinMeBackEndService;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate;
@@ -50,6 +53,12 @@ import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.Retrofit.Builder;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Main Activity class that defines how to switch fragments, has setters and getters for Invitation
@@ -59,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     //implements FragInvitationRVListener,
     //FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
     //FragInviteDetailsListener
-    {
+{
 
   private static final String TAG = "MainActivity";
 
@@ -79,6 +88,7 @@ public class MainActivity extends AppCompatActivity
   private static final int UPDATE_INTERVAL_MS = 30000;
   private static final int FASTEST_INTERVAL_MS = 25000;
   private static boolean SHOULD_FILL_DB_W_TEST = false;
+  private static boolean IS_FIRST_TIME_USER = true;
   private Toolbar toolbar;
   private FrameLayout container;
   private FragmentManager fragmentManager;
@@ -93,11 +103,13 @@ public class MainActivity extends AppCompatActivity
   private ClientDB clientDB;
   private long invitationId;
   private long personId;
+  private Person deviceUser;
   private boolean mLocationPermissionGranted = false;
   private FusedLocationProviderClient fusedLocationProviderClient;
   private LocationRequest mLocationRequest;
   private LocationCallback mLocationCallback;
   private Location mCurrentLocation;
+  private Retrofit retrofit;
 
 
   @Override
@@ -110,7 +122,7 @@ public class MainActivity extends AppCompatActivity
     initDataIntoViews();
     initData();
     initLoc();
-    setPersonId(getIntent().getLongExtra(getString(R.string.person_id_key), 0));
+
   }
 
   private void initLoc() {
@@ -122,7 +134,9 @@ public class MainActivity extends AppCompatActivity
           return;
         }
         mCurrentLocation = locationResult.getLastLocation();
-        Toast.makeText(getBaseContext(), "Lat: " + mCurrentLocation.getLatitude() + "     Long: " + mCurrentLocation.getLongitude(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getBaseContext(),
+//            "Lat: " + mCurrentLocation.getLatitude() + "     Long: " + mCurrentLocation
+//                .getLongitude(), Toast.LENGTH_LONG).show();
 //        setTokenDistances();
 //        sortDBTokens();
       }
@@ -141,17 +155,91 @@ public class MainActivity extends AppCompatActivity
 
   private void initData() {
     setPersonId(getIntent().getLongExtra(getString(R.string.person_id_key), 0));
+    new QuerySinglePersonTask().execute(personId);
     fragmentManager = getSupportFragmentManager();
     fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     getLastKnownLocation();
-    if (SHOULD_FILL_DB_W_TEST) {
-//      fillDBwithTest();
-    } else {
-      fillDBwithAPI();
-    }
+    initServices();
+  }
+
+  private void updateUsingAPI() {
+    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
+
   }
 
   private void fillDBwithAPI() {
+    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
+    //if first time, create user on backend
+    Call<Person> call = service.addPerson(deviceUser);
+    call.enqueue(new Callback<Person>() {
+      @Override
+      public void onResponse(Call<Person> call, Response<Person> response) {
+        try {
+
+          Toast.makeText(getBaseContext(), "DeviceUserId updated: " + response.body().getPersonId(), Toast.LENGTH_LONG).show();
+
+          Person deviceUserReplacement = new Person();
+          deviceUserReplacement.setPersonId(response.body().getPersonId());
+          deviceUserReplacement.setUserImage(deviceUser.getUserImage());
+          deviceUserReplacement.setUserEmail(deviceUser.getUserEmail());
+          deviceUserReplacement.setFirstName(deviceUser.getFirstName());
+          deviceUserReplacement.setLastName(deviceUser.getLastName());
+          deviceUserReplacement.setDisplayName(deviceUser.getDisplayName());
+          deviceUserReplacement.setGoogleUserId(deviceUser.getGoogleUserId());
+
+          new UpdateFirstTimeUserTask().execute(deviceUser, deviceUserReplacement);
+          personId = deviceUserReplacement.getPersonId();
+          
+        } catch (NullPointerException e) {
+          Toast.makeText(getBaseContext(), "DeviceUserId was null pointer", Toast.LENGTH_LONG).show();
+        }
+      }
+
+      @Override
+      public void onFailure(Call<Person> call, Throwable t) {
+        Toast.makeText(getBaseContext(), "failed to connect " + t.getMessage(), Toast.LENGTH_LONG).show();
+      }
+    });
+
+//
+//        Call<List<Token>> call = service.get(endPoint);
+//        call.enqueue(new Callback<List<Token>>() {
+//          @Override
+//          public void onResponse(@NonNull Call<List<Token>> call,
+//              @NonNull Response<List<Token>> response) {
+//            if (!response.isSuccessful()) {
+//              return;
+//            }
+//            List<Token> tokensFromApi = response.body();
+//            if(tokensFromApi!=null){
+//              for (Token token :
+//                  tokensFromApi) {
+//                token.setTokenType(getServiceTokenType(endPoint));
+//                token = TokenPrepper.prep(Main2Activity.this, token);
+//              }
+//              Token[] tokenArr = tokensFromApi.toArray(new Token[0]);
+//              new AddTask().execute(tokenArr);
+//            }
+//            resetRetries();
+//          }
+//
+//          @Override
+//          public void onFailure(@NonNull Call<List<Token>> call, @NonNull Throwable t) {
+//            if(shouldStopRetrying()){
+//              Toast.makeText(getBaseContext(), getString(R.string.could_not_load_resource) + endPoint, Toast.LENGTH_SHORT).show();
+//              resetRetries();
+//            }else{
+//              fillDBwithAPI(endPoint);
+//            }
+//          }
+//        });
+  }
+
+  private void initServices() {
+    retrofit = new Builder()
+        .baseUrl("http://10.0.2.2:28082/rest/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build();
   }
 
   private void getLastKnownLocation() {
@@ -315,6 +403,7 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Handles the result from a permission request for user location.
+   *
    * @param requestCode used to ensure it was a request that can be handled by this method.
    * @param permissions used by super.
    * @param grantResults representation of user grants of permission.
@@ -336,8 +425,9 @@ public class MainActivity extends AppCompatActivity
   }
 
   /**
-   *  Callback from activity asking for user to enable GPS permission.  If permission is granted,
-   *  then starts user location updates.
+   * Callback from activity asking for user to enable GPS permission.  If permission is granted,
+   * then starts user location updates.
+   *
    * @param requestCode Used to ensure that this method can process the data.
    * @param resultCode Used by the call to super.
    * @param data Used by the call to super.
@@ -381,12 +471,9 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Main fragment switcher from the Main Screen.
-   * @param fragment
-   * @param useStack
-   * @param variant
-   * @param manager
    */
-  public static void switchFragment(Fragment fragment, boolean useStack, String variant, FragmentManager manager) {
+  public static void switchFragment(Fragment fragment, boolean useStack, String variant,
+      FragmentManager manager) {
     String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
     try {
       if (manager.findFragmentByTag(tag) != null) {
@@ -428,8 +515,8 @@ public class MainActivity extends AppCompatActivity
   /**
    * Method that automatically switches to the Main Menu Frag after sign in.
    */
-  public void goToFragMainMenu(){
-    if(fragMainMenu==null){
+  public void goToFragMainMenu() {
+    if (fragMainMenu == null) {
       fragMainMenu = new FragMainMenu();
     }
     switchFragment(fragMainMenu, false, "", fragmentManager);
@@ -484,7 +571,6 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Gives rest of project access to the Invitation ID.
-   * @return
    */
   public long getInvitationId() {
     return invitationId;
@@ -492,7 +578,6 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Allows rest of project to set an Invitation ID.
-   * @param invitationId
    */
   public void setInvitationId(long invitationId) {
     this.invitationId = invitationId;
@@ -500,7 +585,6 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Gives rest of project access to the current Person ID.
-   * @return
    */
   public long getPersonId() {
     return personId;
@@ -508,7 +592,6 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Allows rest of project to set an Invitation ID.
-   * @param personId
    */
   public void setPersonId(long personId) {
     this.personId = personId;
@@ -516,7 +599,6 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Gives rest of project access to a list of invites.
-   * @return
    */
   public int getCalledInviteListType() {
     return calledInviteListType;
@@ -524,12 +606,10 @@ public class MainActivity extends AppCompatActivity
 
   /**
    * Gives rest of project access to a lit of people.
-   * @return
    */
-  public int getCalledPeopleListType(){
+  public int getCalledPeopleListType() {
     return calledPeopleListType;
   }
-
 
 
   private class ClientDBTask extends AsyncTask<Void, Void, Void> {
@@ -541,4 +621,47 @@ public class MainActivity extends AppCompatActivity
       return null;
     }
   }
+
+  private class QuerySinglePersonTask extends AsyncTask<Long, Void, Person> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected Person doInBackground(Long... ids) {
+      Person theDeviceUser = clientDB.getPersonDao().selectPerson(ids[0]);
+
+      return theDeviceUser;
+    }
+    /**
+     * Sets an ID for the user when the email and user name are successfully inserted.
+     * @param user
+     */
+    @Override
+    protected void onPostExecute(Person user) {
+      deviceUser = user;
+      if(IS_FIRST_TIME_USER){
+        fillDBwithAPI();
+        IS_FIRST_TIME_USER = false;
+      }
+    }
+  }
+
+  private class UpdateFirstTimeUserTask extends AsyncTask<Person, Void, Void> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected Void doInBackground(Person... people) {
+      clientDB.getPersonDao().delete(people[0]);
+      clientDB.getPersonDao().insert(people[1]);
+      return null;
+    }
+
+  }
+
+
 }
