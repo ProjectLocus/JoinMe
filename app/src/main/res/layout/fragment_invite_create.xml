@@ -21,8 +21,7 @@
         android:fontFamily="sans-serif-condensed"
         android:text="Create an Invitation"
         android:textAlignment="center"
-        android:textSize="40sp"
-        android:typeface="sans" />
+        android:textSize="40sp" />
 
   <EditText
     android:id="@+id/et_invitation_create_title"
@@ -81,17 +80,6 @@
         android:ems="16"
         android:gravity="center"
         android:text="Date and Time" />
-  <EditText
-    android:id="@+id/et_invitation_create_date"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/et_invitation_create_location"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_centerHorizontal="true"
-    android:ems="16"
-    android:hint="Date and Time"
-    android:gravity="center"/>
 
     <EditText
         android:id="@+id/et_invitation_create_description"
