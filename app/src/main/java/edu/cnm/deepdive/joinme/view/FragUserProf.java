@@ -75,9 +75,6 @@ public class FragUserProf extends Fragment {
     @Override
     protected void onPostExecute(Person person) {
       userDisplayName.setText(person.getDisplayName());
-      if (person.getUserImage() == null) {
-        userProfPic.loadUrl("file:///android_res/drawable/ic_person_white.xml");
-      }
       userProfPic.loadUrl(person.getUserImage());
     }
   }

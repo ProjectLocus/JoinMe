@@ -17,14 +17,12 @@ import android.support.annotation.NonNull;
         @Index(value = "user_receiver", unique = true)},
     foreignKeys = {
         @ForeignKey(entity = Person.class, parentColumns = "person_id",
-            childColumns = "user_sender"),
-        @ForeignKey(entity = Person.class, parentColumns = "person_id",
-            childColumns = "user_receiver")}
+            childColumns = "user_sender")}
 )
 public class Invitation {
 
   @NonNull
-  @PrimaryKey
+  @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "invitation_id")
   private long invitationId;
 
