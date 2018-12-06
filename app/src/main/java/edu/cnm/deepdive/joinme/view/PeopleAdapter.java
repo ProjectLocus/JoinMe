@@ -1,19 +1,23 @@
 package edu.cnm.deepdive.joinme.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 import de.hdodenhof.circleimageview.CircleImageView;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
-
 /**
  * Describes an adapter for a {@link RecyclerView}.
  */
@@ -23,15 +27,18 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.Holder> {
 
   private List<Person> listForRecycler;
   private Activity activity;
+  private Context context;
+
 
   /**
    * Constructor
    * @param activity
    * @param listForRecycler
    */
-  public PeopleAdapter(Activity activity, List<Person> listForRecycler) {
+  public PeopleAdapter(Activity activity, List<Person> listForRecycler, Context context) {
     this.activity = activity;
     this.listForRecycler = listForRecycler;
+    this.context = context;
   }
 
 
@@ -45,10 +52,14 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.Holder> {
 
   @Override
   public void onBindViewHolder(@NonNull final Holder holder, int position) {
-    int[] picRes = {R.drawable.alex,R.drawable.brian,R.drawable.notdeb,R.drawable.johnrow,R.drawable.lily,R.drawable.weenie};
+    String[] picRes = {"https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/alex.jpg",
+        "https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/brian.jpg",
+        "https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/johnrow.JPG",
+        "https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/lily.jpg",
+        "https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/notdeb.jpg",
+        "https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/weenie.jpg"};
     Random rng = new Random();
-    holder.image.setImageResource(picRes[rng.nextInt(picRes.length-1)]);
-    //
+    Glide.with(context).load(picRes[rng.nextInt(picRes.length-1)]).into(holder.image);
     // holder.name.setText(listForRecycler.get(position).getFirstName());
     //TODO fix error for above execution: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
     holder.comments.setText("Lorem Ipsum");

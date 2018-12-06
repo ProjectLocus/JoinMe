@@ -52,7 +52,7 @@ public class FragInvitationRV extends Fragment {
   }
 
   private void initRecyclerview() {
-    InvitationAdapter adapter = new InvitationAdapter(getActivity(),dummyInvite);
+    InvitationAdapter adapter = new InvitationAdapter(getActivity(),dummyInvite, getContext());
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
 
