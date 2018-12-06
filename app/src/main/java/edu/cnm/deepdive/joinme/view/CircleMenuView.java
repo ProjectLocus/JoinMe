@@ -36,9 +36,9 @@ import java.util.List;
 //todo: give attribution to https://github.com/Ramotion/circle-menu-android/blob/master/circle-menu/src/main/java/com/ramotion/circlemenu/CircleMenuView.java
 public class CircleMenuView extends FrameLayout {
 
-  private static final int DEFAULT_BUTTON_SIZE = 75;
+  private static final int DEFAULT_BUTTON_SIZE = 100;
   private static final float DEFAULT_DISTANCE = DEFAULT_BUTTON_SIZE * 1.5f;
-  private static final float DEFAULT_RING_SCALE_RATIO = 1.3f;
+  private static final float DEFAULT_RING_SCALE_RATIO = 1.0f;
   private static final float DEFAULT_CLOSE_ICON_ALPHA = 0.3f;
 
   private final List<View> mButtons = new ArrayList<>();
@@ -370,6 +370,7 @@ public class CircleMenuView extends FrameLayout {
       button.setOnLongClickListener(new OnButtonLongClickListener());
       button.setScaleX(0);
       button.setScaleY(0);
+      button.setPadding(-10, -10, -10, -10);
       button.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
       addView(button);
@@ -518,7 +519,7 @@ public class CircleMenuView extends FrameLayout {
       public void onAnimationUpdate(ValueAnimator valueAnimator) {
         final float fraction = valueAnimator.getAnimatedFraction();
         final float value = (float)valueAnimator.getAnimatedValue();
-        offsetAndScaleButtons(centerX, centerY, angleStep, value, fraction);
+        offsetAndScaleButtons(centerX, centerY, angleStep, value, fraction * 1.5f); // FIXME Find a cleaner way to set the fractional value.
       }
     });
 
@@ -526,6 +527,7 @@ public class CircleMenuView extends FrameLayout {
     result.playTogether(alphaAnimation, rotateAnimation, buttonsAppear);
     result.addListener(new AnimatorListenerAdapter() {
       @Override
+
       public void onAnimationStart(Animator animation) {
         mIsAnimating = true;
       }
@@ -721,7 +723,7 @@ public class CircleMenuView extends FrameLayout {
       final float angleStep = 360f / buttonsCount;
 
       final float offset = open ? mDistance : 0f;
-      final float scale = open ? 1f : 0f;
+      final float scale = open ? 3f : 0f;
 
       mMenuButton.setImageResource(open ? mIconClose : mIconMenu);
       mMenuButton.setAlpha(open ? DEFAULT_CLOSE_ICON_ALPHA : 1f);

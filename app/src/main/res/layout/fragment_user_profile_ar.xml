@@ -48,7 +48,7 @@
     android:layout_margin="8dp"
     android:layout_alignParentBottom="true"
     android:layout_alignParentEnd="true"
-    android:backgroundTint="#FF748C"
+    android:backgroundTint="#5DBCD2"
     android:clickable="true"/>
 
 </RelativeLayout>
