@@ -2,10 +2,10 @@ package edu.cnm.deepdive.joinme.controller;
 
 import android.Manifest.permission;
 import android.app.Dialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -24,7 +24,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
@@ -42,16 +41,11 @@ import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.service.JoinMeBackEndService;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
-import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate;
-import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails;
-import edu.cnm.deepdive.joinme.view.FragInviteDetails.FragInviteDetailsListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV;
-import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
-import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,6 +79,8 @@ public class MainActivity extends AppCompatActivity
    * The constant ERROR_DIALOG_REQUEST.
    */
   public static final int ERROR_DIALOG_REQUEST = 9001;
+  public static final String NOT_FIRST_TIME_USER_KEY = "not_first_time_user_key";
+  public static final String MY_PREFERENCES_KEY = "edu.cnm.deepdive.joinme.shared_pref_key";
   private static final int UPDATE_INTERVAL_MS = 30000;
   private static final int FASTEST_INTERVAL_MS = 25000;
   private static boolean SHOULD_FILL_DB_W_TEST = false;
@@ -110,6 +106,9 @@ public class MainActivity extends AppCompatActivity
   private LocationCallback mLocationCallback;
   private Location mCurrentLocation;
   private Retrofit retrofit;
+  private boolean beginUserUpdates = false;
+  private SharedPreferences sharedPreferences;
+  private SharedPreferences.Editor editor;
 
 
   @Override
@@ -134,11 +133,9 @@ public class MainActivity extends AppCompatActivity
           return;
         }
         mCurrentLocation = locationResult.getLastLocation();
-//        Toast.makeText(getBaseContext(),
-//            "Lat: " + mCurrentLocation.getLatitude() + "     Long: " + mCurrentLocation
-//                .getLongitude(), Toast.LENGTH_LONG).show();
-//        setTokenDistances();
-//        sortDBTokens();
+        if(beginUserUpdates){
+          //todo: add logic for the constant updates here.
+        }
       }
     };
   }
@@ -154,6 +151,11 @@ public class MainActivity extends AppCompatActivity
   }
 
   private void initData() {
+    sharedPreferences = getSharedPreferences(MY_PREFERENCES_KEY, Context.MODE_PRIVATE);
+    editor = sharedPreferences.edit();
+    if(sharedPreferences.contains(NOT_FIRST_TIME_USER_KEY)){
+      IS_FIRST_TIME_USER = false;
+    }
     setPersonId(getIntent().getLongExtra(getString(R.string.person_id_key), 0));
     new QuerySinglePersonTask().execute(personId);
     fragmentManager = getSupportFragmentManager();
@@ -189,7 +191,11 @@ public class MainActivity extends AppCompatActivity
 
           new UpdateFirstTimeUserTask().execute(deviceUser, deviceUserReplacement);
           personId = deviceUserReplacement.getPersonId();
-          
+
+          editor.putBoolean(NOT_FIRST_TIME_USER_KEY, true);
+          editor.apply();
+          beginUserUpdates=true;
+
         } catch (NullPointerException e) {
           Toast.makeText(getBaseContext(), "DeviceUserId was null pointer", Toast.LENGTH_LONG).show();
         }
