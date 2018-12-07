@@ -50,7 +50,6 @@
     android:layout_alignEnd="@+id/wv_user_profile_prof_image"
     android:backgroundTint="#FF748C"
     android:clickable="true"
-    android:src=""
     app:fabSize="normal"/>
 
 </RelativeLayout>

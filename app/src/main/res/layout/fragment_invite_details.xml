@@ -34,7 +34,7 @@
         android:textSize="48sp"/>
 
       <TextView
-        android:layout_width="148dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:layout_alignParentTop="true"
@@ -43,14 +43,14 @@
         android:fontFamily="@font/robotoslab_bold"
         android:text="To : "/>
       <TextView
-        android:layout_width="148dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:layout_alignEnd="@+id/et_invitation_details_title"
         android:layout_alignParentTop="true"
         android:ems="16"
         android:fontFamily="@font/robotoslab_bold"
-        android:gravity="end"
+        android:gravity="left|end"
         android:text="From :"/>
 
       <EditText
