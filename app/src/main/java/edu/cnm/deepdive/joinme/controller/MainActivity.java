@@ -117,6 +117,11 @@ public class MainActivity extends AppCompatActivity
   private List<Person> peopleAroundMeList;
   private List<Invitation> newInvitesFromServerForMe;
   private int retries = 7;
+  private int invitationRetries = 7;
+  private int callbackInt = 0;
+  private int fillDBwAPI =0;
+  private int invitationCalls =0;
+  private int peopleCalls = 0;
 
 
   @Override
@@ -137,6 +142,7 @@ public class MainActivity extends AppCompatActivity
     mLocationCallback = new LocationCallback() {
       @Override
       public void onLocationResult(LocationResult locationResult) {
+        Log.d(TAG, "callback onLocationResult: #" + callbackInt++);
         if (locationResult == null) {
           return;
         }
@@ -182,13 +188,15 @@ public class MainActivity extends AppCompatActivity
   }
 
   private void updateInvitations() {
+//    Toast.makeText(getBaseContext(), "Updating Invitations", Toast.LENGTH_LONG).show();
     JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
     Call<List<Invitation>> call = service.getAllInvitationsPerPerson(deviceUser.getPersonId());
     call.enqueue(new Callback<List<Invitation>>() {
       @Override
       public void onResponse(Call<List<Invitation>> call, Response<List<Invitation>> response) {
-        retries = 7;
+        invitationRetries = 7;
         try {
+          Log.d(TAG, "updateinvitation onResponse: #" + invitationCalls++);
           if(response.body().size()>0){
             new AddInvitesTask().execute(response.body().toArray(new Invitation[0]));
           }
@@ -199,12 +207,12 @@ public class MainActivity extends AppCompatActivity
 
       @Override
       public void onFailure(Call<List<Invitation>> call, Throwable t) {
-        if(retries>0){
+        if(invitationRetries>0){
+          invitationRetries--;
           updateInvitations();
-          retries--;
         }
         else{
-          retries = 7;
+          invitationRetries = 7;
           Toast.makeText(getBaseContext(), "Failed to update list of invitations, check internet connection." , Toast.LENGTH_LONG).show();
         }
       }
@@ -219,7 +227,7 @@ public class MainActivity extends AppCompatActivity
       @Override
       public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
         retries = 7;
-
+        Log.d(TAG, "update people onResponse: #" + peopleCalls++);
         try {
           new ReplaceNonDeviceUsers().execute(response.body().toArray(new Person[0]));
         } catch (NullPointerException e) {
@@ -252,7 +260,7 @@ public class MainActivity extends AppCompatActivity
         retries = 7;
         try {
 
-          Toast.makeText(getBaseContext(), "DeviceUserId updated: " + response.body().getPersonId(), Toast.LENGTH_LONG).show();
+          Log.d(TAG, "fillDBwithAPI onResponse: #");
 
           Person deviceUserReplacement = new Person();
           deviceUserReplacement.setPersonId(response.body().getPersonId());
@@ -268,12 +276,15 @@ public class MainActivity extends AppCompatActivity
           personId = deviceUserReplacement.getPersonId();
 
           editor.putBoolean(NOT_FIRST_TIME_USER_KEY, true);
-          editor.apply();
+          editor.commit();
+
+          IS_FIRST_TIME_USER = false;
 
           new QuerySinglePersonTask().execute(personId);
 
         } catch (NullPointerException e) {
           if(sharedPreferences.contains(NOT_FIRST_TIME_USER_KEY)){
+            Log.d(TAG, "onResponse: null pointer exception error");
             editor.remove(NOT_FIRST_TIME_USER_KEY);
             editor.apply();
           }
@@ -786,10 +797,11 @@ public class MainActivity extends AppCompatActivity
       }
       clientDB.getPersonDao().deleteList(peopleToRemove);
       List<Person> peopleToAdd = Arrays.asList(people);
-      for (Person person: peopleToAdd
-      ) {
-        person.setGoogleUserId("101");
-      }
+//      for (Person person: peopleToAdd
+//      ) {
+//        if(person.getGoogleUserId()==null)
+//        person.setGoogleUserId("101");
+//      }
       clientDB.getPersonDao().insert(peopleToAdd);
       return peopleToAdd;
     }
