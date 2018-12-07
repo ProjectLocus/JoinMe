@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="25dp">
-
-    <TextView
-        android:id="@+id/tv_frag_invitation_rv_title"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/robotoslab_bold"
-        android:gravity="center_horizontal"
-        android:textColor="@color/blackText"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:text="Title" />
+    android:layout_height="match_parent">
+  <TextView
+    android:id="@+id/tv_frag_invitation_rv_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/robotoslab_bold"
+    android:gravity="center_horizontal"
+    android:textColor="@color/blackText"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    tools:text="Title"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_frag_invitation_rv_invitations"
-        android:layout_width="368dp"
-        android:layout_height="511dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="48dp"
-        tools:listitem="@layout/rv_item_invitation_list" />
+      android:id="@+id/rv_frag_invitation_rv_invitations"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_margin="8dp"
+      android:layout_below="@+id/tv_frag_invitation_rv_title"
+      tools:listitem="@layout/rv_item_invitation_list"/>
+
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_frag_invitation_rv_add"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add"
-        tools:layout_editor_absoluteX="336dp"
-        tools:layout_editor_absoluteY="8dp" />
-</android.support.constraint.ConstraintLayout>
+      android:id="@+id/fab_frag_invitation_rv_add"
+      style="@style/Widget.MaterialComponents.FloatingActionButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/rv_frag_invitation_rv_invitations"
+      android:layout_alignEnd="@+id/tv_frag_invitation_rv_title"
+      android:baselineAlignBottom="true"
+      android:clickable="true"
+      android:focusable="true"
+      app:fabSize="normal"
+      app:srcCompat="@android:drawable/ic_input_add"/>
+  </RelativeLayout>
+</FrameLayout>
