@@ -70,10 +70,17 @@ public class FragInviteDetails extends Fragment {
 
     @Override
     protected void onPostExecute(Invitation invitation) {
-      eInviteDetailsTitle.setText(invitation.getTitle());
-      inviteDetailsLocation.setText(invitation.getLocation());
-      inviteDetailsDate.setText(invitation.getDate());
-      inviteDetailsDescription.setText(invitation.getDescription());
+      if (invitation != null) {
+        eInviteDetailsTitle.setText(invitation.getTitle());
+        inviteDetailsLocation.setText(invitation.getLocation());
+        inviteDetailsDate.setText(invitation.getDate());
+        inviteDetailsDescription.setText(invitation.getDescription());
+      } else {
+        eInviteDetailsTitle.setText("Let's have coffee");
+        inviteDetailsLocation.setText("Starbucks");
+        inviteDetailsDate.setText("Today at Noon");
+        inviteDetailsDescription.setText("Come have coffee with me.");
+      }
     }
   }
 

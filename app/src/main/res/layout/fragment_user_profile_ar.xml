@@ -3,6 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:background="#90a4ae">
 
   <ImageView
@@ -43,12 +44,13 @@
 
   <android.support.design.widget.FloatingActionButton
     android:id="@+id/fab_user_profile_next"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_margin="8dp"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/tv_user_profile_description"
+    android:layout_alignEnd="@+id/wv_user_profile_prof_image"
     android:backgroundTint="#FF748C"
-    android:clickable="true"/>
+    android:clickable="true"
+    android:src=""
+    app:fabSize="normal"/>
 
 </RelativeLayout>

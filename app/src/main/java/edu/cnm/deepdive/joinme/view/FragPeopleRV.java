@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
@@ -44,14 +45,15 @@ public class FragPeopleRV extends Fragment {
     initRecyclerview(theView);
     initData();
     listTitle = theView.findViewById(R.id.tv_frag_people_rv_title);
+    listTitle.setText("People Near Me");
     recyclerView = theView.findViewById(R.id.rv_frag_people_rv_peoplelist);
 
     List<Person> persons = DummyPersonGenerator.getXDummyPersonsNoDeviceUser(10,getContext());
 
-    PeopleAdapter adapter = new PeopleAdapter(getActivity(),persons);
+    PeopleAdapter adapter = new PeopleAdapter(getActivity(), persons, getContext());
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
-
+    Glide.with(this);
     return theView;
   }
 

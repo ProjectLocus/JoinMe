@@ -6,12 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.TextView;
@@ -52,7 +55,7 @@ public class FragInvitationRV extends Fragment {
   }
 
   private void initRecyclerview() {
-    InvitationAdapter adapter = new InvitationAdapter(getActivity(),dummyInvite);
+    InvitationAdapter adapter = new InvitationAdapter(getActivity(),dummyInvite, getContext());
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
 
@@ -76,8 +79,12 @@ public class FragInvitationRV extends Fragment {
 
   private void initViews(View theView) {
     fragmentTitle = theView.findViewById(R.id.tv_frag_invitation_rv_title);
+    fragmentTitle.setText("Your Received Invites!");
     recyclerView = theView.findViewById(R.id.rv_frag_invitation_rv_invitations);
     floatingActionButton = theView.findViewById(R.id.fab_frag_invitation_rv_add);
+    floatingActionButton.setOnClickListener(v -> {
+      goToFragInviteCreate();
+    });
   }
 
 //  @Override
@@ -89,6 +96,12 @@ public class FragInvitationRV extends Fragment {
 //      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
 //    }
 //  }
+
+  private void goToFragInviteCreate() {
+    FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack(null);
+    fragmentTransaction.replace(R.id.fl_main_frag_container, new FragInviteCreate()).commit();
+  }
 
 
   // TODO Add gson retrofit service object setup function here.

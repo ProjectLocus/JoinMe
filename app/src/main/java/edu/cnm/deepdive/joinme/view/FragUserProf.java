@@ -12,8 +12,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings.ZoomDensity;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -55,7 +53,7 @@ public class FragUserProf extends Fragment {
     userDescription = view.findViewById(R.id.tv_user_profile_description);
     userFA = view.findViewById(R.id.fab_user_profile_next);
     //TODO add a behavior for the listener
-    userFA.setOnClickListener(v -> goToFragInviteRV());
+    userFA.setOnClickListener(v -> {goToFragInviteRV();});
     new QueryTask().execute();
   }
 

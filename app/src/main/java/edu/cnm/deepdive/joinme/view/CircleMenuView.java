@@ -516,7 +516,7 @@ public class CircleMenuView extends FrameLayout {
     buttonsAppear.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator valueAnimator) {
-        final float fraction = valueAnimator.getAnimatedFraction();
+        final float fraction = valueAnimator.getAnimatedFraction() * 1.5f; // FIXME Better to change a property in the ValueAnimator.
         final float value = (float)valueAnimator.getAnimatedValue();
         offsetAndScaleButtons(centerX, centerY, angleStep, value, fraction);
       }
@@ -721,7 +721,7 @@ public class CircleMenuView extends FrameLayout {
       final float angleStep = 360f / buttonsCount;
 
       final float offset = open ? mDistance : 0f;
-      final float scale = open ? 1f : 0f;
+      final float scale = open ? 1.5f : 0f; // Only used if not animating
 
       mMenuButton.setImageResource(open ? mIconClose : mIconMenu);
       mMenuButton.setAlpha(open ? DEFAULT_CLOSE_ICON_ALPHA : 1f);
