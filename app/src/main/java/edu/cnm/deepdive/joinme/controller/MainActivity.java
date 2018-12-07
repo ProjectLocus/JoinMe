@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Paint.Join;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -38,6 +39,7 @@ import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.dao.PersonDao;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
+import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.service.JoinMeBackEndService;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
@@ -47,6 +49,9 @@ import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -109,6 +114,9 @@ public class MainActivity extends AppCompatActivity
   private boolean beginUserUpdates = false;
   private SharedPreferences sharedPreferences;
   private SharedPreferences.Editor editor;
+  private List<Person> peopleAroundMeList;
+  private List<Invitation> newInvitesFromServerForMe;
+  private int retries = 7;
 
 
   @Override
@@ -133,8 +141,11 @@ public class MainActivity extends AppCompatActivity
           return;
         }
         mCurrentLocation = locationResult.getLastLocation();
+        deviceUser.setLatitude(mCurrentLocation.getLatitude());
+        deviceUser.setLongitude(mCurrentLocation.getLongitude());
+        new UpdateDeviceUserTask().execute(deviceUser);
         if(beginUserUpdates){
-          //todo: add logic for the constant updates here.
+          updateUsingAPI();
         }
       }
     };
@@ -165,9 +176,71 @@ public class MainActivity extends AppCompatActivity
   }
 
   private void updateUsingAPI() {
-    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
-
+    updatePeopleNearMe();
+    updateInvitations();
+     beginUserUpdates = true;
   }
+
+  private void updateInvitations() {
+    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
+    Call<List<Invitation>> call = service.getAllInvitationsPerPerson(deviceUser.getPersonId());
+    call.enqueue(new Callback<List<Invitation>>() {
+      @Override
+      public void onResponse(Call<List<Invitation>> call, Response<List<Invitation>> response) {
+        retries = 7;
+        try {
+          if(response.body().size()>0){
+            new AddInvitesTask().execute(response.body().toArray(new Invitation[0]));
+          }
+        } catch (NullPointerException e) {
+          //by design, do nothing. API returned unexpected and unusable body.
+        }
+      }
+
+      @Override
+      public void onFailure(Call<List<Invitation>> call, Throwable t) {
+        if(retries>0){
+          updateInvitations();
+          retries--;
+        }
+        else{
+          retries = 7;
+          Toast.makeText(getBaseContext(), "Failed to update list of invitations, check internet connection." , Toast.LENGTH_LONG).show();
+        }
+      }
+    });
+  }
+
+
+  private void updatePeopleNearMe(){
+    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
+    Call<List<Person>> call = service.getAllPeopleNearPerson(deviceUser, deviceUser.getPersonId());
+    call.enqueue(new Callback<List<Person>>() {
+      @Override
+      public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
+        retries = 7;
+
+        try {
+          new ReplaceNonDeviceUsers().execute(response.body().toArray(new Person[0]));
+        } catch (NullPointerException e) {
+          //by design, do nothing. Client has sent an empty/malformed body.
+        }
+      }
+
+      @Override
+      public void onFailure(Call<List<Person>> call, Throwable t) {
+        if(retries>0){
+          updatePeopleNearMe();
+          retries--;
+        }
+        else{
+          retries = 7;
+          Toast.makeText(getBaseContext(), "Failed to update list of people nearby, check internet connection." , Toast.LENGTH_LONG).show();
+        }
+      }
+    });
+  }
+
 
   private void fillDBwithAPI() {
     JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
@@ -176,6 +249,7 @@ public class MainActivity extends AppCompatActivity
     call.enqueue(new Callback<Person>() {
       @Override
       public void onResponse(Call<Person> call, Response<Person> response) {
+        retries = 7;
         try {
 
           Toast.makeText(getBaseContext(), "DeviceUserId updated: " + response.body().getPersonId(), Toast.LENGTH_LONG).show();
@@ -188,22 +262,34 @@ public class MainActivity extends AppCompatActivity
           deviceUserReplacement.setLastName(deviceUser.getLastName());
           deviceUserReplacement.setDisplayName(deviceUser.getDisplayName());
           deviceUserReplacement.setGoogleUserId(deviceUser.getGoogleUserId());
+          deviceUserReplacement.setThisMe(true);
 
           new UpdateFirstTimeUserTask().execute(deviceUser, deviceUserReplacement);
           personId = deviceUserReplacement.getPersonId();
 
           editor.putBoolean(NOT_FIRST_TIME_USER_KEY, true);
           editor.apply();
-          beginUserUpdates=true;
+
+          new QuerySinglePersonTask().execute(personId);
 
         } catch (NullPointerException e) {
-          Toast.makeText(getBaseContext(), "DeviceUserId was null pointer", Toast.LENGTH_LONG).show();
+          if(sharedPreferences.contains(NOT_FIRST_TIME_USER_KEY)){
+            editor.remove(NOT_FIRST_TIME_USER_KEY);
+            editor.apply();
+          }
         }
       }
 
       @Override
       public void onFailure(Call<Person> call, Throwable t) {
-        Toast.makeText(getBaseContext(), "failed to connect " + t.getMessage(), Toast.LENGTH_LONG).show();
+        if(retries>0){
+          fillDBwithAPI();
+          retries--;
+        }
+        else{
+          retries = 7;
+          Toast.makeText(getBaseContext(), "Failed to add new user. Cannot update information. Restart app to try again." , Toast.LENGTH_LONG).show();
+        }
       }
     });
 
@@ -649,8 +735,8 @@ public class MainActivity extends AppCompatActivity
       deviceUser = user;
       if(IS_FIRST_TIME_USER){
         fillDBwithAPI();
-        IS_FIRST_TIME_USER = false;
       }
+      updateUsingAPI();
     }
   }
 
@@ -669,5 +755,64 @@ public class MainActivity extends AppCompatActivity
 
   }
 
+  private class UpdateDeviceUserTask extends AsyncTask<Person, Void, Void> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected Void doInBackground(Person... people) {
+      clientDB.getPersonDao().update(people[0]);
+      return null;
+    }
+
+  }
+
+  private class ReplaceNonDeviceUsers extends AsyncTask<Person, Void, List<Person>> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected List<Person> doInBackground(Person... people) {
+      List<Person> tempPeople = clientDB.getPersonDao().selectAll();
+      List<Person> peopleToRemove = new LinkedList<>();
+      for (int i = 0; i < tempPeople.size(); i++) {
+        if(!tempPeople.get(i).isThisMe()){
+          peopleToRemove.add(tempPeople.get(i));
+        }
+      }
+      clientDB.getPersonDao().deleteList(peopleToRemove);
+      List<Person> peopleToAdd = Arrays.asList(people);
+      for (Person person: peopleToAdd
+      ) {
+        person.setGoogleUserId("101");
+      }
+      clientDB.getPersonDao().insert(peopleToAdd);
+      return peopleToAdd;
+    }
+
+    @Override
+    protected void onPostExecute(List<Person> peopleToAdd) {
+      peopleAroundMeList = new LinkedList<>();
+      peopleAroundMeList = peopleToAdd;
+    }
+  }
+
+  private class AddInvitesTask extends AsyncTask<Invitation, Void, Void> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected Void doInBackground(Invitation... invitations) {
+      clientDB.getInvitationDao().insert(Arrays.asList(invitations));
+      return null;
+    }
+
+  }
 
 }

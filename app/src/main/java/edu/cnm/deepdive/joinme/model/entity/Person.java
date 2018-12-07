@@ -17,7 +17,7 @@ import java.util.Date;
     indices = {
         @Index(value= "person_id", unique = true),
         @Index(value = "display_name", unique = true),
-        @Index(value = "google_user_id", unique = true)}
+        }
 )
 public class Person {
 
@@ -54,7 +54,6 @@ public class Person {
 
   private String userImageLocation;
 
-  @NonNull
   @ColumnInfo(name = "google_user_id")
   private String googleUserId;
 
@@ -460,4 +459,6 @@ public class Person {
   public void setGoogleUserId(String googleUserId) {
     this.googleUserId = googleUserId;
   }
+
+
 }
