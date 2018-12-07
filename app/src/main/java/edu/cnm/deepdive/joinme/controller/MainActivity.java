@@ -794,7 +794,7 @@ public class MainActivity extends AppCompatActivity
       List<Person> tempPeople = clientDB.getPersonDao().selectAll();
       List<Person> peopleToRemove = new LinkedList<>();
       for (int i = 0; i < tempPeople.size(); i++) {
-        if(!tempPeople.get(i).isThisMe()){
+        if(!tempPeople.get(i).getGoogleUserId().equals(deviceUser.getGoogleUserId())){
           peopleToRemove.add(tempPeople.get(i));
         }
       }
