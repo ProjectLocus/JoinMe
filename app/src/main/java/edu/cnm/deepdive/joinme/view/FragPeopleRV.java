@@ -45,6 +45,7 @@ public class FragPeopleRV extends Fragment {
     initRecyclerview(theView);
     initData();
     listTitle = theView.findViewById(R.id.tv_frag_people_rv_title);
+    listTitle.setText("People Near Me");
     recyclerView = theView.findViewById(R.id.rv_frag_people_rv_peoplelist);
 
     List<Person> persons = DummyPersonGenerator.getXDummyPersonsNoDeviceUser(10,getContext());

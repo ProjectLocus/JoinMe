@@ -20,7 +20,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:text="Title"/>
+    tools:text="People Near Me"/>
   <android.support.v7.widget.RecyclerView
     android:id="@+id/rv_frag_people_rv_peoplelist"
     android:layout_width="0dp"

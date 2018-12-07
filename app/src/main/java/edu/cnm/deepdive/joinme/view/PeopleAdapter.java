@@ -59,10 +59,11 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.Holder> {
         "https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/notdeb.jpg",
         "https://rawcdn.githack.com/ProjectLocus/project-content/0bf856eff9c7e79f9066ddbb8b2eec53ee390060/join-me-pics/weenie.jpg"};
     Random rng = new Random();
-    Glide.with(context).load(picRes[rng.nextInt(picRes.length-1)]).into(holder.image);
+    Glide.with(context).load(picRes[rng.nextInt(picRes.length)]).into(holder.image);
     // holder.name.setText(listForRecycler.get(position).getFirstName());
     //TODO fix error for above execution: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
-    holder.comments.setText("Lorem Ipsum");
+    String[] locDet = {"Ear shot", "Arms length", "Eye sight"};
+    holder.comments.setText(locDet[rng.nextInt(locDet.length)]);
   }
 
 
