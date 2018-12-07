@@ -227,9 +227,13 @@ public class MainActivity extends AppCompatActivity
       @Override
       public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
         retries = 7;
-        Log.d(TAG, "update people onResponse: #" + peopleCalls++);
+
         try {
-          new ReplaceNonDeviceUsers().execute(response.body().toArray(new Person[0]));
+
+          List<Person> tempListPersons = response.body();
+          Person[] tempArrPersons = tempListPersons.toArray(new Person[0]);
+//          Log.d(TAG, "update people onResponse: personList " + tempArrPersons.length);
+          new ReplaceNonDeviceUsers().execute(tempArrPersons);
         } catch (NullPointerException e) {
           //by design, do nothing. Client has sent an empty/malformed body.
         }
@@ -794,17 +798,16 @@ public class MainActivity extends AppCompatActivity
       List<Person> tempPeople = clientDB.getPersonDao().selectAll();
       List<Person> peopleToRemove = new LinkedList<>();
       for (int i = 0; i < tempPeople.size(); i++) {
-        if(!tempPeople.get(i).getGoogleUserId().equals(deviceUser.getGoogleUserId())){
+        if(tempPeople.get(i).getGoogleUserId()==null){
+          peopleToRemove.add(tempPeople.get(i));
+        }
+        else if(!tempPeople.get(i).getGoogleUserId().equals(deviceUser.getGoogleUserId())){
           peopleToRemove.add(tempPeople.get(i));
         }
       }
       clientDB.getPersonDao().deleteList(peopleToRemove);
-      List<Person> peopleToAdd = Arrays.asList(people);
-//      for (Person person: peopleToAdd
-//      ) {
-//        if(person.getGoogleUserId()==null)
-//        person.setGoogleUserId("101");
-//      }
+      List<Person> peopleToAdd = new LinkedList<>();
+      peopleToAdd.addAll(Arrays.asList(people));
       clientDB.getPersonDao().insert(peopleToAdd);
       return peopleToAdd;
     }
