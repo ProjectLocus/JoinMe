@@ -65,7 +65,7 @@ public interface JoinMeBackEndService {
    * @param personId
    * @return
    */
-  @GET("people/{personId}/people")
+  @PUT("people/{personId}/people")
   Call<List<Person>> getAllPeopleNearPerson(@Body Person person, @Path("personId") long personId);
 
   /**

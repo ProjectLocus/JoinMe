@@ -2,11 +2,12 @@ package edu.cnm.deepdive.joinme.controller;
 
 import android.Manifest.permission;
 import android.app.Dialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Paint.Join;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -24,7 +25,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
@@ -39,20 +39,19 @@ import edu.cnm.deepdive.joinme.JoinMeApplication;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.model.dao.PersonDao;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
+import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.service.JoinMeBackEndService;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
-import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate;
-import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails;
-import edu.cnm.deepdive.joinme.view.FragInviteDetails.FragInviteDetailsListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV;
-import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
-import edu.cnm.deepdive.joinme.view.FragUserProf.FragUserProfListener;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,6 +84,8 @@ public class MainActivity extends AppCompatActivity
    * The constant ERROR_DIALOG_REQUEST.
    */
   public static final int ERROR_DIALOG_REQUEST = 9001;
+  public static final String NOT_FIRST_TIME_USER_KEY = "not_first_time_user_key";
+  public static final String MY_PREFERENCES_KEY = "edu.cnm.deepdive.joinme.shared_pref_key";
   private static final int UPDATE_INTERVAL_MS = 30000;
   private static final int FASTEST_INTERVAL_MS = 25000;
   private static boolean SHOULD_FILL_DB_W_TEST = false;
@@ -110,6 +111,17 @@ public class MainActivity extends AppCompatActivity
   private LocationCallback mLocationCallback;
   private Location mCurrentLocation;
   private Retrofit retrofit;
+  private boolean beginUserUpdates = false;
+  private SharedPreferences sharedPreferences;
+  private SharedPreferences.Editor editor;
+  private List<Person> peopleAroundMeList;
+  private List<Invitation> newInvitesFromServerForMe;
+  private int retries = 7;
+  private int invitationRetries = 7;
+  private int callbackInt = 0;
+  private int fillDBwAPI =0;
+  private int invitationCalls =0;
+  private int peopleCalls = 0;
 
 
   @Override
@@ -130,15 +142,17 @@ public class MainActivity extends AppCompatActivity
     mLocationCallback = new LocationCallback() {
       @Override
       public void onLocationResult(LocationResult locationResult) {
+        Log.d(TAG, "callback onLocationResult: #" + callbackInt++);
         if (locationResult == null) {
           return;
         }
         mCurrentLocation = locationResult.getLastLocation();
-//        Toast.makeText(getBaseContext(),
-//            "Lat: " + mCurrentLocation.getLatitude() + "     Long: " + mCurrentLocation
-//                .getLongitude(), Toast.LENGTH_LONG).show();
-//        setTokenDistances();
-//        sortDBTokens();
+        deviceUser.setLatitude(mCurrentLocation.getLatitude());
+        deviceUser.setLongitude(mCurrentLocation.getLongitude());
+        new UpdateDeviceUserTask().execute(deviceUser);
+        if(beginUserUpdates){
+          updateUsingAPI();
+        }
       }
     };
   }
@@ -154,6 +168,11 @@ public class MainActivity extends AppCompatActivity
   }
 
   private void initData() {
+    sharedPreferences = getSharedPreferences(MY_PREFERENCES_KEY, Context.MODE_PRIVATE);
+    editor = sharedPreferences.edit();
+    if(sharedPreferences.contains(NOT_FIRST_TIME_USER_KEY)){
+      IS_FIRST_TIME_USER = false;
+    }
     setPersonId(getIntent().getLongExtra(getString(R.string.person_id_key), 0));
     new QuerySinglePersonTask().execute(personId);
     fragmentManager = getSupportFragmentManager();
@@ -163,9 +182,73 @@ public class MainActivity extends AppCompatActivity
   }
 
   private void updateUsingAPI() {
-    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
-
+    updatePeopleNearMe();
+    updateInvitations();
+     beginUserUpdates = true;
   }
+
+  private void updateInvitations() {
+//    Toast.makeText(getBaseContext(), "Updating Invitations", Toast.LENGTH_LONG).show();
+    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
+    Call<List<Invitation>> call = service.getAllInvitationsPerPerson(deviceUser.getPersonId());
+    call.enqueue(new Callback<List<Invitation>>() {
+      @Override
+      public void onResponse(Call<List<Invitation>> call, Response<List<Invitation>> response) {
+        invitationRetries = 7;
+        try {
+          Log.d(TAG, "updateinvitation onResponse: #" + invitationCalls++);
+          if(response.body().size()>0){
+            new AddInvitesTask().execute(response.body().toArray(new Invitation[0]));
+          }
+        } catch (NullPointerException e) {
+          //by design, do nothing. API returned unexpected and unusable body.
+        }
+      }
+
+      @Override
+      public void onFailure(Call<List<Invitation>> call, Throwable t) {
+        if(invitationRetries>0){
+          invitationRetries--;
+          updateInvitations();
+        }
+        else{
+          invitationRetries = 7;
+          Toast.makeText(getBaseContext(), "Failed to update list of invitations, check internet connection." , Toast.LENGTH_LONG).show();
+        }
+      }
+    });
+  }
+
+
+  private void updatePeopleNearMe(){
+    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
+    Call<List<Person>> call = service.getAllPeopleNearPerson(deviceUser, deviceUser.getPersonId());
+    call.enqueue(new Callback<List<Person>>() {
+      @Override
+      public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
+        retries = 7;
+        Log.d(TAG, "update people onResponse: #" + peopleCalls++);
+        try {
+          new ReplaceNonDeviceUsers().execute(response.body().toArray(new Person[0]));
+        } catch (NullPointerException e) {
+          //by design, do nothing. Client has sent an empty/malformed body.
+        }
+      }
+
+      @Override
+      public void onFailure(Call<List<Person>> call, Throwable t) {
+        if(retries>0){
+          updatePeopleNearMe();
+          retries--;
+        }
+        else{
+          retries = 7;
+          Toast.makeText(getBaseContext(), "Failed to update list of people nearby, check internet connection." , Toast.LENGTH_LONG).show();
+        }
+      }
+    });
+  }
+
 
   private void fillDBwithAPI() {
     JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
@@ -174,9 +257,10 @@ public class MainActivity extends AppCompatActivity
     call.enqueue(new Callback<Person>() {
       @Override
       public void onResponse(Call<Person> call, Response<Person> response) {
+        retries = 7;
         try {
 
-          Toast.makeText(getBaseContext(), "DeviceUserId updated: " + response.body().getPersonId(), Toast.LENGTH_LONG).show();
+          Log.d(TAG, "fillDBwithAPI onResponse: #");
 
           Person deviceUserReplacement = new Person();
           deviceUserReplacement.setPersonId(response.body().getPersonId());
@@ -186,18 +270,37 @@ public class MainActivity extends AppCompatActivity
           deviceUserReplacement.setLastName(deviceUser.getLastName());
           deviceUserReplacement.setDisplayName(deviceUser.getDisplayName());
           deviceUserReplacement.setGoogleUserId(deviceUser.getGoogleUserId());
+          deviceUserReplacement.setThisMe(true);
 
           new UpdateFirstTimeUserTask().execute(deviceUser, deviceUserReplacement);
           personId = deviceUserReplacement.getPersonId();
-          
+
+          editor.putBoolean(NOT_FIRST_TIME_USER_KEY, true);
+          editor.commit();
+
+          IS_FIRST_TIME_USER = false;
+
+          new QuerySinglePersonTask().execute(personId);
+
         } catch (NullPointerException e) {
-          Toast.makeText(getBaseContext(), "DeviceUserId was null pointer", Toast.LENGTH_LONG).show();
+          if(sharedPreferences.contains(NOT_FIRST_TIME_USER_KEY)){
+            Log.d(TAG, "onResponse: null pointer exception error");
+            editor.remove(NOT_FIRST_TIME_USER_KEY);
+            editor.apply();
+          }
         }
       }
 
       @Override
       public void onFailure(Call<Person> call, Throwable t) {
-        Toast.makeText(getBaseContext(), "failed to connect " + t.getMessage(), Toast.LENGTH_LONG).show();
+        if(retries>0){
+          fillDBwithAPI();
+          retries--;
+        }
+        else{
+          retries = 7;
+          Toast.makeText(getBaseContext(), "Failed to add new user. Cannot update information. Restart app to try again." , Toast.LENGTH_LONG).show();
+        }
       }
     });
 
@@ -646,8 +749,8 @@ public class MainActivity extends AppCompatActivity
       deviceUser = user;
       if(IS_FIRST_TIME_USER){
         fillDBwithAPI();
-        IS_FIRST_TIME_USER = false;
       }
+      updateUsingAPI();
     }
   }
 
@@ -666,5 +769,65 @@ public class MainActivity extends AppCompatActivity
 
   }
 
+  private class UpdateDeviceUserTask extends AsyncTask<Person, Void, Void> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected Void doInBackground(Person... people) {
+      clientDB.getPersonDao().update(people[0]);
+      return null;
+    }
+
+  }
+
+  private class ReplaceNonDeviceUsers extends AsyncTask<Person, Void, List<Person>> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected List<Person> doInBackground(Person... people) {
+      List<Person> tempPeople = clientDB.getPersonDao().selectAll();
+      List<Person> peopleToRemove = new LinkedList<>();
+      for (int i = 0; i < tempPeople.size(); i++) {
+        if(!tempPeople.get(i).getGoogleUserId().equals(deviceUser.getGoogleUserId())){
+          peopleToRemove.add(tempPeople.get(i));
+        }
+      }
+      clientDB.getPersonDao().deleteList(peopleToRemove);
+      List<Person> peopleToAdd = Arrays.asList(people);
+//      for (Person person: peopleToAdd
+//      ) {
+//        if(person.getGoogleUserId()==null)
+//        person.setGoogleUserId("101");
+//      }
+      clientDB.getPersonDao().insert(peopleToAdd);
+      return peopleToAdd;
+    }
+
+    @Override
+    protected void onPostExecute(List<Person> peopleToAdd) {
+      peopleAroundMeList = new LinkedList<>();
+      peopleAroundMeList = peopleToAdd;
+    }
+  }
+
+  private class AddInvitesTask extends AsyncTask<Invitation, Void, Void> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected Void doInBackground(Invitation... invitations) {
+      clientDB.getInvitationDao().insert(Arrays.asList(invitations));
+      return null;
+    }
+
+  }
 
 }

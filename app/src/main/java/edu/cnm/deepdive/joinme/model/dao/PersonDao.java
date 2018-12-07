@@ -56,6 +56,9 @@ public interface PersonDao {
   @Delete
   int delete(Person personId);
 
+  @Delete
+  int deleteList(List<Person> persons);
+
   @Query("DELETE FROM people")
   int nuke();
 }
