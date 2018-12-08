@@ -1,4 +1,6 @@
 # JoinMe
+A social media meetup app with a focus on connecting people on a human level by allowing users to send invitations to other people to do actual activities such as enjoy a cup of coffee or attend an office party.
+
 ## User Stories:
 * As a user I want to be able to send an invitation to other people who I can see.
   * As a user I want to be able to invite one other person out to coffee.
