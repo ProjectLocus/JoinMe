@@ -18,7 +18,7 @@ Brian Bleck:
   * As a user I want to be able to invite one other person out to coffee.
   * As a leader of an organization I want to be able to invite everyone in a meeting to lunch.
   * As a user I want to be able to connect with new people in close proximity.
-* As a senior I want to be able to alert people around me that I am in need of medical attenttion.
+* As a senior I want to be able to alert people around me that I am in need of medical attention.
   * As a user I want to be able to alert people in the immediate vicinity that I am in danger.
   * As a user I want to be able to alert people of a fire.
 * As a user I want to able to receive invitations from other users.
@@ -26,14 +26,21 @@ Brian Bleck:
   * As a bar owner I want to be able to inform users of bar events.
 * As a community organizer I want to be able to alert people that there is a rally coming together.
 * As a highschooler I want to be able to invite my friends to a party.
-* As a user I want to be able to drop down an event in an area for people to see within that aare.
+* As a user I want to be able to drop down an event in an area for people to see within that are.
   * As a user I want to be able to see events dropped down by other users within the same area.
 * As a user I want to be able to tell everyone that I've lost my pet.
   * As a user I want to be able to tell everyone that I have a gig going on.
 
+## Technical Information:
+The app was developed in mostly English with a restricted Portrait orientation. Operating Systems
+developed in were Windows and OSx. Software used includes both IntelliJ and Android Studio. Project
+was developed in Java 8 and the app had a minimum SDK level of 23 but has been tested to work on
+SDKs 24-28. Most test were ran on both emulators and physical android devices that run at least
+Marshmellow.
+
 ## External Services, 3rd Part Libraries with Licenses:
 * Google Services (including Google Sign In and Google Location):
-   * Licenses:
+  * Licenses:
       * [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
       * [Creative Commons Attribution 2.5](https://creativecommons.org/licenses/by/2.5/)
   * Depencies:
