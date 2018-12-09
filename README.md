@@ -1,5 +1,17 @@
 # JoinMe
-A social media meetup app with a focus on connecting people on a human level by allowing users to send invitations to other people to do actual activities such as enjoy a cup of coffee or attend an office party.
+A social media invitation app with a focus on connecting people on a human level by allowing users 
+to send invitations to other people to actual events such as enjoy a cup of coffee or attend an office party.
+
+## Team Members:
+Alex Rael:
+Did most of the Room Persistence manipulation throughout the app. That includes grabbing the necessary
+information to create a new user, displaying that info in the user profile section, grabbing info from
+the create invitation fragment and displaying it in the new invitation fragment. Also setup most of the
+Retrofit calls to communicate with the backend.
+
+Dina Rabanal:
+
+Brian Bleck:
 
 ## User Stories:
 * As a user I want to be able to send an invitation to other people who I can see.
