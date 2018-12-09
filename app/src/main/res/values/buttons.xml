@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <array name="icons">
-    <item>@drawable/ic_person_white</item>
+    <item>@drawable/ic_my_profile</item>
     <item>@drawable/ic_around_me</item>
     <item>@drawable/ic_sent_invitation</item>
     <item>@drawable/ic_invitation_received</item>
-    <item>@drawable/ic_person_white</item>
+    <item>@drawable/ic_invitations_accepted</item>
   </array>
   <array name="colors">
     <item>@color/colorPrimary</item>
