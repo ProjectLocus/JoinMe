@@ -30,3 +30,59 @@ Brian Bleck:
   * As a user I want to be able to see events dropped down by other users within the same area.
 * As a user I want to be able to tell everyone that I've lost my pet.
   * As a user I want to be able to tell everyone that I have a gig going on.
+
+## External Services, 3rd Part Libraries with Licenses:
+* Google Services (including Google Sign In and Google Location):
+   * Licenses:
+      * [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+      * [Creative Commons Attribution 2.5](https://creativecommons.org/licenses/by/2.5/)
+  * Depencies:
+```
+implementation 'com.google.gms:google-services:4.1.0'
+implementation 'com.google.android.gms:play-services-auth:16.0.1'
+implementation 'com.google.android.gms:play-services-location:16.0.0'                                                         
+```
+
+* Room Persistence ORM:
+  * Licenses:
+    * [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+    * [Creative Commons Attribution 2.5](https://creativecommons.org/licenses/by/2.5/)
+  * Depencies:
+``` 
+implementation 'android.arch.persistence.room:runtime:1.1.1'
+annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+testImplementation "android.arch.persistence.room:testing:1.1.1"
+```
+
+* Retrofit and Gson:
+  * Licenses: 
+    * Retrofit [Apache License 2.0](https://rawcdn.githack.com/square/retrofit/ee72ada9bb9d227f133786a866606c019c349064/LICENSE.txt),
+    * Gson [Apache License 2.0](https://rawcdn.githack.com/google/gson/da5cae371e8b739fe63a6c6d16debf7b297dea0e/LICENSE)
+  * Dependencies:
+```
+implementation 'com.google.code.gson:gson:2.8.5'
+implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+```
+
+* Glide:
+  * Licenses (and other associated Licenses): [Licenses](https://rawcdn.githack.com/bumptech/glide/f7d860412f061e059aa84a42f2563a01ac8c303b/LICENSE)
+  * Depencies:
+```
+implementation 'com.github.bumptech.glide:glide:4.8.0'
+annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+```
+
+* Ramotion (Circle Menu):
+  * License: [MIT License](https://rawcdn.githack.com/Ramotion/circle-menu-android/c958736ee12b73c41f469d6ceff7956c706233dc/LICENSE)
+  * Depencies:
+```
+implementation 'com.ramotion.circlemenu:circle-menu:0.3.1'
+```
+
+* Hdodenof (Circle Image View):
+  * License: [Apache License 2.0](https://rawcdn.githack.com/hdodenhof/CircleImageView/e9ce455fdd2cceed5d5dab2a1fc7216deb7d2b37/LICENSE.txt)
+  * Dependencies:
+```
+implementation 'de.hdodenhof:circleimageview:2.2.0'
+```
