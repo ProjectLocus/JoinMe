@@ -48,8 +48,8 @@
     android:layout_height="wrap_content"
     android:layout_alignBottom="@+id/tv_user_profile_description"
     android:layout_alignEnd="@+id/wv_user_profile_prof_image"
-    android:backgroundTint="#D81B60"
+    android:backgroundTint="#3f3fc1 "
     android:clickable="true"
-    app:fabSize="normal"/>
+    app:fabSize="mini"/>
 
 </RelativeLayout>

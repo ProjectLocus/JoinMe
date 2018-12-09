@@ -79,7 +79,7 @@ public class FragInvitationRV extends Fragment {
 
   private void initViews(View theView) {
     fragmentTitle = theView.findViewById(R.id.tv_frag_invitation_rv_title);
-    fragmentTitle.setText("Your Received Invites!");
+    fragmentTitle.setText("Received Invitations");
     recyclerView = theView.findViewById(R.id.rv_frag_invitation_rv_invitations);
     floatingActionButton = theView.findViewById(R.id.fab_frag_invitation_rv_add);
     floatingActionButton.setOnClickListener(v -> {

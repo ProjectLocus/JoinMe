@@ -3,8 +3,8 @@
   <array name="icons">
     <item>@drawable/ic_person_white</item>
     <item>@drawable/ic_aroundme</item>
-    <item>@drawable/ic_person_white</item>
-    <item>@drawable/ic_person_white</item>
+    <item>@drawable/ic_sent_invitation</item>
+    <item>@drawable/ic_invitation_received</item>
     <item>@drawable/ic_person_white</item>
   </array>
   <array name="colors">
