@@ -32,17 +32,17 @@
       tools:listitem="@layout/rv_item_invitation_list"/>
 
 
-    <android.support.design.widget.FloatingActionButton
-      android:id="@+id/fab_frag_invitation_rv_add"
-      style="@style/Widget.MaterialComponents.FloatingActionButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/rv_frag_invitation_rv_invitations"
-      android:layout_alignEnd="@+id/tv_frag_invitation_rv_title"
-      android:baselineAlignBottom="true"
-      android:clickable="true"
-      android:focusable="true"
-      app:fabSize="normal"
-      app:srcCompat="@android:drawable/ic_input_add"/>
+    <!--<android.support.design.widget.FloatingActionButton-->
+      <!--android:id="@+id/fab_frag_invitation_rv_add"-->
+      <!--style="@style/Widget.MaterialComponents.FloatingActionButton"-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_alignBottom="@+id/rv_frag_invitation_rv_invitations"-->
+      <!--android:layout_alignEnd="@+id/tv_frag_invitation_rv_title"-->
+      <!--android:baselineAlignBottom="true"-->
+      <!--android:clickable="true"-->
+      <!--android:focusable="true"-->
+      <!--app:fabSize="normal"-->
+      <!--app:srcCompat="@android:drawable/ic_input_add"/>-->
   </RelativeLayout>
 </FrameLayout>

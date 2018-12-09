@@ -36,7 +36,7 @@ import java.util.List;
 //todo: give attribution to https://github.com/Ramotion/circle-menu-android/blob/master/circle-menu/src/main/java/com/ramotion/circlemenu/CircleMenuView.java
 public class CircleMenuView extends FrameLayout {
 
-  private static final int DEFAULT_BUTTON_SIZE = 75;
+  private static final int DEFAULT_BUTTON_SIZE = 72;
   private static final float DEFAULT_DISTANCE = DEFAULT_BUTTON_SIZE * 1.5f;
   private static final float DEFAULT_RING_SCALE_RATIO = 1.3f;
   private static final float DEFAULT_CLOSE_ICON_ALPHA = 0.3f;
@@ -256,7 +256,7 @@ public class CircleMenuView extends FrameLayout {
     final float density = context.getResources().getDisplayMetrics().density;
     final float defaultDistance = DEFAULT_DISTANCE * density;
 
-//    mIconMenu = R.drawable.ic_joinme;
+ //   mIconMenu = R.drawable.ic_joinme;
     mIconClose = R.drawable.ic_close_black_24dp;
 
     mDurationRing = getResources().getInteger(android.R.integer.config_mediumAnimTime);
