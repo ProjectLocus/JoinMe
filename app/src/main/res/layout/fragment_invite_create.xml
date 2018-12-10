@@ -4,10 +4,11 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  xmlns:layout_bottom="http://schemas.android.com/tools"
   android:background="#90a4ae">
   <android.support.v7.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:elevation="8dp"
     android:outlineAmbientShadowColor="#000000"
@@ -17,74 +18,79 @@
     <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingBottom="32dp"
       android:layout_margin="8dp">
       <TextView
         android:id="@+id/tv_invite_create_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
         android:fontFamily="@font/robotoslab_bold"
         android:text="Invitation"
         android:textAlignment="center"
-        android:textSize="48sp" />
+        android:textSize="48sp"/>
       <EditText
         android:id="@+id/et_invitation_create_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="8dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:layout_marginBottom="12dp"
         android:ems="16"
         android:fontFamily="@font/robotoslab_bold"
         android:gravity="center"
-        android:text="Let's have coffee" />
+        android:text="Let's have coffee"/>
       <EditText
         android:id="@+id/et_invitation_create_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_below="@+id/et_invitation_create_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="8dp"
         android:ems="16"
         android:fontFamily="@font/robotoslab_bold"
         android:gravity="center"
-        android:text="Starbucks" />
+        android:text="Starbucks"/>
       <EditText
         android:id="@+id/et_invitation_create_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_below="@+id/et_invitation_create_location"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="8dp"
         android:ems="16"
         android:fontFamily="@font/robotoslab_bold"
         android:gravity="center"
-        android:text="Today at Noon" />
+        android:text="Today at Noon"/>
       <EditText
         android:id="@+id/et_invitation_create_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/et_invitation_create_date"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
         android:ems="16"
         android:fontFamily="@font/robotoslab_bold"
         android:gravity="center"
-        android:text="Come have coffee with me." />
+        android:text="Come have coffee with me."/>
       <Button
         android:id="@+id/bt_invitation_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
         android:fontFamily="@font/robotoslab_bold"
-        android:text="Enter" />
+        android:text="Enter"/>
+
+      <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_invitation_done"
+        android:layout_below="@+id/et_invitation_create_description"
+        android:layout_alignParentStart="true"/>
     </RelativeLayout>
   </android.support.v7.widget.CardView>
 </LinearLayout>

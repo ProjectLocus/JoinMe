@@ -13,8 +13,8 @@ import android.support.annotation.NonNull;
 @Entity(
     tableName = "invitations",
     indices = {@Index(value = "invitation_id", unique = true),
-        @Index(value = "user_sender", unique = true),
-        @Index(value = "user_receiver", unique = true)}
+        @Index(value = "user_sender_id", unique = true),
+        @Index(value = "user_receiver_id", unique = true)}
 //    foreignKeys = {
 //        @ForeignKey(entity = Person.class, parentColumns = "person_id",
 //            childColumns = "user_sender")}
@@ -27,12 +27,12 @@ public class Invitation {
   private long invitationId;
 
   @NonNull
-  @ColumnInfo(name = "user_sender")
-  private long userSender;
+  @ColumnInfo(name = "user_sender_id")
+  private long userSenderId;
 
   @NonNull
-  @ColumnInfo(name = "user_receiver")
-  private long userReceiver;
+  @ColumnInfo(name = "user_receiver_id")
+  private long userReceiverId;
 
   @NonNull
   @ColumnInfo(name = "date")
@@ -150,16 +150,16 @@ public class Invitation {
    * @return
    */
   @NonNull
-  public long getUserSender() {
-    return userSender;
+  public long getUserSenderId() {
+    return userSenderId;
   }
 
   /**
    * Sets the id of the person receiving the invitation.
-   * @param userSender
+   * @param userSenderId
    */
-  public void setUserSender(@NonNull long userSender) {
-    this.userSender = userSender;
+  public void setUserSenderId(@NonNull long userSenderId) {
+    this.userSenderId = userSenderId;
   }
 
   /**
@@ -167,16 +167,16 @@ public class Invitation {
    * @return
    */
   @NonNull
-  public long getUserReceiver() {
-    return userReceiver;
+  public long getUserReceiverId() {
+    return userReceiverId;
   }
 
   /**
    * Sets the id of the person receiving the invitation.
-   * @param userReceiver
+   * @param userReceiverId
    */
-  public void setUserReceiver(long userReceiver) {
-    this.userReceiver = userReceiver;
+  public void setUserReceiverId(long userReceiverId) {
+    this.userReceiverId = userReceiverId;
   }
 
   /**

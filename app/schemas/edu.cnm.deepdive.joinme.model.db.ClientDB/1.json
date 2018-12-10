@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c8158fb43cd200404cb47d0cc9350030",
+    "identityHash": "0d6bb583c9f9c38d53244ca3f75107a9",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_sender_id` INTEGER NOT NULL, `user_receiver_id` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "invitationId",
@@ -15,14 +15,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "userSender",
-            "columnName": "user_sender",
+            "fieldPath": "userSenderId",
+            "columnName": "user_sender_id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "userReceiver",
-            "columnName": "user_receiver",
+            "fieldPath": "userReceiverId",
+            "columnName": "user_receiver_id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -85,20 +85,20 @@
             "createSql": "CREATE UNIQUE INDEX `index_invitations_invitation_id` ON `${TABLE_NAME}` (`invitation_id`)"
           },
           {
-            "name": "index_invitations_user_sender",
+            "name": "index_invitations_user_sender_id",
             "unique": true,
             "columnNames": [
-              "user_sender"
+              "user_sender_id"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_invitations_user_sender` ON `${TABLE_NAME}` (`user_sender`)"
+            "createSql": "CREATE UNIQUE INDEX `index_invitations_user_sender_id` ON `${TABLE_NAME}` (`user_sender_id`)"
           },
           {
-            "name": "index_invitations_user_receiver",
+            "name": "index_invitations_user_receiver_id",
             "unique": true,
             "columnNames": [
-              "user_receiver"
+              "user_receiver_id"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_invitations_user_receiver` ON `${TABLE_NAME}` (`user_receiver`)"
+            "createSql": "CREATE UNIQUE INDEX `index_invitations_user_receiver_id` ON `${TABLE_NAME}` (`user_receiver_id`)"
           }
         ],
         "foreignKeys": []
@@ -191,7 +191,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c8158fb43cd200404cb47d0cc9350030\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0d6bb583c9f9c38d53244ca3f75107a9\")"
     ]
   }
 }

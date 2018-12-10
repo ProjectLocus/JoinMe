@@ -43,11 +43,11 @@ public interface InvitationDao {
   @Query("SELECT * FROM invitations WHERE description=:description")
   List<Invitation> selectAllDescription(String description);
 
-  @Query("SELECT * FROM invitations WHERE user_sender=:userSender")
-  List<Invitation> getInvitatiionsForUserSender(long userSender);
+  @Query("SELECT * FROM invitations WHERE user_sender_id=:userSenderId")
+  List<Invitation> getInvitatiionsForUserSender(long userSenderId);
 
-  @Query("SELECT * FROM invitations WHERE user_receiver=:userReceiver")
-  List<Invitation> getInvitationsForUserReceiver(long userReceiver);
+  @Query("SELECT * FROM invitations WHERE user_receiver_id=:userReceiverId")
+  List<Invitation> getInvitationsForUserReceiver(long userReceiverId);
 
   @Query("SELECT * FROM invitations WHERE title=:title")
   List<Invitation> getAllTitle(String title);

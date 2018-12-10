@@ -266,6 +266,11 @@ public class MainActivity extends AppCompatActivity
     });
   }
 
+  /**
+   * Sends an invitation to a person with a certain recipient ID.
+   * @param inviteToSend
+   * @param recipientId
+   */
   public void sendAnInvitation(Invitation inviteToSend, long recipientId){
     JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
     Call<Invitation> call = service.addInvitation(recipientId, inviteToSend);
@@ -378,7 +383,7 @@ public class MainActivity extends AppCompatActivity
 
   private void initServices() {
     retrofit = new Builder()
-        .baseUrl("http://10.0.2.2:28082/rest/")
+        .baseUrl("http://10.0.2.2:28182/rest/")
         .addConverterFactory(GsonConverterFactory.create())
         .build();
   }
@@ -758,7 +763,7 @@ public class MainActivity extends AppCompatActivity
   }
 
   /**
-   * Gives rest of project access to a lit of people.
+   * Gives rest of project access to a list of people.
    */
   public int getCalledPeopleListType() {
     return calledPeopleListType;
@@ -777,6 +782,11 @@ public class MainActivity extends AppCompatActivity
 
   private class ClientDBTask extends AsyncTask<Void, Void, Void> {
 
+    /**
+     * Creates an instance of the Client database to build.
+     * @param voids
+     * @return
+     */
     @Override
     protected Void doInBackground(Void... voids) {
       PersonDao personDao = clientDB.getPersonDao();
@@ -814,8 +824,9 @@ public class MainActivity extends AppCompatActivity
   private class UpdateFirstTimeUserTask extends AsyncTask<Person, Void, Void> {
 
     /**
-     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
-     * the email and user name data into the Person entity.
+     *
+     * @param people
+     * @return
      */
     @Override
     protected Void doInBackground(Person... people) {
@@ -829,8 +840,9 @@ public class MainActivity extends AppCompatActivity
   private class UpdateDeviceUserTask extends AsyncTask<Person, Void, Void> {
 
     /**
-     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
-     * the email and user name data into the Person entity.
+     * Updates
+     * @param people
+     * @return
      */
     @Override
     protected Void doInBackground(Person... people) {
@@ -842,10 +854,6 @@ public class MainActivity extends AppCompatActivity
 
   private class ReplaceNonDeviceUsers extends AsyncTask<Person, Void, List<Person>> {
 
-    /**
-     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
-     * the email and user name data into the Person entity.
-     */
     @Override
     protected List<Person> doInBackground(Person... people) {
       List<Person> tempPeople = clientDB.getPersonDao().selectAll();
@@ -874,10 +882,6 @@ public class MainActivity extends AppCompatActivity
 
   private class AddInvitesTask extends AsyncTask<Invitation, Void, Void> {
 
-    /**
-     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
-     * the email and user name data into the Person entity.
-     */
     @Override
     protected Void doInBackground(Invitation... invitations) {
       clientDB.getInvitationDao().insert(Arrays.asList(invitations));
@@ -888,10 +892,6 @@ public class MainActivity extends AppCompatActivity
 
   private class UpdateSentInvitations extends AsyncTask<Void, Void, List<Invitation>> {
 
-    /**
-     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
-     * the email and user name data into the Person entity.
-     */
     @Override
     protected List<Invitation> doInBackground(Void... voids) {
       return clientDB.getInvitationDao().getInvitatiionsForUserSender(deviceUser.getPersonId());
@@ -906,10 +906,6 @@ public class MainActivity extends AppCompatActivity
 
   private class UpdateReceivedInvitations extends AsyncTask<Void, Void, List<Invitation>> {
 
-    /**
-     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
-     * the email and user name data into the Person entity.
-     */
     @Override
     protected List<Invitation> doInBackground(Void... voids) {
       return clientDB.getInvitationDao().getInvitationsForUserReceiver(deviceUser.getPersonId());
@@ -922,22 +918,44 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
+  /**
+   * Returns a list of invitations that were sent by the current person.
+   * @return
+   */
   public List<Invitation> getInvitesSentByMe() {
     return invitesSentByMe;
   }
 
+  /**
+   * Returns a list of invitations that were sent to the current user.
+   * @return
+   */
   public List<Invitation> getInvitesToMe() {
     return invitesToMe;
   }
 
+  /**
+   * Returns a list of people that are around the current person.
+   * @return
+   */
   public List<Person> getPeopleAroundMeList() {
     return peopleAroundMeList;
   }
 
+  /**
+   * Allows a fragment to build a recycler view based on whether the invitation was sent by the current person,
+   * or received by you.
+   * @return
+   */
   public boolean isUseInviteListToMeForRV() {
     return useInviteListToMeForRV;
   }
 
+  /**
+   * Allows rest of project to discern whever an invitation was sent by the current person, or received
+   * by the current person.
+   * @param useInviteListToMeForRV
+   */
   public void setUseInviteListToMeForRV(boolean useInviteListToMeForRV) {
     this.useInviteListToMeForRV = useInviteListToMeForRV;
   }

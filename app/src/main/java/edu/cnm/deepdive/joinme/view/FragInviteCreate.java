@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,12 +20,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import edu.cnm.deepdive.joinme.R;
 import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.db.ClientDB;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
+import java.util.List;
 
 /**
  * Class for creating an invitation. The class grabs he inputed data and sets it in the Client
@@ -41,11 +45,15 @@ public class FragInviteCreate extends Fragment {
   private Button doneButton;
   private Context context;
   private View view;
+  private RecyclerView recyclerView;
+  private List<Person> persons;
+
 
   private FragInviteCreateListener fragInviteCreateListener;
 
   public interface FragInviteCreateListener {
     void sendAnInvitation(Invitation inviteToSend, long recipientId);
+    MainActivity getParentActivity();
   }
 
   @Nullable
@@ -55,6 +63,7 @@ public class FragInviteCreate extends Fragment {
     view = inflater.inflate(R.layout.fragment_invite_create, container, false);
     initViews();
     initButton();
+    initRecyclerView();
     return view;
   }
 
@@ -68,6 +77,15 @@ public class FragInviteCreate extends Fragment {
    // inviteCreateDate.addTextChangedListener(textWatcher2);
     inviteCreateDescription = view.findViewById(R.id.et_invitation_create_description);
     //inviteCreateDescription.addTextChangedListener(textWatcher3);
+  }
+
+  private void initRecyclerView() {
+    recyclerView = view.findViewById(R.id.rv_frag_people_rv_peoplelist);
+    persons = fragInviteCreateListener.getParentActivity().getPeopleAroundMeList();
+    PeopleAdapter adapter = new PeopleAdapter(getActivity(), persons, getContext());
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    recyclerView.setAdapter(adapter);
+    Glide.with(this);
   }
 
 //  private TextWatcher textWatcher = new TextWatcher() {
@@ -184,7 +202,7 @@ public class FragInviteCreate extends Fragment {
           .selectAllDate(strings[0]);
       if (invitation == null) {
         invitation = new Invitation();
-        invitation.setUserSender(((MainActivity) getActivity()).getPersonId());
+        invitation.setUserSenderId(((MainActivity) getActivity()).getPersonId());
         invitation.setTitle(strings[0]);
         invitation.setLocation(strings[1]);
         invitation.setDate(strings[2]);
