@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity
   private boolean beginUserUpdates = false;
   private SharedPreferences sharedPreferences;
   private SharedPreferences.Editor editor;
-  private List<Person> peopleAroundMeList;
+  private List<Person> peopleAroundMeList = new LinkedList<>();
   private List<Invitation> invitesToMe = new LinkedList<>();
   private List<Invitation> invitesSentByMe = new LinkedList<>();
   private boolean useInviteListToMeForRV = false;
