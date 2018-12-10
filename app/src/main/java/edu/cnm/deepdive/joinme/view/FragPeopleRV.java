@@ -34,6 +34,9 @@ public class FragPeopleRV extends Fragment {
   private DummyInvitationGenerator dummyInvitationGenerator;
 
 
+  /**
+   * Public interface listener.
+   */
   public interface FragPeopleRVListener {
 
     int getCalledPeopleListType();

@@ -16,6 +16,7 @@ import edu.cnm.deepdive.joinme.model.entity.Invitation;
 
 /**
  * The Main circle button view after signing in. Also defines which buttons go to which fragment.
+ * Credit to <a href="https://github.com/Ramotion">Ramotion</a> for developing this view.
  */
 public class FragMainMenu extends Fragment {
   private static final String TAG = "FragMainMenu";
@@ -24,6 +25,7 @@ public class FragMainMenu extends Fragment {
   private Invitation invitation;
   private Context context;
   private FragMainMenuListener fragMainMenuListener;
+  private View view;
 
   public interface FragMainMenuListener{
     MainActivity getParentActivity();
@@ -34,13 +36,13 @@ public class FragMainMenu extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View theView = inflater.inflate(R.layout.fragment_main_screen_ar, container, false);
-    initViews(theView);
+    view = inflater.inflate(R.layout.fragment_main_screen_ar, container, false);
+    initViews();
 
-    return theView;
+    return view;
   }
 
-  private void initViews(View view) {
+  private void initViews() {
     final CircleMenuView menu = view.findViewById(R.id.cm_fragmainscreen_menu);
     menu.setEventListener(new CircleMenuView.EventListener() {
       @Override

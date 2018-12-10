@@ -27,6 +27,14 @@ public class DummyInvitationGenerator {
   private static Random rng = new Random();
 
 
+  /**
+   * Gets a list of the dummy invitations to inflate data.
+   * @param isReceivedInvite
+   * @param theUser
+   * @param context
+   * @param xDummies
+   * @return
+   */
   public static List<Invitation> getXDummyInvitations(boolean isReceivedInvite, Person theUser, Context context, int xDummies){
 
    List<Invitation> dummyInvitations = new LinkedList<>();

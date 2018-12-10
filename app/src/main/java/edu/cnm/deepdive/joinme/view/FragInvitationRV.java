@@ -42,6 +42,9 @@ public class FragInvitationRV extends Fragment {
   private View view;
 
 
+  /**
+   * A public listener.
+   */
   public interface FragInvitationRVListener{
     int getCalledInviteListType();
     List<Invitation> getInvitesForRV();

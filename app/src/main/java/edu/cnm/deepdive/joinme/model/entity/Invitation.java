@@ -21,23 +21,38 @@ import android.support.annotation.NonNull;
 )
 public class Invitation {
 
+  /**
+   * This is the invitation's unique id
+   */
   @NonNull
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "invitation_id")
   private long invitationId;
 
+  /**
+   * This is the sender's id.
+   */
   @NonNull
   @ColumnInfo(name = "user_sender_id")
   private long userSenderId;
 
+  /**
+   * This is the receiver's id.
+   */
   @NonNull
   @ColumnInfo(name = "user_receiver_id")
   private long userReceiverId;
 
+  /**
+   * This is the invitations inputed date.
+   */
   @NonNull
   @ColumnInfo(name = "date")
   private String date;
 
+  /**
+   * This is the invitation inputed description.
+   */
   @NonNull
   @ColumnInfo(name = "description")
   private String description;
@@ -46,23 +61,36 @@ public class Invitation {
 //  @ColumnInfo(name = "created")
 //  private String created;
 
+  /**
+   * This is the invitations inputed title.
+   */
   @NonNull
   @ColumnInfo(name = "title")
   private String title;
 
+  /**
+   * This is the invitations inputed location.
+   */
   @NonNull
   @ColumnInfo(name = "location")
   private String location;
 
-//  @NonNull
-//  @ColumnInfo(name = "time")
-//  private String time;
+  /**
+   * This is the invitation's inputed time.
+   */
+  @NonNull
+  @ColumnInfo(name = "time")
+  private String time;
 
-
+  /**
+   * Tells true or false if the invitation was delivered.
+   */
   @ColumnInfo(name = "wasDelivered")
   private boolean wasDelivered;
 
-
+  /**
+   * Tells if the receiver accepted the invitation.
+   */
   @ColumnInfo(name = "willAttend")
   private boolean willAttend;
 
@@ -223,18 +251,34 @@ public class Invitation {
 //  }
 
 
+  /**
+   * If was delivered.
+   * @return
+   */
   public boolean isWasDelivered() {
     return wasDelivered;
   }
 
+  /**
+   * Sets if was delivered.
+   * @param wasDelivered
+   */
   public void setWasDelivered(boolean wasDelivered) {
     this.wasDelivered = wasDelivered;
   }
 
+  /**
+   * If will attend.
+   * @return
+   */
   public boolean isWillAttend() {
     return willAttend;
   }
 
+  /**
+   * Sets if will attend.
+   * @param willAttend
+   */
   public void setWillAttend(boolean willAttend) {
     this.willAttend = willAttend;
   }

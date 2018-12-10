@@ -12,6 +12,9 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+/**
+ * Main back end communication interface to allow communication from front end to back end.
+ */
 public interface JoinMeBackEndService {
 
   /**

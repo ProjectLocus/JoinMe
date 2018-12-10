@@ -24,7 +24,7 @@ import edu.cnm.deepdive.joinme.model.entity.Person;
 import java.security.SecureRandom;
 
 /**
- * The type Sign in activity.
+ * The main Sign in activity.
  */
 public class SignInActivity extends AppCompatActivity {
 
@@ -53,6 +53,13 @@ public class SignInActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Grabs the necessary information from Google to successfully create a new person.
+   * If an image doesn't exist for a person, a default image is given.
+   * @param requestCode
+   * @param resultCode
+   * @param data
+   */
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     if(requestCode == REQUEST_CODE){
@@ -151,6 +158,12 @@ public class SignInActivity extends AppCompatActivity {
 
     private Context context;
 
+    /**
+     * Gets an instance of the Client database and grabs the person's Google Id to verify that the
+     * current person is already logged in.
+     * @param strings
+     * @return
+     */
     @Override
     protected Person doInBackground(String... strings) {
       Person person = ClientDB.getInstance(getApplicationContext()).getPersonDao().selectGoogleUserId(
@@ -158,6 +171,10 @@ public class SignInActivity extends AppCompatActivity {
       return person;
     }
 
+    /**
+     * If current person is logged in, they go straight to the Main Menu.
+     * @param person
+     */
     @Override
     protected void onPostExecute(Person person) {
       super.onPostExecute(person);

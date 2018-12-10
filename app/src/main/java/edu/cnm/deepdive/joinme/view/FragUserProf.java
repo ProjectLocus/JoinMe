@@ -32,6 +32,9 @@ public class FragUserProf extends Fragment {
   private FragUserProfListener fragUserProfListener;
   private View view;
 
+  /**
+   * Public interface listener.
+   */
   public interface FragUserProfListener {
 
   }
@@ -66,6 +69,11 @@ public class FragUserProf extends Fragment {
 
   private class QueryTask extends AsyncTask<Void, Void, Person> {
 
+    /**
+     * Gets an instance of the Client database and grabs the current person's id.
+     * @param voids
+     * @return
+     */
     @Override
     protected Person doInBackground(Void... voids) {
       Person person = ClientDB.getInstance(getContext()).getPersonDao().selectPerson(
@@ -74,6 +82,11 @@ public class FragUserProf extends Fragment {
       return person;
     }
 
+    /**
+     * With the current person's id, both the display name and user profile pic are inflated with that
+     * person's information.
+     * @param person
+     */
     @Override
     protected void onPostExecute(Person person) {
       userDisplayName.setText(person.getDisplayName());

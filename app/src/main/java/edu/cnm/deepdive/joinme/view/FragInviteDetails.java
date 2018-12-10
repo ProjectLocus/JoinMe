@@ -36,6 +36,9 @@ public class FragInviteDetails extends Fragment {
 
   private FragInviteDetailsListener fragInviteDetailsListener;
 
+  /**
+   * Public listener.
+   */
   public interface FragInviteDetailsListener {
     ClientDB getClientDB();
   }
@@ -74,6 +77,11 @@ public class FragInviteDetails extends Fragment {
 
   private class QueryTask extends AsyncTask<Void, Void, Invitation> {
 
+    /**
+     * Grabs an instance of the Client database and queries a certain invitation id.
+     * @param voids
+     * @return
+     */
     @Override
     protected Invitation doInBackground(Void... voids) {
       Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao()
@@ -81,6 +89,11 @@ public class FragInviteDetails extends Fragment {
       return invitation;
     }
 
+    /**
+     * If the invitation isn't null, the invitation info is inserted into the associated text views,
+     * else it's hardcoded in (for now.)
+     * @param invitation
+     */
     @Override
     protected void onPostExecute(Invitation invitation) {
       if (invitation != null) {
@@ -101,6 +114,11 @@ public class FragInviteDetails extends Fragment {
 
   private class DeleteInviteTask extends AsyncTask<Invitation, Void, Void> {
 
+    /**
+     * The invitation is deleted upon being inserted into the backed database.
+     * @param invitations
+     * @return
+     */
     @Override
     protected Void doInBackground(Invitation... invitations) {
       if(invitations[0]!=null){
@@ -112,6 +130,11 @@ public class FragInviteDetails extends Fragment {
 
   private class UpdateInviteTask extends AsyncTask<Invitation, Void, Void> {
 
+    /**
+     * Invitation is updated upon any changes.
+     * @param invitations
+     * @return
+     */
     @Override
     protected Void doInBackground(Invitation... invitations) {
       if(invitations[0]!=null){

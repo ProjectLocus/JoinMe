@@ -30,7 +30,7 @@ import edu.cnm.deepdive.joinme.model.entity.Person;
 import java.util.List;
 
 /**
- * Class for creating an invitation. The class grabs he inputed data and sets it in the Client
+ * Class for creating an invitation. The class grabs the inputed data and sets it in the Client
  * database with both an invitation ID and person ID to then be sent out.
  */
 public class FragInviteCreate extends Fragment {
@@ -196,6 +196,11 @@ public class FragInviteCreate extends Fragment {
 
   private class QueryTask extends AsyncTask<String, Void, Long> {
 
+    /**
+     * Gets an instance of the Client database to create a new Invitation.
+     * @param strings
+     * @return
+     */
     @Override
     protected Long doInBackground(String... strings) {
       Invitation invitation = ClientDB.getInstance(getContext()).getInvitationDao()
@@ -212,6 +217,10 @@ public class FragInviteCreate extends Fragment {
       return invitation.getInvitationId();
     }
 
+    /**
+     * Sets the new Invitation with an invitation id.
+     * @param aLong
+     */
     @Override
     protected void onPostExecute(Long aLong) {
       ((MainActivity) getActivity()).setInvitationId(aLong);
