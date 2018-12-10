@@ -3,15 +3,15 @@ A social media invitation app with a focus on connecting people on a human level
 to send invitations to other people to actual events such as enjoy a cup of coffee or attend an office party.
 
 ## Team Members:
-Alex Rael:
+* **Alex Rael**:
 Did most of the Room Persistence manipulation throughout the app. That includes grabbing the necessary
 information to create a new user, displaying that info in the user profile section, grabbing info from
 the create invitation fragment and displaying it in the new invitation fragment. Also setup most of the
 Retrofit calls to communicate with the backend.
 
-Dina Rabanal:
+* **Dina Rabanal**:
 
-Brian Bleck:
+* **Brian Bleck**:
 
 ## User Stories:
 * As a user I want to be able to send an invitation to other people who I can see.
@@ -25,7 +25,7 @@ Brian Bleck:
 * As a store owner I want to be able to inform users of current sales.
   * As a bar owner I want to be able to inform users of bar events.
 * As a community organizer I want to be able to alert people that there is a rally coming together.
-* As a highschooler I want to be able to invite my friends to a party.
+* As a student I want to be able to invite my friends to a party.
 * As a user I want to be able to drop down an event in an area for people to see within that are.
   * As a user I want to be able to see events dropped down by other users within the same area.
 * As a user I want to be able to tell everyone that I've lost my pet.
@@ -43,7 +43,7 @@ Marshmellow.
   * Licenses:
       * [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
       * [Creative Commons Attribution 2.5](https://creativecommons.org/licenses/by/2.5/)
-  * Depencies:
+  * Dependencies:
 ```
 implementation 'com.google.gms:google-services:4.1.0'
 implementation 'com.google.android.gms:play-services-auth:16.0.1'
@@ -54,7 +54,7 @@ implementation 'com.google.android.gms:play-services-location:16.0.0'
   * Licenses:
     * [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
     * [Creative Commons Attribution 2.5](https://creativecommons.org/licenses/by/2.5/)
-  * Depencies:
+  * Dependencies:
 ``` 
 implementation 'android.arch.persistence.room:runtime:1.1.1'
 annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
@@ -74,7 +74,7 @@ implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
 * Glide:
   * Licenses (and other associated Licenses): [Licenses](https://rawcdn.githack.com/bumptech/glide/f7d860412f061e059aa84a42f2563a01ac8c303b/LICENSE)
-  * Depencies:
+  * Dependencies:
 ```
 implementation 'com.github.bumptech.glide:glide:4.8.0'
 annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
@@ -82,7 +82,7 @@ annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
 * Ramotion (Circle Menu):
   * License: [MIT License](https://rawcdn.githack.com/Ramotion/circle-menu-android/c958736ee12b73c41f469d6ceff7956c706233dc/LICENSE)
-  * Depencies:
+  * Dependencies:
 ```
 implementation 'com.ramotion.circlemenu:circle-menu:0.3.1'
 ```

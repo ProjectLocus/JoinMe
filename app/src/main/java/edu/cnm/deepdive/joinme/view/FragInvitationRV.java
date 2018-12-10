@@ -39,6 +39,7 @@ public class FragInvitationRV extends Fragment {
   private FloatingActionButton floatingActionButton;
   private List<Invitation> dummyInvite;
   private List<Invitation> invitationList;
+  private View view;
 
 
   public interface FragInvitationRVListener{
@@ -51,11 +52,11 @@ public class FragInvitationRV extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View theView = inflater.inflate(R.layout.fragment_invitation_rv, container, false);
-    initViews(theView);
+    view = inflater.inflate(R.layout.fragment_invitation_rv, container, false);
+    initViews();
     initData();
     initRecyclerview();
-    return theView;
+    return view;
   }
 
   private void initRecyclerview() {
@@ -81,8 +82,8 @@ public class FragInvitationRV extends Fragment {
 
 
 
-  private void initViews(View theView) {
-    fragmentTitle = theView.findViewById(R.id.tv_frag_invitation_rv_title);
+  private void initViews() {
+    fragmentTitle = view.findViewById(R.id.tv_frag_invitation_rv_title);
     if(fragInvitationRVListener.getParentActivity().isUseInviteListToMeForRV()){
       fragmentTitle.setText("Received Invitations");
       //todo: do whatever needs to be done to visually change things to indicate the list is received invitations
@@ -91,11 +92,11 @@ public class FragInvitationRV extends Fragment {
       //todo: do whatever needs to be done to visually change things to indicate the list is sent invitations
     }
 
-    recyclerView = theView.findViewById(R.id.rv_frag_invitation_rv_invitations);
+    recyclerView = view.findViewById(R.id.rv_frag_invitation_rv_invitations);
     //floatingActionButton = theView.findViewById(R.id.fab_frag_invitation_rv_add);
-    floatingActionButton.setOnClickListener(v -> {
-      goToFragInviteCreate();
-    });
+//    floatingActionButton.setOnClickListener(v -> {
+//      goToFragInviteCreate();
+//    });
   }
 
   @Override
