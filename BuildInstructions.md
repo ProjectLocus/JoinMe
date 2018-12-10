@@ -22,15 +22,13 @@ This Project was built on IntelliJ. Here's some quick instructions to get starte
 2. Make sure you have an active internet connection.
 3. Click on 'Check Out from Version Control'.
 4. Input the above git link to clone the project.
-5. Make sure that the 3rd party libraries and External Services from the [README](https://rawcdn.githack.com/ProjectLocus/JoinMe/7a13faa65ad125e74e50f5d4af6b0d6657facc4a/README.md)
+5. Make sure that the 3rd party libraries and External Services from the [README](https://github.com/ProjectLocus/JoinMe/blob/master/README.md)
 are implemented.
  
-With these instructions, you should be able to successfully build on InelliJ.
+With these instructions, you should be able to successfully build on IntelliJ.
  
 Keep in mind that this app runs on a minimum API level of 23, but has been tested and works on API
 levels 24 - 28.
-  
-##Building with Android Studio
 
 ## Didn't Work?
 1. Make sure JDK 8 is installed.
