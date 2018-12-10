@@ -95,6 +95,9 @@ public class Invitation {
   private boolean willAttend;
 
 
+  /**
+   * A number of times an invitation can be re-shared.
+   */
   @ColumnInfo(name = "degreesRemaining")
   private long degreesRemaining;
 
@@ -283,10 +286,18 @@ public class Invitation {
     this.willAttend = willAttend;
   }
 
+  /**
+   * Gets the degrees remaining.
+   * @return
+   */
   public long getDegreesRemaining() {
     return degreesRemaining;
   }
 
+  /**
+   * Sets how many times an invitation can be reshared.
+   * @param degreesRemaining
+   */
   public void setDegreesRemaining(long degreesRemaining) {
     this.degreesRemaining = degreesRemaining;
   }
