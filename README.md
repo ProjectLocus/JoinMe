@@ -61,6 +61,19 @@ implementation 'android.arch.persistence.room:runtime:1.1.1'
 annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 testImplementation "android.arch.persistence.room:testing:1.1.1"
 ```
+* Room Persistence ORM:
+  * Also add this java compile option directly under the testInstrumentationRunner in your app level 
+build.gradle file:
+```
+javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+            dataBinding {
+                enabled = true
+            }
+        }
+```
 
 * Retrofit and Gson:
   * Licenses: 
@@ -94,3 +107,6 @@ implementation 'com.ramotion.circlemenu:circle-menu:0.3.1'
 ```
 implementation 'de.hdodenhof:circleimageview:2.2.0'
 ```
+
+## Build and User Instructions:
+* [Build instructions](https://github.com/ProjectLocus/JoinMe/blob/master/BuildInstructions.md)
