@@ -75,12 +75,12 @@ public class Invitation {
   @ColumnInfo(name = "location")
   private String location;
 
-  /**
-   * This is the invitation's inputed time.
-   */
-  @NonNull
-  @ColumnInfo(name = "time")
-  private String time;
+//  /**
+//   * This is the invitation's inputed time.
+//   */
+//  @NonNull
+//  @ColumnInfo(name = "time")
+//  private String time;
 
   /**
    * Tells true or false if the invitation was delivered.
