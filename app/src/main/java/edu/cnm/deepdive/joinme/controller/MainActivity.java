@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity
 
   private void initServices() {
     retrofit = new Builder()
-        .baseUrl("http://10.0.2.2:28182/rest/")
+        .baseUrl("http://joinme.us-east-2.elasticbeanstalk.com/rest/")
         .addConverterFactory(GsonConverterFactory.create())
         .build();
   }
