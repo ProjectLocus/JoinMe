@@ -80,7 +80,7 @@ public class FragInviteCreate extends Fragment {
   }
 
   private void initRecyclerView() {
-    recyclerView = view.findViewById(R.id.rv_frag_people_rv_peoplelist);
+    recyclerView = view.findViewById(R.id.rv_invitation_create);
     persons = fragInviteCreateListener.getParentActivity().getPeopleAroundMeList();
     PeopleAdapter adapter = new PeopleAdapter(getActivity(), persons, getContext());
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

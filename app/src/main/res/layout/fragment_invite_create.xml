@@ -86,6 +86,7 @@
         android:text="Enter"/>
 
       <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_invitation_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bt_invitation_done"
