@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity
   private SharedPreferences sharedPreferences;
   private SharedPreferences.Editor editor;
   private List<Person> peopleAroundMeList;
-  private List<Invitation> invitesToMe;
-  private List<Invitation> invitesSentByMe;
+  private List<Invitation> invitesToMe = new LinkedList<>();
+  private List<Invitation> invitesSentByMe = new LinkedList<>();
   private boolean useInviteListToMeForRV = false;
   private int retries = 7;
   private int invitationRetries = 7;

@@ -14,10 +14,10 @@ import android.support.annotation.NonNull;
     tableName = "invitations",
     indices = {@Index(value = "invitation_id", unique = true),
         @Index(value = "user_sender", unique = true),
-        @Index(value = "user_receiver", unique = true)},
-    foreignKeys = {
-        @ForeignKey(entity = Person.class, parentColumns = "person_id",
-            childColumns = "user_sender")}
+        @Index(value = "user_receiver", unique = true)}
+//    foreignKeys = {
+//        @ForeignKey(entity = Person.class, parentColumns = "person_id",
+//            childColumns = "user_sender")}
 )
 public class Invitation {
 

@@ -1,6 +1,7 @@
 # JoinMe
 A social media invitation app with a focus on connecting people on a human level by allowing users 
 to send invitations to other people to actual events such as enjoy a cup of coffee or attend an office party.
+Here's our [Apache License 2.0](https://rawcdn.githack.com/ProjectLocus/JoinMe/dc49ee484daa1a7591474ff979f394719ab53cbf/LICENSE)
 
 ## Team Members:
 * **Alex Rael**:

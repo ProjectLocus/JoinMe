@@ -79,11 +79,11 @@ public class FragMainMenu extends Fragment {
             MainActivity.switchFragment(new FragPeopleRV(), true, "",getFragmentManager());
             break;
           case 2:
-            fragMainMenuListener.getParentActivity().setUseInviteListToMeForRV(false);
             MainActivity.switchFragment(new FragInviteCreate(), true, "",getFragmentManager());
             break;
           case 3:
-            MainActivity.switchFragment(new FragInviteDetails(), true, "", getFragmentManager());
+            fragMainMenuListener.getParentActivity().setUseInviteListToMeForRV(false);
+            MainActivity.switchFragment(new FragInvitationRV(), true, "", getFragmentManager());
             break;
           case 4:
             fragMainMenuListener.getParentActivity().setUseInviteListToMeForRV(true);
