@@ -74,7 +74,7 @@ public interface JoinMeBackEndService {
    * @param personId
    * @return
    */
-  @GET("people/{personId}/invitation")
+  @GET("people/{personId}/invitations")
   Call<List<Invitation>> getAllInvitationsPerPerson(@Path("personId") long personId);
 
   /**
@@ -86,7 +86,7 @@ public interface JoinMeBackEndService {
    * @param invitation
    * @return
    */
-  @GET("people/{personId}/invitation/{invitationId}")
+  @GET("people/{personId}/invitations/{invitationId}")
   Call<Invitation> getInvitationPerPerson(@Path("personId") long personId, @Body Person person, @Path("invitationId") long invitationId,
       @Body Invitation invitation);
 
@@ -94,13 +94,12 @@ public interface JoinMeBackEndService {
    * Creates a new invitation by the person
    *
    * @param personId
-   * @param invitationId
+   * @param
    * @param invitation
    * @return
    */
-  @POST("people/{personId}/invitation")
-  Call<Invitation> addInvitation(@Path("personId") long personId, @Path("invitationId") long invitationId,
-      @Body Invitation invitation);
+  @POST("people/{personId}/invitations")
+  Call<Invitation> addInvitation(@Path("personId") long personId, @Body Invitation invitation);
 
   /**
    * Updates a specific invitation, that a person created
@@ -109,7 +108,7 @@ public interface JoinMeBackEndService {
    * @param invitationId
    * @return
    */
-  @PUT("people/{personId}/invitation/{invitationId}")
+  @PUT("people/{personId}/invitations/{invitationId}")
   Call<Invitation> updateInvitation(@Path("personId") long personId, @Path("invitationId") long invitationId);
 
   /**
@@ -119,7 +118,7 @@ public interface JoinMeBackEndService {
    * @param invitationId
    * @return
    */
-  @DELETE("people/{personId}/invitation/{invitationId}")
+  @DELETE("people/{personId}/invitations/{invitationId}")
   Call<Invitation> deleteInvitation(@Path("personId") long personId, @Path("invitationId") long invitationId);
 
   /**

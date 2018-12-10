@@ -45,7 +45,7 @@ public class FragInviteCreate extends Fragment {
   private FragInviteCreateListener fragInviteCreateListener;
 
   public interface FragInviteCreateListener {
-
+    void sendAnInvitation(Invitation inviteToSend, long recipientId);
   }
 
   @Nullable
@@ -162,18 +162,19 @@ public class FragInviteCreate extends Fragment {
       FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
           .addToBackStack(null);
       fragmentTransaction.replace(R.id.fl_main_frag_container, new FragMainMenu()).commit();
+      //todo:  send the invitation to the server via: fragInviteCreateListener.sendAnInvitation(inviteToSend, recipientId);
     });
   }
 
-//  @Override
-//  public void onAttach(Context context) {
-//    super.onAttach(context);
-//    try {
-//      fragInviteCreateListener = (FragInviteCreateListener) getActivity();
-//    } catch (ClassCastException e) {
-//      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
-//    }
-//  }
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    try {
+      fragInviteCreateListener = (FragInviteCreateListener) getActivity();
+    } catch (ClassCastException e) {
+      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
+    }
+  }
 
   private class QueryTask extends AsyncTask<String, Void, Long> {
 

@@ -23,6 +23,11 @@ public class FragMainMenu extends Fragment {
   private CircleMenuView circleMenuView;
   private Invitation invitation;
   private Context context;
+  private FragMainMenuListener fragMainMenuListener;
+
+  public interface FragMainMenuListener{
+    MainActivity getParentActivity();
+  }
 
 
   @Nullable
@@ -74,12 +79,14 @@ public class FragMainMenu extends Fragment {
             MainActivity.switchFragment(new FragPeopleRV(), true, "",getFragmentManager());
             break;
           case 2:
+            fragMainMenuListener.getParentActivity().setUseInviteListToMeForRV(false);
             MainActivity.switchFragment(new FragInviteCreate(), true, "",getFragmentManager());
             break;
           case 3:
             MainActivity.switchFragment(new FragInviteDetails(), true, "", getFragmentManager());
             break;
           case 4:
+            fragMainMenuListener.getParentActivity().setUseInviteListToMeForRV(true);
             MainActivity.switchFragment(new FragInvitationRV(), true, "",getFragmentManager());
             break;
         }
@@ -91,7 +98,7 @@ public class FragMainMenu extends Fragment {
   public void onAttach(Context context) {
     super.onAttach(context);
     try {
-      //fragMainMenuListener = (FragMainMenuListener) getActivity();
+      fragMainMenuListener = (FragMainMenuListener) getActivity();
     } catch (ClassCastException e) {
       Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
     }

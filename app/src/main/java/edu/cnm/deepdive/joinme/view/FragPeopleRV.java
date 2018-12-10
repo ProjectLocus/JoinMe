@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
 import edu.cnm.deepdive.joinme.model.utility.DummyPersonGenerator;
@@ -29,11 +30,15 @@ public class FragPeopleRV extends Fragment {
   private FragPeopleRVListener fragPeopleRVListener;
   private TextView listTitle;
   private RecyclerView recyclerView;
+  private List<Person> persons;
   private DummyInvitationGenerator dummyInvitationGenerator;
 
 
-  public interface FragPeopleRVListener{
+  public interface FragPeopleRVListener {
+
     int getCalledPeopleListType();
+
+    MainActivity getParentActivity();
   }
 
   @Nullable
@@ -47,14 +52,17 @@ public class FragPeopleRV extends Fragment {
     listTitle = theView.findViewById(R.id.tv_frag_people_rv_title);
     listTitle.setText("People Near Me");
     recyclerView = theView.findViewById(R.id.rv_frag_people_rv_peoplelist);
-
-    List<Person> persons = DummyPersonGenerator.getXDummyPersonsNoDeviceUser(10,getContext());
-
+    persons = fragPeopleRVListener.getParentActivity().getPeopleAroundMeList();
     PeopleAdapter adapter = new PeopleAdapter(getActivity(), persons, getContext());
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
     Glide.with(this);
     return theView;
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
   }
 
   private void initData() {
@@ -67,14 +75,16 @@ public class FragPeopleRV extends Fragment {
 
   private void initRecyclerview(View theView) {
   }
-    @Override
-      public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-          fragPeopleRVListener = (FragPeopleRVListener) getActivity();
-        } catch (ClassCastException e) {
-          Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
-        }
+
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    try {
+      fragPeopleRVListener = (FragPeopleRVListener) getActivity();
+    } catch (ClassCastException e) {
+      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
+    }
   }
 
   // TODO Add gson retrofit service object setup function here.

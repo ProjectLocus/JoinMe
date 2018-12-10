@@ -43,10 +43,15 @@ import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.service.JoinMeBackEndService;
 import edu.cnm.deepdive.joinme.view.FragInvitationRV;
+import edu.cnm.deepdive.joinme.view.FragInvitationRV.FragInvitationRVListener;
 import edu.cnm.deepdive.joinme.view.FragInviteCreate;
+import edu.cnm.deepdive.joinme.view.FragInviteCreate.FragInviteCreateListener;
 import edu.cnm.deepdive.joinme.view.FragInviteDetails;
+import edu.cnm.deepdive.joinme.view.FragInviteDetails.FragInviteDetailsListener;
 import edu.cnm.deepdive.joinme.view.FragMainMenu;
+import edu.cnm.deepdive.joinme.view.FragMainMenu.FragMainMenuListener;
 import edu.cnm.deepdive.joinme.view.FragPeopleRV;
+import edu.cnm.deepdive.joinme.view.FragPeopleRV.FragPeopleRVListener;
 import edu.cnm.deepdive.joinme.view.FragUserProf;
 import edu.cnm.deepdive.joinme.view.SignInActivity;
 import java.util.Arrays;
@@ -64,7 +69,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * ID and Person ID and build the Client Database.
  */
 public class MainActivity extends AppCompatActivity
-    //implements FragInvitationRVListener,
+    implements FragInvitationRVListener, FragMainMenuListener, FragPeopleRVListener,
+    FragInviteDetailsListener, FragInviteCreateListener
     //FragUserProfListener, FragPeopleRVListener, FragInviteCreateListener,
     //FragInviteDetailsListener
 {
@@ -86,8 +92,8 @@ public class MainActivity extends AppCompatActivity
   public static final int ERROR_DIALOG_REQUEST = 9001;
   public static final String NOT_FIRST_TIME_USER_KEY = "not_first_time_user_key";
   public static final String MY_PREFERENCES_KEY = "edu.cnm.deepdive.joinme.shared_pref_key";
-  private static final int UPDATE_INTERVAL_MS = 30000;
-  private static final int FASTEST_INTERVAL_MS = 25000;
+  private static final int UPDATE_INTERVAL_MS = 15000;
+  private static final int FASTEST_INTERVAL_MS = 10000;
   private static boolean SHOULD_FILL_DB_W_TEST = false;
   private static boolean IS_FIRST_TIME_USER = true;
   private Toolbar toolbar;
@@ -115,7 +121,9 @@ public class MainActivity extends AppCompatActivity
   private SharedPreferences sharedPreferences;
   private SharedPreferences.Editor editor;
   private List<Person> peopleAroundMeList;
-  private List<Invitation> newInvitesFromServerForMe;
+  private List<Invitation> invitesToMe;
+  private List<Invitation> invitesSentByMe;
+  private boolean useInviteListToMeForRV = false;
   private int retries = 7;
   private int invitationRetries = 7;
   private int callbackInt = 0;
@@ -184,7 +192,7 @@ public class MainActivity extends AppCompatActivity
   private void updateUsingAPI() {
     updatePeopleNearMe();
     updateInvitations();
-     beginUserUpdates = true;
+    beginUserUpdates = true;
   }
 
   private void updateInvitations() {
@@ -198,10 +206,14 @@ public class MainActivity extends AppCompatActivity
         try {
           Log.d(TAG, "updateinvitation onResponse: #" + invitationCalls++);
           if(response.body().size()>0){
+            Log.d(TAG, "onResponse: invitation is being added");
             new AddInvitesTask().execute(response.body().toArray(new Invitation[0]));
+          }else{
+            Log.d(TAG, "onResponse: no invitations in body");
           }
         } catch (NullPointerException e) {
           //by design, do nothing. API returned unexpected and unusable body.
+          Log.d(TAG, "onResponse: response was a null pointer");
         }
       }
 
@@ -217,6 +229,8 @@ public class MainActivity extends AppCompatActivity
         }
       }
     });
+    new UpdateReceivedInvitations().execute();
+    new UpdateSentInvitations().execute();
   }
 
 
@@ -249,6 +263,27 @@ public class MainActivity extends AppCompatActivity
           retries = 7;
           Toast.makeText(getBaseContext(), "Failed to update list of people nearby, check internet connection." , Toast.LENGTH_LONG).show();
         }
+      }
+    });
+  }
+
+  public void sendAnInvitation(Invitation inviteToSend, long recipientId){
+    JoinMeBackEndService service = retrofit.create(JoinMeBackEndService.class);
+    Call<Invitation> call = service.addInvitation(recipientId, inviteToSend);
+    call.enqueue(new Callback<Invitation>() {
+      @Override
+      public void onResponse(Call<Invitation> call, Response<Invitation> response) {
+        try{
+          Toast.makeText(getBaseContext(), "Invitation sent.", Toast.LENGTH_SHORT).show();
+          new AddInvitesTask().execute(response.body());
+        }catch (NullPointerException e){
+          //by design, do nothing.  Unknown error where server sent poorly formed body.
+        }
+      }
+
+      @Override
+      public void onFailure(Call<Invitation> call, Throwable t) {
+        Toast.makeText(getBaseContext(), "Invitation could not be delivered to server.", Toast.LENGTH_SHORT).show();
       }
     });
   }
@@ -714,11 +749,30 @@ public class MainActivity extends AppCompatActivity
     return calledInviteListType;
   }
 
+  @Override
+  public List<Invitation> getInvitesForRV() {
+    if(useInviteListToMeForRV){
+      return invitesToMe;
+    }else{
+      return invitesSentByMe;
+    }
+  }
+
   /**
    * Gives rest of project access to a lit of people.
    */
   public int getCalledPeopleListType() {
     return calledPeopleListType;
+  }
+
+  @Override
+  public MainActivity getParentActivity() {
+    return this;
+  }
+
+  @Override
+  public ClientDB getClientDB() {
+    return clientDB;
   }
 
 
@@ -832,5 +886,62 @@ public class MainActivity extends AppCompatActivity
     }
 
   }
+
+  private class UpdateSentInvitations extends AsyncTask<Void, Void, List<Invitation>> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected List<Invitation> doInBackground(Void... voids) {
+      return clientDB.getInvitationDao().getInvitatiionsForUserSender(deviceUser.getPersonId());
+    }
+
+    @Override
+    protected void onPostExecute(List<Invitation> sentInvites) {
+      invitesSentByMe = new LinkedList<>();
+      invitesSentByMe = sentInvites;
+    }
+  }
+
+  private class UpdateReceivedInvitations extends AsyncTask<Void, Void, List<Invitation>> {
+
+    /**
+     * Creates an instance of the Client database, grabs a query from the Person Dao, and inserts
+     * the email and user name data into the Person entity.
+     */
+    @Override
+    protected List<Invitation> doInBackground(Void... voids) {
+      return clientDB.getInvitationDao().getInvitationsForUserReceiver(deviceUser.getPersonId());
+    }
+
+    @Override
+    protected void onPostExecute(List<Invitation> receivedInvites) {
+      invitesToMe = new LinkedList<>();
+      invitesToMe = receivedInvites;
+    }
+  }
+
+  public List<Invitation> getInvitesSentByMe() {
+    return invitesSentByMe;
+  }
+
+  public List<Invitation> getInvitesToMe() {
+    return invitesToMe;
+  }
+
+  public List<Person> getPeopleAroundMeList() {
+    return peopleAroundMeList;
+  }
+
+  public boolean isUseInviteListToMeForRV() {
+    return useInviteListToMeForRV;
+  }
+
+  public void setUseInviteListToMeForRV(boolean useInviteListToMeForRV) {
+    this.useInviteListToMeForRV = useInviteListToMeForRV;
+  }
+
 
 }

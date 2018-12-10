@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.TextView;
 import edu.cnm.deepdive.joinme.R;
+import edu.cnm.deepdive.joinme.controller.MainActivity;
 import edu.cnm.deepdive.joinme.model.entity.Invitation;
 import edu.cnm.deepdive.joinme.model.entity.Person;
 import edu.cnm.deepdive.joinme.model.utility.DummyInvitationGenerator;
@@ -37,10 +38,13 @@ public class FragInvitationRV extends Fragment {
   private RecyclerView recyclerView;
   private FloatingActionButton floatingActionButton;
   private List<Invitation> dummyInvite;
+  private List<Invitation> invitationList;
 
 
   public interface FragInvitationRVListener{
     int getCalledInviteListType();
+    List<Invitation> getInvitesForRV();
+    MainActivity getParentActivity();
   }
 
   @Nullable
@@ -55,7 +59,7 @@ public class FragInvitationRV extends Fragment {
   }
 
   private void initRecyclerview() {
-    InvitationAdapter adapter = new InvitationAdapter(getActivity(),dummyInvite, getContext());
+    InvitationAdapter adapter = new InvitationAdapter(getActivity(), invitationList, getContext());
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
 
@@ -67,8 +71,8 @@ public class FragInvitationRV extends Fragment {
   }
 
   private void initData() {
-    dummyInvite = DummyInvitationGenerator.getXDummyInvitations(true,new Person(), getContext(),10);
-
+//    dummyInvite = DummyInvitationGenerator.getXDummyInvitations(true,new Person(), getContext(),10);
+    invitationList = fragInvitationRVListener.getInvitesForRV();
 
     //reference to list
     //ref = dummy invitationGenerator.get.xdummyinvit
@@ -79,7 +83,14 @@ public class FragInvitationRV extends Fragment {
 
   private void initViews(View theView) {
     fragmentTitle = theView.findViewById(R.id.tv_frag_invitation_rv_title);
-    fragmentTitle.setText("Your Received Invites!");
+    if(fragInvitationRVListener.getParentActivity().isUseInviteListToMeForRV()){
+      fragmentTitle.setText("Your Received Invites!");
+      //todo: do whatever needs to be done to visually change things to indicate the list is received invitations
+    }else{
+      fragmentTitle.setText("Invitations You've Sent");
+      //todo: do whatever needs to be done to visually change things to indicate the list is sent invitations
+    }
+
     recyclerView = theView.findViewById(R.id.rv_frag_invitation_rv_invitations);
     floatingActionButton = theView.findViewById(R.id.fab_frag_invitation_rv_add);
     floatingActionButton.setOnClickListener(v -> {
@@ -87,15 +98,15 @@ public class FragInvitationRV extends Fragment {
     });
   }
 
-//  @Override
-//  public void onAttach(Context context) {
-//    super.onAttach(context);
-//    try {
-//      fragInvitationRVListener = (FragInvitationRVListener) getActivity();
-//    } catch (ClassCastException e) {
-//      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
-//    }
-//  }
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    try {
+      fragInvitationRVListener = (FragInvitationRVListener) getActivity();
+    } catch (ClassCastException e) {
+      Log.e(TAG, "onAttach: ClassCastException" + e.getMessage());
+    }
+  }
 
   private void goToFragInviteCreate() {
     FragmentManager fragmentManager = getFragmentManager();
