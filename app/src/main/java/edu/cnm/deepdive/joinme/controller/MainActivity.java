@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Paint.Join;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
