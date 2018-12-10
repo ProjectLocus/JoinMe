@@ -84,7 +84,7 @@ public class FragInvitationRV extends Fragment {
   private void initViews(View theView) {
     fragmentTitle = theView.findViewById(R.id.tv_frag_invitation_rv_title);
     if(fragInvitationRVListener.getParentActivity().isUseInviteListToMeForRV()){
-      fragmentTitle.setText("Your Received Invites!");
+      fragmentTitle.setText("Received Invitations");
       //todo: do whatever needs to be done to visually change things to indicate the list is received invitations
     }else{
       fragmentTitle.setText("Invitations You've Sent");
