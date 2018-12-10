@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b1e886c1d9c0fc24a0552f34a661d38d",
+    "identityHash": "c8158fb43cd200404cb47d0cc9350030",
     "entities": [
       {
         "tableName": "invitations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL, FOREIGN KEY(`user_sender`) REFERENCES `people`(`person_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`invitation_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_sender` INTEGER NOT NULL, `user_receiver` INTEGER NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `title` TEXT NOT NULL, `location` TEXT NOT NULL, `wasDelivered` INTEGER NOT NULL, `willAttend` INTEGER NOT NULL, `degreesRemaining` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "invitationId",
@@ -101,19 +101,7 @@
             "createSql": "CREATE UNIQUE INDEX `index_invitations_user_receiver` ON `${TABLE_NAME}` (`user_receiver`)"
           }
         ],
-        "foreignKeys": [
-          {
-            "table": "people",
-            "onDelete": "NO ACTION",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "user_sender"
-            ],
-            "referencedColumns": [
-              "person_id"
-            ]
-          }
-        ]
+        "foreignKeys": []
       },
       {
         "tableName": "people",
@@ -203,7 +191,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b1e886c1d9c0fc24a0552f34a661d38d\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c8158fb43cd200404cb47d0cc9350030\")"
     ]
   }
 }
