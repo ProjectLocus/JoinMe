@@ -129,3 +129,17 @@ implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 ## Data Definition Language
 Here's a link to our [ClientDB.sql](https://github.com/ProjectLocus/JoinMe/blob/master/ClientDB.sql) file.
+
+## State of Completion and Stretch Goals:
+You're able to create a new account through Google Sign In and see other people, within your area, in the app. You're able to create invitations and see the details of that invitation. When that invitation is successfully sent, the person will be able to see it in their received invitations view. After all that feel free to head on over to your user profile where you'll be presented with your image from Google, and your display name. Feel free to head on over to the create invitation screen from here with that button on the bottom.
+
+Here's some stretch goals
+1. Actually be able to send invitations.
+2. Allow the user to seend multiple people invitations with just one invitation.
+3. Allow people who have accepted an invitation to see all who is attending that event.
+4. Allow users to add a description to their profile.
+5. Allow people to see other people's profiles.
+6. Implement Google Sign In Oauth2 for secure sign in.
+7. Allow user to decide what aspects of their profile they can have uploaded.
+8. Take in birthdays and sort out people based on ages to protect minors.
+9. Implement an Emergency function with emergency services available.
