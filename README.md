@@ -1,10 +1,7 @@
+<img src="https://rawcdn.githack.com/ProjectLocus/project-content/8abb5e4d715ef18a75fc27af46c5b3a4364cf366/join-me-pics/ic_joinme.png">
 A social media invitation app with a focus on connecting people on a human level by allowing users 
-to send invitations to other people to do actual events such as enjoy a cup of coffee or attend an office party.
-Amongst all of the social media apps out there that are connecting people with others across the world,
-our app has the fine opportunity of connecting people on a more intimate level. Not across the world,
-but maybe across the street. 
-
-Here's our [Apache 2.0 License](https://github.com/ProjectLocus/JoinMe/blob/master/LICENSE)
+to send invitations to other people to actual events such as enjoy a cup of coffee or attend an office party.
+Here's our [Apache License 2.0](https://rawcdn.githack.com/ProjectLocus/JoinMe/dc49ee484daa1a7591474ff979f394719ab53cbf/LICENSE)
 
 ## Team Members:
 * **Alex Rael**:
@@ -16,6 +13,7 @@ Retrofit calls to communicate with the backend.
 * **Dina Rabanal**:
 
 * **Brian Bleck**:
+Built the back-end and deployed it onto AWS Elastic Beanstalk. The database is an Apache Derby database and Hibernate was used as the ORM layer on top of it. Jackson was used to serialize/deserialize the data coming from/to the back-end. Built the early architecture for the front-end to be fleshed out around. Troubleshot data transfer issues between client/server. For the client, coded the location updates and the data update loop to keep the front end connected to the back-end. Coded the logic to maintain the client database with the correct data. Coded the client logic for packaging incoming data for use in the various UI elements, and the client logic for packaging data and making calls to the back-end. 
 
 ## User Stories:
 * As a user I want to be able to send an invitation to other people who I can see.
@@ -114,6 +112,3 @@ implementation 'de.hdodenhof:circleimageview:2.2.0'
 ## Build and User Instructions:
 * [Build instructions](https://github.com/ProjectLocus/JoinMe/blob/master/BuildInstructions.md)
 * [User Instructions]()
-
-## Data Definition Language
-[ClientDB.sql](https://github.com/ProjectLocus/JoinMe/blob/master/ClientDB.sql)
