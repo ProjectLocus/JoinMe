@@ -8,10 +8,10 @@ Here's our [Apache 2.0 License](https://github.com/ProjectLocus/JoinMe/blob/mast
 
 ## Team Members:
 * **Alex Rael**:
-Did most of the Room Persistence manipulation throughout the app. That includes grabbing the necessary
-information to create a new user, displaying that info in the user profile section, grabbing info from
-the create invitation fragment and displaying it in the new invitation fragment. Also setup most of the
-Retrofit calls to communicate with the backend.
+Did most of the Room Persistence ORM manipulation throughout the app. That includes grabbing the necessary
+information to create a new user from Google Sign In, displaying that info in the user profile section including a users
+display name and display image, grabbing info from the create invitation fragment including the location of the event and the
+date and time of the event and displaying it in a new invitation view for the user who receives it. Also setup most of the Retrofit calls to communicate with the backend.
 
 * **Dina Rabanal**:
 I created recycler views for the people and invitations fragments. Making the basic recycler knowing
@@ -19,7 +19,7 @@ that it would expand into backend use of the list of people in each quadrant. I 
 I believe that the look of the app is just as important as design of the code.
 
 * **Brian Bleck**:
-Built the back-end using the Spring Boot Framework (Tomcat, Spring MVC, Spring Security, and Spring HATEOAS) and deployed it onto AWS Elastic Beanstalk. The database is an Apache Derby database and Hibernate was used as the ORM layer on top of it. The Jackson library was used to serialize/deserialize the data coming from/to the back-end. Created the early architectural bones for the front-end to be fleshed out around. Troubleshot data transfer issues between client/server. For the client, coded the location updates and the data update loop to keep the front end connected to the back-end. Coded the logic to maintain the client database with the correct data. Coded the client logic for packaging incoming data for use in the various UI elements, and the client logic for packaging data and making calls to the back-end. 
+Built the back-end using the Spring Boot Framework (incorporates Tomcat, Spring MVC, Spring Security, and Spring HATEOAS) and deployed it onto AWS Elastic Beanstalk. The database is an Apache Derby database and Hibernate was used as the ORM layer on top of it. The Jackson library was used to serialize/deserialize the data coming from/to the back-end. Created the early architectural bones for the front-end to be fleshed out around. Troubleshot data transfer issues between client/server. For the client, coded the location updates and the data update loop to keep the front end connected to the back-end. Coded the logic to maintain the client database with the correct data. Coded the client logic for packaging incoming data for use in the various UI elements, and the client logic for packaging data and making calls to the back-end. 
 
 ## User Stories:
 * As a user I want to be able to send an invitation to other people who I can see.
