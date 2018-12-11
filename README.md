@@ -1,7 +1,10 @@
-<img src="https://rawcdn.githack.com/ProjectLocus/project-content/8abb5e4d715ef18a75fc27af46c5b3a4364cf366/join-me-pics/ic_joinme.png">
 A social media invitation app with a focus on connecting people on a human level by allowing users 
-to send invitations to other people to actual events such as enjoy a cup of coffee or attend an office party.
-Here's our [Apache License 2.0](https://github.com/ProjectLocus/JoinMe/blob/master/LICENSE)
+to send invitations to other people to do actual events such as enjoy a cup of coffee or attend an office party.
+Amongst all of the social media apps out there that are connecting people with others across the world,
+our app has the fine opportunity of connecting people on a more intimate level. Not across the world,
+but maybe across the street. 
+
+Here's our [Apache 2.0 License](https://github.com/ProjectLocus/JoinMe/blob/master/LICENSE)
 
 ## Team Members:
 * **Alex Rael**:
