@@ -1,0 +1,8 @@
+edu.cnm.deepdive.joinme
+edu.cnm.deepdive.joinme.controller
+edu.cnm.deepdive.joinme.model.dao
+edu.cnm.deepdive.joinme.model.db
+edu.cnm.deepdive.joinme.model.entity
+edu.cnm.deepdive.joinme.model.utility
+edu.cnm.deepdive.joinme.service
+edu.cnm.deepdive.joinme.view
