@@ -39,6 +39,9 @@ Built the back-end and deployed it onto AWS Elastic Beanstalk. The database is a
 * As a user I want to be able to tell everyone that I've lost my pet.
   * As a user I want to be able to tell everyone that I have a gig going on.
 
+## Wireframes:
+A link to our Join Me [wireframes](https://xd.adobe.com/view/d6ac88a3-27a0-472c-4504-44abbed3cf8b-a09d/).
+
 ## Technical Information:
 The app was developed in mostly English with a restricted Portrait orientation. Operating Systems
 developed in were Windows and OSx. Software used includes both IntelliJ and Android Studio. Project
