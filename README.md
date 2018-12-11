@@ -4,6 +4,8 @@ Amongst all of the social media apps out there that are connecting people with o
 our app has the fine opportunity of connecting people on a more intimate level. Not across the world,
 but maybe across the street. 
 
+The files in this repository are for building the front end android client.
+
 Here's our [Apache 2.0 License](https://github.com/ProjectLocus/JoinMe/blob/master/LICENSE)
 
 ## Team Members:
