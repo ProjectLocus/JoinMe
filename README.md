@@ -112,3 +112,6 @@ implementation 'de.hdodenhof:circleimageview:2.2.0'
 ## Build and User Instructions:
 * [Build instructions](https://github.com/ProjectLocus/JoinMe/blob/master/BuildInstructions.md)
 * [User Instructions]()
+
+## Java Documentation
+[Java Docs](https://github.com/ProjectLocus/JoinMe/tree/master/docs)
