@@ -42,6 +42,9 @@ Built the back-end using the Spring Boot Framework (Tomcat, Spring MVC, Spring S
 ## Wireframes:
 A link to our Join Me [wireframes](https://xd.adobe.com/view/d6ac88a3-27a0-472c-4504-44abbed3cf8b-a09d/).
 
+## Entity Relationship Diagram
+<img src="https://rawcdn.githack.com/ProjectLocus/JoinMe/02860eeed0ebcf8768f1509fb9d88ceadac9937f/erd.jpg"/>
+
 ## Technical Information:
 The app was developed in mostly English with a restricted Portrait orientation. Operating Systems
 developed in were Windows and OSx. Software used includes both IntelliJ and Android Studio. Project
