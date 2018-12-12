@@ -125,7 +125,7 @@ implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 ## Build and User Instructions:
 * Here's a link to our [Build instructions](https://github.com/ProjectLocus/JoinMe/blob/master/BuildInstructions.md) file.
-* Here's a link to our [User Instructions]() file.
+* Here's a link to our [User Instructions](https://github.com/ProjectLocus/JoinMe/blob/master/BasicUserInstructions.md) file.
 
 ## Data Definition Language
 Here's a link to our [ClientDB.sql](https://github.com/ProjectLocus/JoinMe/blob/master/ClientDB.sql) file.
