@@ -27,6 +27,7 @@ public class JoinMeApplication extends Application {
     super.onCreate();
     initDB();
     instance = this;
+    Stetho.initializeWithDefaults(this);
     GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestEmail()
         .requestId()

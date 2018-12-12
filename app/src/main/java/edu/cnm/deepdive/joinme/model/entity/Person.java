@@ -51,7 +51,6 @@ public class Person {
   /**
    * This is a string representation of the get function for the user's image
    */
-
   private String userImageLocation;
 
   @ColumnInfo(name = "google_user_id")
