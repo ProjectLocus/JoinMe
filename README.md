@@ -143,3 +143,6 @@ Here's some stretch goals
 7. Allow user to decide what aspects of their profile they can have uploaded.
 8. Take in birthdays and sort out people based on ages to protect minors.
 9. Implement an Emergency function with emergency services available.
+
+## Thank You
+Thank you for stopping by and checking out our project. This was a 3-4 week success, and even though we still have a lot to implement, we're still proud of what we've committed so far. Feel free to watch it grow, if we do continue. Thank you.
