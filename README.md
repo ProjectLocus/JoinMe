@@ -89,6 +89,11 @@ javaCompileOptions {
             }
         }
 ```
+* Facebook Stetho:
+  * Licences: [BSD License](https://rawcdn.githack.com/facebook/stetho/6d148f20b96ecb29320cced6617830eda8af0426/LICENSE)
+  ```
+  implementation 'com.facebook.stetho:stetho:1.5.0'
+  ```
 
 * Retrofit and Gson:
   * Licenses: 
